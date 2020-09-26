@@ -153,6 +153,9 @@
     <ClInclude Include="src\Engine\Application.h" />
     <ClInclude Include="src\Engine\Core.h" />
     <ClInclude Include="src\Engine\EntryPoint.h" />
+    <ClInclude Include="src\Engine\event\Event.h" />
+    <ClInclude Include="src\Engine\event\EventHandler.h" />
+    <ClInclude Include="src\Engine\event\EventListener.h" />
     <ClInclude Include="src\Engine\Log.h" />
     <ClInclude Include="src\Engine\Window.h" />
     <ClInclude Include="src\Engine\platform\windows\WindowsWindow.h" />

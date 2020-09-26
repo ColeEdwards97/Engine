@@ -2,6 +2,7 @@
 
 #include "Core.h"
 #include "Window.h"
+#include "Log.h"
 
 namespace Engine {
 

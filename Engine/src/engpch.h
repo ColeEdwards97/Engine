@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include <iostream>
 #include <memory>
 #include <utility>
@@ -14,6 +13,7 @@
 #include <unordered_map>
 #include <unordered_set>
 
+#include <type_traits>
 
 
 #ifdef ENG_PLATFORM_WINDOWS

@@ -2,6 +2,8 @@
 
 #include "Application.h"
 
+#include "GLFW/glfw3.h"
+
 namespace Engine {
 
 	Application::Application() 
@@ -19,8 +21,9 @@ namespace Engine {
 	{
 		while (m_running)
 		{
+			glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+			glClear(GL_COLOR_BUFFER_BIT);
 			m_window->onUpdate();
-
 		}
 	}
 

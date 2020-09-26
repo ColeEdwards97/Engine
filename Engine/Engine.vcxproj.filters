@@ -32,6 +32,9 @@
       <Filter>Engine\platform\windows</Filter>
     </ClInclude>
     <ClInclude Include="src\engpch.h" />
+    <ClInclude Include="src\Engine\event\Event.h" />
+    <ClInclude Include="src\Engine\event\EventListener.h" />
+    <ClInclude Include="src\Engine\event\EventHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Engine\Application.cpp">
