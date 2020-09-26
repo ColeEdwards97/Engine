@@ -10,6 +10,14 @@ workspace "Engine"
 	
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+-- Include directories relative to root folder
+includeDir = {}
+includeDir["glfw"] = "Engine/vendor/glfw/include"
+
+include "Engine/vendor/glfw" 
+
+
+-- ENGINE PROJECT -------------------------------
 project "Engine"
 	location "Engine"
 	kind "SharedLib"
@@ -17,6 +25,9 @@ project "Engine"
 	
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+	
+	pchheader "engpch.h"
+	pchsource "Engine/src/engpch.cpp"
 	
 	files
 	{
@@ -26,7 +37,15 @@ project "Engine"
 	
 	includedirs
 	{
-		"%{prj.name}/vendor/spdlog/include"
+		"%{prj.name}/src",
+		"%{prj.name}/vendor/spdlog/include",
+		"%{includeDir.glfw}"
+	}
+	
+	links
+	{
+		"GLFW",
+		"opengl32.lib"
 	}
 	
 	filter "system:windows"
@@ -46,7 +65,7 @@ project "Engine"
 		}
 		
 	filter "configurations:Debug"
-		defines "ENG_DEBUG"
+		defines { "ENG_DEBUG", "ENG_ENABLE_ASSERTS" }
 		symbols "On"
 		
 	filter "configurations:Release"
@@ -58,6 +77,7 @@ project "Engine"
 		optimize "On"
 		
 
+-- SANDBOX PROJECT ------------------------------
 project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
@@ -94,7 +114,7 @@ project "Sandbox"
 		}
 		
 	filter "configurations:Debug"
-		defines "ENG_DEBUG"
+		defines { "ENG_DEBUG", "ENG_ENABLE_ASSERTS" }
 		symbols "On"
 		
 	filter "configurations:Release"

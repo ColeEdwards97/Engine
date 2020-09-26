@@ -4,6 +4,12 @@
     <Filter Include="Engine">
       <UniqueIdentifier>{DBC7D3B0-C769-FE86-B024-12DB9C6585D7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\platform">
+      <UniqueIdentifier>{AFA6F61D-1B32-64E2-2443-E7D6904DC0E2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\platform\windows">
+      <UniqueIdentifier>{0928A32B-755F-EBC2-7E69-4FE6EA1F12BC}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Engine.h" />
@@ -19,6 +25,13 @@
     <ClInclude Include="src\Engine\Log.h">
       <Filter>Engine</Filter>
     </ClInclude>
+    <ClInclude Include="src\Engine\Window.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\platform\windows\WindowsWindow.h">
+      <Filter>Engine\platform\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engpch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Engine\Application.cpp">
@@ -27,5 +40,9 @@
     <ClCompile Include="src\Engine\Log.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="src\Engine\platform\windows\WindowsWindow.cpp">
+      <Filter>Engine\platform\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engpch.cpp" />
   </ItemGroup>
 </Project>
