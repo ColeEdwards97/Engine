@@ -16,6 +16,10 @@
 #include <type_traits>
 
 
+// Engine Includes
+#include "Engine/Log.h"
+
+
 #ifdef ENG_PLATFORM_WINDOWS
 #include <Windows.h>
 #endif // ENG_PLATFORM_WINDOWS

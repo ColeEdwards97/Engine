@@ -21,8 +21,11 @@ namespace Engine {
 		inline unsigned int getWidth() const override { return m_data.width; }
 		inline unsigned int getHeight() const override { return m_data.height; }
 
+		void setEventCallback(const eventCallbackFn& callback) override { m_data.eventCallback = callback; }
 		void setVSync(bool enabled) override;
 		bool isVSync() const override;
+
+		void onEvent(Event& e) override;
 
 	private:
 		virtual void init(const WindowProperties& props);
@@ -37,6 +40,8 @@ namespace Engine {
 			unsigned int width;
 			unsigned int height;
 			bool vSync;
+
+			eventCallbackFn eventCallback;
 		};
 
 		WindowData m_data;

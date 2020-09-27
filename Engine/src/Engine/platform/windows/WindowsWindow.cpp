@@ -2,11 +2,16 @@
 
 #include "WindowsWindow.h"
 
+#include "Engine/event/EventHandler.h"
+#include "Engine/event/WindowEvent.h"
+
+
 namespace Engine {
 	
 	static bool s_isGLFWInitialized = false;
 
-	
+	// IMPLEMENTATION OF THE Window CLASS
+	// (this is how the code knows to create a Windows Window and not a BlaBlaWindow)
 	Window* Window::create(const WindowProperties& props) 
 	{
 		return new WindowsWindow(props);
@@ -31,7 +36,8 @@ namespace Engine {
 		m_data.width = props.width;
 		m_data.height = props.height;
 		m_data.title = props.title;
-		
+		setEventCallback(ENG_BIND_EVENT_FN(dispatchEvent));
+
 		ENGINE_CORE_INFO("Creating Windows Window: {0}; {1} x {2}", props.title, props.width, props.height);
 
 		if (!s_isGLFWInitialized) {
@@ -63,6 +69,31 @@ namespace Engine {
 		glfwSetWindowUserPointer(m_window, &m_data);
 		setVSync(true);
 
+
+		// GLFW Callbacks -----------------------
+
+		glfwSetWindowSizeCallback(m_window, [](GLFWwindow* window, int width, int height)
+			{
+				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+				data.width = width;
+				data.height = height;
+
+				WindowResizeEvent event(width, height);
+				data.eventCallback(event);
+			}
+		);
+
+		glfwSetWindowCloseCallback(m_window, [](GLFWwindow* window)
+			{
+				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+				
+				WindowCloseEvent event;
+				data.eventCallback(event);
+			}
+		);
+
+		// --------------------------------------------
+
 	}
 
 
@@ -89,6 +120,11 @@ namespace Engine {
 	bool WindowsWindow::isVSync() const
 	{
 		return m_data.vSync;
+	}
+
+
+	void WindowsWindow::onEvent(Event& e)
+	{
 	}
 
 

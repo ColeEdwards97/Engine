@@ -152,10 +152,17 @@
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\Engine\Application.h" />
     <ClInclude Include="src\Engine\Core.h" />
+    <ClInclude Include="src\Engine\entity\Component.h" />
+    <ClInclude Include="src\Engine\entity\Entity.h" />
+    <ClInclude Include="src\Engine\entity\InputComponent.h" />
+    <ClInclude Include="src\Engine\entity\LivingEntity.h" />
+    <ClInclude Include="src\Engine\entity\Player.h" />
+    <ClInclude Include="src\Engine\entity\PlayerInputComponent.h" />
     <ClInclude Include="src\Engine\EntryPoint.h" />
     <ClInclude Include="src\Engine\event\Event.h" />
     <ClInclude Include="src\Engine\event\EventHandler.h" />
     <ClInclude Include="src\Engine\event\EventListener.h" />
+    <ClInclude Include="src\Engine\event\WindowEvent.h" />
     <ClInclude Include="src\Engine\Log.h" />
     <ClInclude Include="src\Engine\Window.h" />
     <ClInclude Include="src\Engine\platform\windows\WindowsWindow.h" />
@@ -163,6 +170,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Engine\Application.cpp" />
+    <ClCompile Include="src\Engine\event\EventHandler.cpp" />
     <ClCompile Include="src\Engine\Log.cpp" />
     <ClCompile Include="src\Engine\platform\windows\WindowsWindow.cpp" />
     <ClCompile Include="src\engpch.cpp">

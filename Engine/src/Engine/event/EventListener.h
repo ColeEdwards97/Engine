@@ -5,13 +5,13 @@
 namespace Engine 
 {
 
-	class EventListener
+	class ENGINE_API EventListener
 	{
 
 	public:
 
-		//virtual ~EventListener();
-		//virtual void onEvent(Event& e);
+		virtual ~EventListener() = default;
+		virtual void onEvent(Event& e) = 0;
 
 	};
 

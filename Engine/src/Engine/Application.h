@@ -2,11 +2,14 @@
 
 #include "Core.h"
 #include "Window.h"
-#include "Log.h"
+
+#include "event/Event.h"
+#include "event/WindowEvent.h"
+#include "event/EventListener.h"
 
 namespace Engine {
 
-	class ENGINE_API Application
+	class ENGINE_API Application : public EventListener
 	{
 	public:
 
@@ -14,6 +17,10 @@ namespace Engine {
 		virtual ~Application();
 
 		void run();
+
+		void onEvent(Event& e) override;
+		void onWindowResizeEvent(WindowResizeEvent& e);
+		void onWindowCloseEvent(WindowCloseEvent& e);
 
 	private:
 		std::unique_ptr<Window> m_window;
