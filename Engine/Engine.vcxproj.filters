@@ -4,6 +4,12 @@
     <Filter Include="Engine">
       <UniqueIdentifier>{DBC7D3B0-C769-FE86-B024-12DB9C6585D7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\entity">
+      <UniqueIdentifier>{E723D183-53E4-4CBA-1C1F-9637889E9196}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\event">
+      <UniqueIdentifier>{8C916797-78F4-F63B-217A-2FF20DBCC2BE}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Engine\platform">
       <UniqueIdentifier>{AFA6F61D-1B32-64E2-2443-E7D6904DC0E2}</UniqueIdentifier>
     </Filter>
@@ -22,29 +28,61 @@
     <ClInclude Include="src\Engine\EntryPoint.h">
       <Filter>Engine</Filter>
     </ClInclude>
+    <ClInclude Include="src\Engine\Layer.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\LayerStack.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
     <ClInclude Include="src\Engine\Log.h">
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Window.h">
       <Filter>Engine</Filter>
     </ClInclude>
+    <ClInclude Include="src\Engine\entity\Component.h">
+      <Filter>Engine\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\entity\Entity.h">
+      <Filter>Engine\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\entity\InputComponent.h">
+      <Filter>Engine\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\entity\LivingEntity.h">
+      <Filter>Engine\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\entity\Player.h">
+      <Filter>Engine\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\entity\PlayerInputComponent.h">
+      <Filter>Engine\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\event\Event.h">
+      <Filter>Engine\event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\event\EventHandler.h">
+      <Filter>Engine\event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\event\EventListener.h">
+      <Filter>Engine\event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\event\WindowEvent.h">
+      <Filter>Engine\event</Filter>
+    </ClInclude>
     <ClInclude Include="src\Engine\platform\windows\WindowsWindow.h">
       <Filter>Engine\platform\windows</Filter>
     </ClInclude>
     <ClInclude Include="src\engpch.h" />
-    <ClInclude Include="src\Engine\event\Event.h" />
-    <ClInclude Include="src\Engine\event\EventListener.h" />
-    <ClInclude Include="src\Engine\event\EventHandler.h" />
-    <ClInclude Include="src\Engine\entity\Entity.h" />
-    <ClInclude Include="src\Engine\entity\Component.h" />
-    <ClInclude Include="src\Engine\entity\InputComponent.h" />
-    <ClInclude Include="src\Engine\entity\Player.h" />
-    <ClInclude Include="src\Engine\entity\LivingEntity.h" />
-    <ClInclude Include="src\Engine\entity\PlayerInputComponent.h" />
-    <ClInclude Include="src\Engine\event\WindowEvent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Engine\Application.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Layer.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\LayerStack.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="src\Engine\Log.cpp">
@@ -54,6 +92,5 @@
       <Filter>Engine\platform\windows</Filter>
     </ClCompile>
     <ClCompile Include="src\engpch.cpp" />
-    <ClCompile Include="src\Engine\event\EventHandler.cpp" />
   </ItemGroup>
 </Project>

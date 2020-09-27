@@ -20,7 +20,7 @@ namespace Engine
 
 		virtual EventType getEventType() const = 0;
 		
-		bool m_handled = false;
+		bool handled = false;
 
 	};
 

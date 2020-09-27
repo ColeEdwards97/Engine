@@ -1,20 +1,24 @@
 #include <Engine.h>
 
+#include "TestLayer.h"
 
 class Sandbox : public Engine::Application {
 
 public:
 
-	Sandbox() {
-
+	Sandbox() 
+	{
+		pushLayer(new TestLayer());
 	}
 
-	~Sandbox() {
+	~Sandbox() 
+	{
 
 	}
 	
 };
 
-Engine::Application* Engine::createApplication() {
+Engine::Application* Engine::createApplication() 
+{
 	return new Sandbox();
 }

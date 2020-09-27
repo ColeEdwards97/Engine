@@ -22,6 +22,8 @@ project "Engine"
 	location "Engine"
 	kind "SharedLib"
 	language "C++"
+	cppdialect "C++17"
+	staticruntime "on"
 	
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -49,8 +51,6 @@ project "Engine"
 	}
 	
 	filter "system:windows"
-		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 		
 		defines
@@ -66,14 +66,17 @@ project "Engine"
 		
 	filter "configurations:Debug"
 		defines { "ENG_DEBUG", "ENG_ENABLE_ASSERTS" }
+		runtime "Debug"
 		symbols "On"
 		
 	filter "configurations:Release"
 		defines "ENG_RELEASE"
+		runtime "Release"
 		optimize "On"
 	
 	filter "configurations:Dist"
 		defines "ENG_DIST"
+		runtime "Release"
 		optimize "On"
 		
 
@@ -82,6 +85,8 @@ project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
+	cppdialect "C++17"
+	staticruntime "on"
 	
 	targetdir ("bin/" ..outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -104,8 +109,6 @@ project "Sandbox"
 	}
 	
 	filter "system:windows"
-		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 		
 		defines
@@ -115,12 +118,15 @@ project "Sandbox"
 		
 	filter "configurations:Debug"
 		defines { "ENG_DEBUG", "ENG_ENABLE_ASSERTS" }
+		runtime "Debug"
 		symbols "On"
 		
 	filter "configurations:Release"
 		defines "ENG_RELEASE"
+		runtime "Release"
 		optimize "On"
 	
 	filter "configurations:Dist"
 		defines "ENG_DIST"
+		runtime "Release"
 		optimize "On"

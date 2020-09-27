@@ -7,6 +7,8 @@
 #include "event/WindowEvent.h"
 #include "event/EventListener.h"
 
+#include "LayerStack.h"
+
 namespace Engine {
 
 	class ENGINE_API Application : public EventListener
@@ -19,12 +21,17 @@ namespace Engine {
 		void run();
 
 		void onEvent(Event& e) override;
-		void onWindowResizeEvent(WindowResizeEvent& e);
-		void onWindowCloseEvent(WindowCloseEvent& e);
+		bool onWindowResizeEvent(WindowResizeEvent& e);
+		bool onWindowCloseEvent(WindowCloseEvent& e);
+
+		void pushLayer(Layer* layer);
+		void pushOverlay(Layer* overlay);
 
 	private:
 		std::unique_ptr<Window> m_window;
 		bool m_running;
+
+		LayerStack m_layerStack;
 
 	};
 

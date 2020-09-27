@@ -60,18 +60,20 @@ namespace Engine
 
 
 		template<typename E, typename F>
-		void forwardEvent(Event& e, const F& func)
+		bool forwardEvent(Event& e, const F& func)
 		{
 			if (typeid(E) == typeid(e))
 			{
-				func(static_cast<E&>(e));
+				e.handled = func(static_cast<E&>(e));
+				return true;
 			}
+			return false;
 		}
 
 
 	private:
 		
-		static std::unordered_map<EventType, std::vector<EventListener*>> eventListeners;
+		std::unordered_map<EventType, std::vector<EventListener*>> eventListeners;
 
 
 	};

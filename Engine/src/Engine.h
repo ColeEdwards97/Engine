@@ -5,6 +5,7 @@
 
 // For use by Engine applications only
 #include "Engine/Application.h"
+#include "Engine/Layer.h"
 #include "Engine/Log.h"
 
 
