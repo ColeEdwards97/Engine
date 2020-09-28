@@ -8,7 +8,9 @@ namespace Engine
 	enum EventType
 	{
 		None = 0,
-		WindowEvent
+		WindowEvent,
+		KeyboardEvent,
+		MouseEvent
 	};
 
 	class ENGINE_API Event

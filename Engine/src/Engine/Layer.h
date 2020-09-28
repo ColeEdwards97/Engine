@@ -19,7 +19,7 @@ namespace Engine
 
 		inline const std::string& getName() const { return m_debugName; }
 
-		// TODO: bool isEnabled()
+		bool enabled = true;
 
 	private:
 		std::string m_debugName;

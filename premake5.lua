@@ -1,5 +1,6 @@
 workspace "Engine"
 	architecture "x64"
+	startproject "Sandbox"
 	
 	configurations
 	{
@@ -14,8 +15,10 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 includeDir = {}
 includeDir["glfw"] = "Engine/vendor/glfw/include"
 
-include "Engine/vendor/glfw" 
+group "Dependencies"
+	include "Engine/vendor/glfw" 
 
+group ""
 
 -- ENGINE PROJECT -------------------------------
 project "Engine"
@@ -23,7 +26,7 @@ project "Engine"
 	kind "SharedLib"
 	language "C++"
 	cppdialect "C++17"
-	staticruntime "on"
+	staticruntime "off"
 	
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -61,11 +64,11 @@ project "Engine"
 		
 		postbuildcommands
 		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
+			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
 		}
 		
 	filter "configurations:Debug"
-		defines { "ENG_DEBUG", "ENG_ENABLE_ASSERTS" }
+		defines "ENG_DEBUG"
 		runtime "Debug"
 		symbols "On"
 		
@@ -86,7 +89,7 @@ project "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
 	cppdialect "C++17"
-	staticruntime "on"
+	staticruntime "off"
 	
 	targetdir ("bin/" ..outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -117,7 +120,7 @@ project "Sandbox"
 		}
 		
 	filter "configurations:Debug"
-		defines { "ENG_DEBUG", "ENG_ENABLE_ASSERTS" }
+		defines "ENG_DEBUG"
 		runtime "Debug"
 		symbols "On"
 		

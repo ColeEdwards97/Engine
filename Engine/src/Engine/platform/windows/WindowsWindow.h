@@ -27,6 +27,9 @@ namespace Engine {
 
 		void onEvent(Event& e) override;
 
+		inline virtual void* getNativeWindow() const override { return m_window; }
+
+
 	private:
 		virtual void init(const WindowProperties& props);
 		virtual void shutdown();

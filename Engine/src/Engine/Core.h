@@ -10,6 +10,9 @@
 	#error Engine currently only supports Windows!
 #endif
 
+#ifdef ENG_DEBUG
+	#define ENG_ENABLE_ASSERTS
+#endif // ENG_DEBUG
 
 #ifdef ENG_ENABLE_ASSERTS
 	#define ENGINE_ASSERT(x, ...) { if(!(x)) { ENGINE_ERROR("Assertion failed: {0}", __VA_ARGS__); __debugbreak(); } }

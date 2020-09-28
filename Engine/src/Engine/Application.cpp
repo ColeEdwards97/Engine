@@ -4,13 +4,21 @@
 
 #include "GLFW/glfw3.h"
 
+#include "Input.h"
+
 namespace Engine {
+
+	Application* Application::s_instance = nullptr;
 
 	Application::Application() 
 	{
 		m_running = true;
+		s_instance = this;
 		m_window = std::unique_ptr<Window>(Window::create());
+
+		// REGISTER EVENT LISTENERS
 		m_window->addEventListener(EventType::WindowEvent, this);
+		m_window->addEventListener(EventType::MouseEvent, this);
 	}
 
 	Application::~Application() 
@@ -27,7 +35,10 @@ namespace Engine {
 
 			for (Layer* layer : m_layerStack)
 			{
-				layer->onUpdate();
+				if (layer->enabled) 
+				{
+					layer->onUpdate();
+				}
 			}
 
 			m_window->onUpdate();
@@ -41,7 +52,6 @@ namespace Engine {
 		
 		m_window->forwardEvent<WindowResizeEvent>(e, ENG_BIND_EVENT_FN(Application::onWindowResizeEvent));
 		m_window->forwardEvent<WindowCloseEvent>(e, ENG_BIND_EVENT_FN(Application::onWindowCloseEvent));
-
 
 		for (auto it = m_layerStack.rbegin(); it != m_layerStack.rend(); ++it)
 		{

@@ -74,6 +74,12 @@
       <Filter>Engine\platform\windows</Filter>
     </ClInclude>
     <ClInclude Include="src\engpch.h" />
+    <ClInclude Include="src\Engine\Input.h" />
+    <ClInclude Include="src\Engine\platform\windows\WindowsInput.h" />
+    <ClInclude Include="src\Engine\KeyCodes.h" />
+    <ClInclude Include="src\Engine\MouseButtonCodes.h" />
+    <ClInclude Include="src\Engine\event\KeyEvent.h" />
+    <ClInclude Include="src\Engine\event\MouseEvent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Engine\Application.cpp">
@@ -92,5 +98,6 @@
       <Filter>Engine\platform\windows</Filter>
     </ClCompile>
     <ClCompile Include="src\engpch.cpp" />
+    <ClCompile Include="src\Engine\platform\windows\WindowsInput.cpp" />
   </ItemGroup>
 </Project>

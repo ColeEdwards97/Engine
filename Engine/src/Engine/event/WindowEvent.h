@@ -5,19 +5,29 @@
 namespace Engine
 {
 
-	class WindowResizeEvent : public Event
+	class WindowEvent : public Event
+	{
+	public:
+
+		EventType getEventType() const override { return EventType::WindowEvent; }
+
+	protected:
+
+		WindowEvent()
+		{}
+
+	};
+
+	class WindowResizeEvent : public WindowEvent
 	{
 	public:
 
 		WindowResizeEvent(unsigned int width, unsigned int height)
 			: m_width(width), m_height(height)
 		{}
-
-		EventType getEventType() const override { return EventType::WindowEvent; }
-
+		
 		unsigned int getWidth() const { return m_width; }
 		unsigned int getHeight() const { return m_height; }
-
 
 	private:
 
@@ -26,14 +36,12 @@ namespace Engine
 
 	};
 
-	class WindowCloseEvent : public Event
+	class WindowCloseEvent : public WindowEvent
 	{
 	public:
 
 		WindowCloseEvent() = default;
-
-		EventType getEventType() const override { return EventType::WindowEvent; }
-
+		
 	};
 
 }
