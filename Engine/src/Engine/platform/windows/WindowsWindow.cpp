@@ -38,7 +38,7 @@ namespace Engine {
 		m_data.width = props.width;
 		m_data.height = props.height;
 		m_data.title = props.title;
-		setEventCallback(ENG_BIND_EVENT_FN(dispatchEvent));
+		setEventCallback(ENG_BIND_EVENT_FN(notify));
 
 		// Error Callback
 		glfwSetErrorCallback([](int error, const char* description)

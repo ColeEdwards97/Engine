@@ -17,7 +17,7 @@ namespace Engine
 		virtual void onUpdate() {}
 		virtual void onEvent(Event& e) {}
 
-		inline const std::string& getName() const { return m_debugName; }
+		const std::string& getName() const { return m_debugName; }
 
 		bool enabled = true;
 

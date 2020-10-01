@@ -9,11 +9,11 @@ namespace Engine
 	public:
 
 		// Public static "Accessor" methods
-		inline static bool isKeyPressed(int keyCode) { return s_instance->isKeyPressedImp(keyCode); }
-		inline static bool isMouseButtonPressed(int button) { return s_instance->isMouseButtonPressedImp(button); }
-		inline static std::pair<float, float> getMousePosition() { return s_instance->getMousePositionImp(); }
-		inline static float getMouseX() { return s_instance->getMouseXImp(); }
-		inline static float getMouseY() { return s_instance->getMouseYImp(); }
+		static bool isKeyPressed(int keyCode) { return s_instance->isKeyPressedImp(keyCode); }
+		static bool isMouseButtonPressed(int button) { return s_instance->isMouseButtonPressedImp(button); }
+		static std::pair<float, float> getMousePosition() { return s_instance->getMousePositionImp(); }
+		static float getMouseX() { return s_instance->getMouseXImp(); }
+		static float getMouseY() { return s_instance->getMouseYImp(); }
 
 	protected:
 

@@ -18,8 +18,8 @@ namespace Engine {
 
 		void onUpdate() override;
 
-		inline unsigned int getWidth() const override { return m_data.width; }
-		inline unsigned int getHeight() const override { return m_data.height; }
+		unsigned int getWidth() const override { return m_data.width; }
+		unsigned int getHeight() const override { return m_data.height; }
 
 		void setEventCallback(const eventCallbackFn& callback) override { m_data.eventCallback = callback; }
 		void setVSync(bool enabled) override;
@@ -27,7 +27,7 @@ namespace Engine {
 
 		void onEvent(Event& e) override;
 
-		inline virtual void* getNativeWindow() const override { return m_window; }
+		virtual void* getNativeWindow() const override { return m_window; }
 
 
 	private:

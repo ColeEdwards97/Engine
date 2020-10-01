@@ -49,7 +49,7 @@ namespace Engine
 
 	public:
 		
-		void dispatchEvent(Event& e)
+		void notify(Event& e)
 		{
 			std::vector<EventListener*> v = eventListeners[e.getEventType()];
 			for (std::vector<EventListener*>::iterator it = v.begin(); it != v.end(); ++it)
@@ -60,7 +60,7 @@ namespace Engine
 
 
 		template<typename E, typename F>
-		bool forwardEvent(Event& e, const F& func)
+		bool dispatch(Event& e, const F& func)
 		{
 			if (typeid(E) == typeid(e))
 			{

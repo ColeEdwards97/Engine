@@ -50,8 +50,8 @@ namespace Engine {
 	{
 		ENGINE_CORE_TRACE("An Event Occurred!");
 		
-		m_window->forwardEvent<WindowResizeEvent>(e, ENG_BIND_EVENT_FN(Application::onWindowResizeEvent));
-		m_window->forwardEvent<WindowCloseEvent>(e, ENG_BIND_EVENT_FN(Application::onWindowCloseEvent));
+		m_window->dispatch<WindowResizeEvent>(e, ENG_BIND_EVENT_FN(Application::onWindowResizeEvent));
+		m_window->dispatch<WindowCloseEvent>(e, ENG_BIND_EVENT_FN(Application::onWindowCloseEvent));
 
 		for (auto it = m_layerStack.rbegin(); it != m_layerStack.rend(); ++it)
 		{
