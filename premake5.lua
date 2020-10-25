@@ -13,10 +13,13 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 -- Include directories relative to root folder
 includeDir = {}
+includeDir["glad"] = "Engine/vendor/glad/include"
 includeDir["glfw"] = "Engine/vendor/glfw/include"
+includeDir["glm"] = "Engine/vendor/glm"
 
 group "Dependencies"
-	include "Engine/vendor/glfw" 
+	include "Engine/vendor/glad"
+	include "Engine/vendor/glfw"
 
 group ""
 
@@ -37,18 +40,23 @@ project "Engine"
 	files
 	{
 		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp"
+		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/glm/glm/**.hpp",
+		"%{prj.name}/vendor/glm/glm/**.inl"
 	}
 	
 	includedirs
 	{
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
-		"%{includeDir.glfw}"
+		"%{includeDir.glad}",
+		"%{includeDir.glfw}",
+		"%{includeDir.glm}"
 	}
 	
 	links
 	{
+		"glad",
 		"GLFW",
 		"opengl32.lib"
 	}
@@ -59,7 +67,8 @@ project "Engine"
 		defines
 		{
 			"ENG_PLATFORM_WINDOWS",
-			"ENGINE_BUILD_DLL"
+			"ENGINE_BUILD_DLL",
+			"GLFW_INCLUDE_NONE"
 		}
 		
 		postbuildcommands
@@ -103,7 +112,8 @@ project "Sandbox"
 	includedirs
 	{
 		"Engine/vendor/spdlog/include",
-		"Engine/src"
+		"Engine/src",
+		"%{includeDir.glm}"
 	}
 	
 	links 

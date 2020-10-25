@@ -7,6 +7,7 @@
 #include "Engine/event/KeyEvent.h"
 #include "Engine/event/MouseEvent.h"
 
+#include <glad/glad.h>
 
 namespace Engine {
 	
@@ -75,6 +76,11 @@ namespace Engine {
 		}
 
 		glfwMakeContextCurrent(m_window);
+		
+		// initialize glad
+		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		ENGINE_CORE_ASSERT(status, "Failed to initialize glad");
+
 		glfwSetWindowUserPointer(m_window, &m_data);
 		setVSync(true);
 
