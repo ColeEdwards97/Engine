@@ -5,7 +5,7 @@
 namespace Engine
 {
 
-	class MouseEvent : public Event
+	class ENGINE_API MouseEvent : public Event
 	{
 	public:
 
@@ -19,7 +19,7 @@ namespace Engine
 	};
 
 
-	class MouseMovedEvent : public MouseEvent
+	class ENGINE_API MouseMovedEvent : public MouseEvent
 	{
 	public:
 
@@ -40,7 +40,7 @@ namespace Engine
 	};
 
 
-	class MouseScrolledEvent : public MouseEvent
+	class ENGINE_API MouseScrolledEvent : public MouseEvent
 	{
 	public:
 
@@ -61,7 +61,7 @@ namespace Engine
 	};
 
 
-	class MouseButtonEvent : public MouseEvent
+	class ENGINE_API MouseButtonEvent : public MouseEvent
 	{
 	public:
 
@@ -81,7 +81,7 @@ namespace Engine
 
 	};
 
-	class MouseButtonPressedEvent : public MouseButtonEvent
+	class ENGINE_API MouseButtonPressedEvent : public MouseButtonEvent
 	{
 	public:
 
@@ -98,7 +98,7 @@ namespace Engine
 	};
 
 
-	class MouseButtonReleasedEvent : public MouseButtonEvent
+	class ENGINE_API MouseButtonReleasedEvent : public MouseButtonEvent
 	{
 	public:
 

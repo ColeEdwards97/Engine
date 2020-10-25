@@ -5,7 +5,7 @@
 namespace Engine
 {
 
-	class WindowEvent : public Event
+	class ENGINE_API WindowEvent : public Event
 	{
 	public:
 
@@ -18,7 +18,7 @@ namespace Engine
 
 	};
 
-	class WindowResizeEvent : public WindowEvent
+	class ENGINE_API WindowResizeEvent : public WindowEvent
 	{
 	public:
 
@@ -38,7 +38,7 @@ namespace Engine
 
 	};
 
-	class WindowCloseEvent : public WindowEvent
+	class ENGINE_API WindowCloseEvent : public WindowEvent
 	{
 	public:
 
