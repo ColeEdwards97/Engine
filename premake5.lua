@@ -16,10 +16,12 @@ includeDir = {}
 includeDir["glad"] = "Engine/vendor/glad/include"
 includeDir["glfw"] = "Engine/vendor/glfw/include"
 includeDir["glm"] = "Engine/vendor/glm"
+includeDir["imgui"] = "Engine/vendor/imgui"
 
 group "Dependencies"
 	include "Engine/vendor/glad"
 	include "Engine/vendor/glfw"
+	include "Engine/vendor/imgui"
 
 group ""
 
@@ -51,13 +53,15 @@ project "Engine"
 		"%{prj.name}/vendor/spdlog/include",
 		"%{includeDir.glad}",
 		"%{includeDir.glfw}",
-		"%{includeDir.glm}"
+		"%{includeDir.glm}",
+		"%{includeDir.imgui}"
 	}
 	
 	links
 	{
 		"glad",
 		"GLFW",
+		"ImGui",
 		"opengl32.lib"
 	}
 	

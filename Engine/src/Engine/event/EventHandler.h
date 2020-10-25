@@ -16,6 +16,34 @@ namespace Engine
 		EventHandler() {};
 
 
+		/* TODO: (convenience) subscribe to all events of a certain category 
+		void addEventListener(int categoryFlags, EventListener* eventListener)
+		{
+			// Figure out which categories to subscribe to
+			EventCategory key;
+			for (std::unordered_map<EventCategory, std::vector<EventListener*>>::iterator iter = eventListeners2.begin(); iter != eventListeners2.end(); ++iter)
+			{
+				key = iter->first;
+				// If this key is flagged
+				if (key & categoryFlags) 
+				{
+					// Get the vector of EventListener Pointers associated with the event category
+					std::vector<EventListener*> v = eventListeners2[key];
+					// Check to make sure this EventListener isn't already associated
+					if (std::find(v.begin(), v.end(), eventListener) == v.end())
+					{
+						// Add the EventListener to the vector
+						v.push_back(eventListener);
+					}
+					// Set the vector associated with the EventType
+					eventListeners2[key] = v;
+				}
+
+			}
+
+		}
+		*/
+
 		void addEventListener(EventType eventType, EventListener* eventListener)
 		{
 			// Get the vector of EventListener Pointers associated with the EventType
@@ -74,7 +102,7 @@ namespace Engine
 	private:
 		
 		std::unordered_map<EventType, std::vector<EventListener*>> eventListeners;
-
+		//std::unordered_map<EventCategory, std::vector<EventListener*>> eventListeners2;
 
 	};
 

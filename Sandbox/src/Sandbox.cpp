@@ -9,6 +9,7 @@ public:
 	Sandbox() 
 	{
 		pushLayer(new TestLayer());
+		pushOverlay(new Engine::ImGuiLayer());
 	}
 
 	~Sandbox() 

@@ -1344,6 +1344,8 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp">
       <Filter>vendor\glm\glm</Filter>
     </ClInclude>
+    <ClInclude Include="src\Engine\imgui\ImGuiLayer.h" />
+    <ClInclude Include="src\Engine\platform\OpenGL\ImGuiOpenGLRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Engine\Application.cpp">
@@ -1367,5 +1369,7 @@
     <ClCompile Include="src\engpch.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Engine\imgui\ImGuiLayer.cpp" />
+    <ClCompile Include="src\Engine\platform\OpenGL\ImGuiOpenGLRenderer.cpp" />
   </ItemGroup>
 </Project>

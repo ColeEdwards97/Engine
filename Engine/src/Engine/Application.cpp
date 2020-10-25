@@ -12,13 +12,18 @@ namespace Engine {
 
 	Application::Application() 
 	{
-		m_running = true;
+		ENGINE_CORE_ASSERT(!s_instance, "Application already exists");
 		s_instance = this;
+		m_running = true;
 		m_window = std::unique_ptr<Window>(Window::create());
 
 		// REGISTER EVENT LISTENERS
-		m_window->addEventListener(EventType::WindowEvent, this);
-		m_window->addEventListener(EventType::MouseEvent, this);
+		m_window->addEventListener(EventType::WindowClose, this);
+		m_window->addEventListener(EventType::WindowResize, this);
+		m_window->addEventListener(EventType::MouseMoved, this);
+		m_window->addEventListener(EventType::MouseScrolled, this);
+		m_window->addEventListener(EventType::MouseButtonPressed, this);
+		m_window->addEventListener(EventType::MouseButtonReleased, this);
 	}
 
 	Application::~Application() 
@@ -82,11 +87,13 @@ namespace Engine {
 	void Application::pushLayer(Layer* layer)
 	{
 		m_layerStack.pushLayer(layer);
+		layer->onAttach();
 	}
 
 	void Application::pushOverlay(Layer* overlay)
 	{
 		m_layerStack.pushOverlay(overlay);
+		overlay->onAttach();
 	}
 
 }
