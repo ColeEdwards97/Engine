@@ -12,12 +12,12 @@ public:
 
 	void onUpdate() override
 	{
-		ENGINE_INFO("Layer: {0} onUpdate()", this->getName());
+		//ENGINE_INFO("Layer: {0} onUpdate()", this->getName());
 	}
 
 	void onEvent(Engine::Event& e) override
 	{
-		ENGINE_TRACE("An Event Occurred!");
+		//ENGINE_TRACE("An Event Occurred!");
 	}
 
 };

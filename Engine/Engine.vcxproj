@@ -153,6 +153,7 @@
     <ClInclude Include="src\Engine\Application.h" />
     <ClInclude Include="src\Engine\Core.h" />
     <ClInclude Include="src\Engine\EntryPoint.h" />
+    <ClInclude Include="src\Engine\event\EventDispatcher.h" />
     <ClInclude Include="src\Engine\Input.h" />
     <ClInclude Include="src\Engine\KeyCodes.h" />
     <ClInclude Include="src\Engine\Layer.h" />
@@ -167,8 +168,6 @@
     <ClInclude Include="src\Engine\entity\Player.h" />
     <ClInclude Include="src\Engine\entity\PlayerInputComponent.h" />
     <ClInclude Include="src\Engine\event\Event.h" />
-    <ClInclude Include="src\Engine\event\EventHandler.h" />
-    <ClInclude Include="src\Engine\event\EventListener.h" />
     <ClInclude Include="src\Engine\event\KeyEvent.h" />
     <ClInclude Include="src\Engine\event\MouseEvent.h" />
     <ClInclude Include="src\Engine\event\Observer.h" />
@@ -591,6 +590,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Engine\Application.cpp" />
+    <ClCompile Include="src\Engine\event\Subject.cpp" />
     <ClCompile Include="src\Engine\Layer.cpp" />
     <ClCompile Include="src\Engine\LayerStack.cpp" />
     <ClCompile Include="src\Engine\Log.cpp" />

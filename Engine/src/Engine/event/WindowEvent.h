@@ -29,7 +29,6 @@ namespace Engine
 		unsigned int getWidth() const { return m_width; }
 		unsigned int getHeight() const { return m_height; }
 
-		EventType getEventType() const override { return WindowResize; }
 		int getEventCategoryFlags() const override { return (EventCategoryApplication); }
 
 	private:
@@ -45,7 +44,6 @@ namespace Engine
 
 		WindowCloseEvent() = default;
 
-		EventType getEventType() const override { return WindowClose; }
 		int getEventCategoryFlags() const override { return (EventCategoryApplication); }
 		
 	};

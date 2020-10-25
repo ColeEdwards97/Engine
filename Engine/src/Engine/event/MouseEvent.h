@@ -29,8 +29,7 @@ namespace Engine
 
 		float getMouseX() const { return m_posX; }
 		float getMouseY() const { return m_posY; }
-
-		EventType getEventType() const override { return MouseMoved; }
+		
 		int getEventCategoryFlags() const override { return (EventCategoryInput | EventCategoryMouse); }
 
 	private:
@@ -52,7 +51,6 @@ namespace Engine
 		float getOffsetX() const { return m_offsetX; }
 		float getOffsetY() const { return m_offsetY; }
 
-		EventType getEventType() const override { return MouseScrolled; }
 		int getEventCategoryFlags() const override { return (EventCategoryInput | EventCategoryMouse); }
 
 	private:
@@ -93,8 +91,6 @@ namespace Engine
 
 		uint16_t getRepeatCount() const { return m_repeats; }
 
-		EventType getEventType() const override { return MouseButtonPressed; }
-
 	private:
 		
 		uint16_t m_repeats;
@@ -109,8 +105,6 @@ namespace Engine
 		MouseButtonReleasedEvent(const int button)
 			: MouseButtonEvent(button)
 		{}
-
-		EventType getEventType() const override { return MouseButtonReleased; }
 
 	};
 

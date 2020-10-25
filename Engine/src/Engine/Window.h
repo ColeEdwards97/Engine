@@ -4,7 +4,7 @@
 
 #include "Core.h"
 
-#include "event/EventHandler.h"
+#include "event/Subject.h"
 
 namespace Engine {
 
@@ -20,7 +20,7 @@ namespace Engine {
 
 	};
 
-	class ENGINE_API Window : public EventHandler {
+	class ENGINE_API Window : public Subject {
 
 	public:
 

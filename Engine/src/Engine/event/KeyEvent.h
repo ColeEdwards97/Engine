@@ -14,7 +14,7 @@ namespace Engine
 
 		int getKeyCode() const { return m_keyCode; }
 
-		int getEventCategoryFlags() { return (EventCategoryKeyboard); }
+		int getEventCategoryFlags() const override { return (EventCategoryKeyboard); }
 
 	protected:
 
@@ -38,9 +38,8 @@ namespace Engine
 		{}
 
 		uint16_t getRepeatCount() const { return m_repeats; }
-		
-		EventType getEventType() const override { return KeyPressed;}
-		int getEventCategoryFlags() const override { return (EventCategoryInput | EventCategoryKeyboard); }
+
+		int getEventCategoryFlags() const override { return (EventCategoryKeyboard | EventCategoryInput); }
 
 	private:
 
@@ -57,8 +56,7 @@ namespace Engine
 			: KeyEvent(keyCode)
 		{}
 
-		EventType getEventType() const override { return KeyReleased; }
-		int getEventCategoryFlags() const override { return (EventCategoryInput | EventCategoryKeyboard); }
+		int getEventCategoryFlags() const override { return (EventCategoryKeyboard | EventCategoryInput); }
 
 	};
 
@@ -71,8 +69,7 @@ namespace Engine
 			: KeyEvent(keyCode)
 		{}
 
-		EventType getEventType() const override { return KeyTyped; }
-		int getEventCategoryFlags() const override { return (EventCategoryInput | EventCategoryKeyboard); }
+		int getEventCategoryFlags() const override { return (EventCategoryKeyboard | EventCategoryInput); }
 
 	};
 }

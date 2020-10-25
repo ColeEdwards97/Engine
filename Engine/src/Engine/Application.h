@@ -7,13 +7,13 @@
 #include "event/WindowEvent.h"
 #include "event/KeyEvent.h"
 #include "event/MouseEvent.h"
-#include "event/EventListener.h"
+#include "event/Observer.h"
 
 #include "LayerStack.h"
 
 namespace Engine {
 
-	class ENGINE_API Application : public EventListener
+	class ENGINE_API Application : public Observer
 	{
 	public:
 

@@ -102,12 +102,6 @@
     <ClInclude Include="src\Engine\event\Event.h">
       <Filter>src\Engine\event</Filter>
     </ClInclude>
-    <ClInclude Include="src\Engine\event\EventHandler.h">
-      <Filter>src\Engine\event</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\event\EventListener.h">
-      <Filter>src\Engine\event</Filter>
-    </ClInclude>
     <ClInclude Include="src\Engine\event\KeyEvent.h">
       <Filter>src\Engine\event</Filter>
     </ClInclude>
@@ -1365,6 +1359,7 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp">
       <Filter>vendor\glm\glm</Filter>
     </ClInclude>
+    <ClInclude Include="src\Engine\event\EventDispatcher.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Engine\Application.cpp">
@@ -1397,5 +1392,6 @@
     <ClCompile Include="src\engpch.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Engine\event\Subject.cpp" />
   </ItemGroup>
 </Project>

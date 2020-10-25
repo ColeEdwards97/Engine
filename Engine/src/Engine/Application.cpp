@@ -6,6 +6,8 @@
 
 #include "Input.h"
 
+#include "event/EventDispatcher.h"
+
 namespace Engine {
 
 	Application* Application::s_instance = nullptr;
@@ -17,13 +19,8 @@ namespace Engine {
 		m_running = true;
 		m_window = std::unique_ptr<Window>(Window::create());
 
-		// REGISTER EVENT LISTENERS
-		m_window->addEventListener(EventType::WindowClose, this);
-		m_window->addEventListener(EventType::WindowResize, this);
-		m_window->addEventListener(EventType::MouseMoved, this);
-		m_window->addEventListener(EventType::MouseScrolled, this);
-		m_window->addEventListener(EventType::MouseButtonPressed, this);
-		m_window->addEventListener(EventType::MouseButtonReleased, this);
+		// REGISTER OBSERVER
+		m_window->registerObserver(this);
 	}
 
 	Application::~Application() 
@@ -53,10 +50,12 @@ namespace Engine {
 
 	void Application::onEvent(Event& e)
 	{
-		ENGINE_CORE_TRACE("An Event Occurred!");
+		//ENGINE_CORE_TRACE("An Event Occurred!");
 		
-		m_window->dispatch<WindowResizeEvent>(e, ENG_BIND_EVENT_FN(Application::onWindowResizeEvent));
-		m_window->dispatch<WindowCloseEvent>(e, ENG_BIND_EVENT_FN(Application::onWindowCloseEvent));
+		EventDispatcher dispatcher(e);
+
+		dispatcher.dispatch<WindowResizeEvent>(ENG_BIND_EVENT_FN(Application::onWindowResizeEvent));
+		dispatcher.dispatch<WindowCloseEvent>(ENG_BIND_EVENT_FN(Application::onWindowCloseEvent));
 
 		for (auto it = m_layerStack.rbegin(); it != m_layerStack.rend(); ++it)
 		{
