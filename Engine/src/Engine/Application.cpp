@@ -18,6 +18,9 @@ namespace Engine {
 		s_instance = this;
 		m_running = true;
 		m_window = std::unique_ptr<Window>(Window::create());
+		
+		m_ImGuiLayer = new ImGuiLayer();
+		pushOverlay(m_ImGuiLayer);
 
 		// REGISTER OBSERVER
 		m_window->registerObserver(this);
@@ -35,6 +38,7 @@ namespace Engine {
 			glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
 
+			// LAYER :: OnUpdate()
 			for (Layer* layer : m_layerStack)
 			{
 				if (layer->enabled) 
@@ -43,6 +47,16 @@ namespace Engine {
 				}
 			}
 
+			// LAYER :: OnImGuiRender()
+			m_ImGuiLayer->begin();
+			for (Layer* layer : m_layerStack)
+			{
+				layer->onImGuiRender();
+			}
+			m_ImGuiLayer->end();
+
+
+			// WINDOW :: On Update()
 			m_window->onUpdate();
 
 		}
@@ -53,8 +67,6 @@ namespace Engine {
 		//ENGINE_CORE_TRACE("An Event Occurred!");
 		
 		EventDispatcher dispatcher(e);
-
-		dispatcher.dispatch<WindowResizeEvent>(ENG_BIND_EVENT_FN(Application::onWindowResizeEvent));
 		dispatcher.dispatch<WindowCloseEvent>(ENG_BIND_EVENT_FN(Application::onWindowCloseEvent));
 
 		for (auto it = m_layerStack.rbegin(); it != m_layerStack.rend(); ++it)
@@ -63,16 +75,14 @@ namespace Engine {
 			{
 				break;
 			}
-			(*it)->onEvent(e);
+			else
+			{
+				(*it)->onEvent(e);
+			}
 		}
 
 	}
 
-	bool Application::onWindowResizeEvent(WindowResizeEvent& e)
-	{
-		ENGINE_CORE_TRACE("Window Resize Event! new size: {0} x {1}", e.getWidth(), e.getHeight());
-		return false;
-	}
 
 	bool Application::onWindowCloseEvent(WindowCloseEvent& e)
 	{

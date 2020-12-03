@@ -2,6 +2,8 @@
 
 #include "Engine.h"
 
+#include "imgui/imgui.h"
+
 class TestLayer : public Engine::Layer
 {
 public:
@@ -18,6 +20,13 @@ public:
 	void onEvent(Engine::Event& e) override
 	{
 		//ENGINE_TRACE("An Event Occurred!");
+	}
+
+	void onImGuiRender() override
+	{
+		//ImGui::Begin("Test");
+		//ImGui::Text("Hello world!");
+		//ImGui::End();
 	}
 
 };

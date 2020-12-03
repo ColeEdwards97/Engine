@@ -153,7 +153,6 @@
     <ClInclude Include="src\Engine\Application.h" />
     <ClInclude Include="src\Engine\Core.h" />
     <ClInclude Include="src\Engine\EntryPoint.h" />
-    <ClInclude Include="src\Engine\event\EventDispatcher.h" />
     <ClInclude Include="src\Engine\Input.h" />
     <ClInclude Include="src\Engine\KeyCodes.h" />
     <ClInclude Include="src\Engine\Layer.h" />
@@ -168,14 +167,13 @@
     <ClInclude Include="src\Engine\entity\Player.h" />
     <ClInclude Include="src\Engine\entity\PlayerInputComponent.h" />
     <ClInclude Include="src\Engine\event\Event.h" />
+    <ClInclude Include="src\Engine\event\EventDispatcher.h" />
     <ClInclude Include="src\Engine\event\KeyEvent.h" />
     <ClInclude Include="src\Engine\event\MouseEvent.h" />
     <ClInclude Include="src\Engine\event\Observer.h" />
     <ClInclude Include="src\Engine\event\Subject.h" />
     <ClInclude Include="src\Engine\event\WindowEvent.h" />
     <ClInclude Include="src\Engine\imgui\ImGuiLayer.h" />
-    <ClInclude Include="src\Engine\platform\OpenGL\ImGuiOpenGLRenderer.h" />
-    <ClInclude Include="src\Engine\platform\OpenGL\imgui_impl_glfw.h" />
     <ClInclude Include="src\Engine\platform\windows\WindowsInput.h" />
     <ClInclude Include="src\Engine\platform\windows\WindowsWindow.h" />
     <ClInclude Include="src\engpch.h" />
@@ -590,13 +588,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Engine\Application.cpp" />
-    <ClCompile Include="src\Engine\event\Subject.cpp" />
     <ClCompile Include="src\Engine\Layer.cpp" />
     <ClCompile Include="src\Engine\LayerStack.cpp" />
     <ClCompile Include="src\Engine\Log.cpp" />
+    <ClCompile Include="src\Engine\event\Subject.cpp" />
+    <ClCompile Include="src\Engine\imgui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Engine\imgui\ImGuiLayer.cpp" />
-    <ClCompile Include="src\Engine\platform\OpenGL\ImGuiOpenGLRenderer.cpp" />
-    <ClCompile Include="src\Engine\platform\OpenGL\imgui_impl_glfw.cpp" />
     <ClCompile Include="src\Engine\platform\windows\WindowsInput.cpp" />
     <ClCompile Include="src\Engine\platform\windows\WindowsWindow.cpp" />
     <ClCompile Include="src\engpch.cpp">

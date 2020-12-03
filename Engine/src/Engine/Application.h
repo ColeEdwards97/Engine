@@ -3,13 +3,14 @@
 #include "Core.h"
 #include "Window.h"
 
-#include "event/Event.h"
-#include "event/WindowEvent.h"
-#include "event/KeyEvent.h"
-#include "event/MouseEvent.h"
-#include "event/Observer.h"
+#include "Engine/event/Event.h"
+#include "Engine/event/WindowEvent.h"
+#include "Engine/event/KeyEvent.h"
+#include "Engine/event/MouseEvent.h"
+#include "Engine/event/Observer.h"
 
-#include "LayerStack.h"
+#include "Engine/imgui/ImGuiLayer.h"
+#include "Engine/LayerStack.h"
 
 namespace Engine {
 
@@ -23,9 +24,7 @@ namespace Engine {
 		void run();
 
 		void onEvent(Event& e) override;
-		bool onWindowResizeEvent(WindowResizeEvent& e);
-		bool onWindowCloseEvent(WindowCloseEvent& e);
-
+		
 		void pushLayer(Layer* layer);
 		void pushOverlay(Layer* overlay);
 
@@ -35,12 +34,16 @@ namespace Engine {
 
 	private:
 
-		static Application* s_instance;
+		bool onWindowCloseEvent(WindowCloseEvent& e);
 
 		std::unique_ptr<Window> m_window;
+		ImGuiLayer* m_ImGuiLayer;
 		bool m_running;
-
 		LayerStack m_layerStack;
+
+	private:
+
+		static Application* s_instance;
 
 	};
 

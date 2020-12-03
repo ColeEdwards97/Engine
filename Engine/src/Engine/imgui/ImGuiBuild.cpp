@@ -1,0 +1,10 @@
+#include "engpch.h"
+
+// INCLUDES IMGUI IMPLEMENTATIONS FOR OPENGL3 AND GLFW DIRECTLY
+// NO NEED TO CREATE OUR OWN IMPLEMENTATION
+// SHOULD BE UPDATED WHEN IMGUI DOCKING BRANCH IS UPDATED
+
+#define IMGUI_IMPL_OPENGL_LOADER_GLAD
+
+#include "backends/imgui_impl_opengl3.cpp"
+#include "backends/imgui_impl_glfw.cpp"

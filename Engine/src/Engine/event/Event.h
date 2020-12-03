@@ -26,6 +26,11 @@ namespace Engine
 		bool cancelled = false;
 
 		virtual int getEventCategoryFlags() const = 0;
+
+		bool isInCategory(EventCategory category)
+		{
+			return getEventCategoryFlags() & category;
+		}
 		
 
 	};

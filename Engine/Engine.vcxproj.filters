@@ -19,9 +19,6 @@
     <Filter Include="src\Engine\platform">
       <UniqueIdentifier>{C6CD5E38-322F-3C46-BB9C-82F827FD7205}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Engine\platform\OpenGL">
-      <UniqueIdentifier>{3A7C5DB7-268C-0988-8F45-6EA67B74F820}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Engine\platform\windows">
       <UniqueIdentifier>{2076709A-8C83-9E80-156A-9A6B81766A37}</UniqueIdentifier>
     </Filter>
@@ -102,6 +99,9 @@
     <ClInclude Include="src\Engine\event\Event.h">
       <Filter>src\Engine\event</Filter>
     </ClInclude>
+    <ClInclude Include="src\Engine\event\EventDispatcher.h">
+      <Filter>src\Engine\event</Filter>
+    </ClInclude>
     <ClInclude Include="src\Engine\event\KeyEvent.h">
       <Filter>src\Engine\event</Filter>
     </ClInclude>
@@ -119,12 +119,6 @@
     </ClInclude>
     <ClInclude Include="src\Engine\imgui\ImGuiLayer.h">
       <Filter>src\Engine\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\platform\OpenGL\ImGuiOpenGLRenderer.h">
-      <Filter>src\Engine\platform\OpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\platform\OpenGL\imgui_impl_glfw.h">
-      <Filter>src\Engine\platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\platform\windows\WindowsInput.h">
       <Filter>src\Engine\platform\windows</Filter>
@@ -1359,7 +1353,6 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp">
       <Filter>vendor\glm\glm</Filter>
     </ClInclude>
-    <ClInclude Include="src\Engine\event\EventDispatcher.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Engine\Application.cpp">
@@ -1374,14 +1367,14 @@
     <ClCompile Include="src\Engine\Log.cpp">
       <Filter>src\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="src\Engine\imgui\ImGuiLayer.cpp">
+    <ClCompile Include="src\Engine\event\Subject.cpp">
+      <Filter>src\Engine\event</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\imgui\ImGuiBuild.cpp">
       <Filter>src\Engine\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="src\Engine\platform\OpenGL\ImGuiOpenGLRenderer.cpp">
-      <Filter>src\Engine\platform\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Engine\platform\OpenGL\imgui_impl_glfw.cpp">
-      <Filter>src\Engine\platform\OpenGL</Filter>
+    <ClCompile Include="src\Engine\imgui\ImGuiLayer.cpp">
+      <Filter>src\Engine\imgui</Filter>
     </ClCompile>
     <ClCompile Include="src\Engine\platform\windows\WindowsInput.cpp">
       <Filter>src\Engine\platform\windows</Filter>
@@ -1392,6 +1385,5 @@
     <ClCompile Include="src\engpch.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Engine\event\Subject.cpp" />
   </ItemGroup>
 </Project>

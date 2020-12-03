@@ -54,9 +54,7 @@ namespace Engine {
 			ENGINE_CORE_ASSERT(success, "Could not initialize GLFW!");
 			s_isGLFWInitialized = true;
 		}
-
-		//glfwWindowHint(GLFW_VERSION_MAJOR, 3);
-		//glfwWindowHint(GLFW_VERSION_MINOR, 3);
+		
 		//glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 		// FOR macOS:
 		//		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
