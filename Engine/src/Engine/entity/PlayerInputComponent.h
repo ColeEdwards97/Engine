@@ -9,7 +9,7 @@ namespace Engine
 	{
 	public:
 
-		void onUpdate(Player& p)
+		void OnUpdate(Player& p)
 		{
 			// do stuff
 		}

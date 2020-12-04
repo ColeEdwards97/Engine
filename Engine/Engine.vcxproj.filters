@@ -78,53 +78,8 @@
     <ClInclude Include="src\Engine\Window.h">
       <Filter>src\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="src\Engine\entity\Component.h">
-      <Filter>src\Engine\entity</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\entity\Entity.h">
-      <Filter>src\Engine\entity</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\entity\InputComponent.h">
-      <Filter>src\Engine\entity</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\entity\LivingEntity.h">
-      <Filter>src\Engine\entity</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\entity\Player.h">
-      <Filter>src\Engine\entity</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\entity\PlayerInputComponent.h">
-      <Filter>src\Engine\entity</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\event\Event.h">
-      <Filter>src\Engine\event</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\event\EventDispatcher.h">
-      <Filter>src\Engine\event</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\event\KeyEvent.h">
-      <Filter>src\Engine\event</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\event\MouseEvent.h">
-      <Filter>src\Engine\event</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\event\Observer.h">
-      <Filter>src\Engine\event</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\event\Subject.h">
-      <Filter>src\Engine\event</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\event\WindowEvent.h">
-      <Filter>src\Engine\event</Filter>
-    </ClInclude>
     <ClInclude Include="src\Engine\imgui\ImGuiLayer.h">
       <Filter>src\Engine\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\platform\windows\WindowsInput.h">
-      <Filter>src\Engine\platform\windows</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\platform\windows\WindowsWindow.h">
-      <Filter>src\Engine\platform\windows</Filter>
     </ClInclude>
     <ClInclude Include="src\engpch.h">
       <Filter>src</Filter>
@@ -1354,7 +1309,52 @@
       <Filter>vendor\glm\glm</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\renderer\GraphicsContext.h" />
-    <ClInclude Include="src\Engine\platform\OpenGL\OpenGLContext.h" />
+    <ClInclude Include="src\platform\OpenGL\OpenGLContext.h" />
+    <ClInclude Include="src\platform\windows\WindowsInput.h">
+      <Filter>src\Engine\platform\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\platform\windows\WindowsWindow.h">
+      <Filter>src\Engine\platform\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\event\Event.h">
+      <Filter>src\Engine\event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\event\EventDispatcher.h">
+      <Filter>src\Engine\event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\event\KeyEvent.h">
+      <Filter>src\Engine\event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\event\MouseEvent.h">
+      <Filter>src\Engine\event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\event\Observer.h">
+      <Filter>src\Engine\event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\event\Subject.h">
+      <Filter>src\Engine\event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\event\WindowEvent.h">
+      <Filter>src\Engine\event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\entity\Component.h">
+      <Filter>src\Engine\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\entity\Entity.h">
+      <Filter>src\Engine\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\entity\InputComponent.h">
+      <Filter>src\Engine\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\entity\LivingEntity.h">
+      <Filter>src\Engine\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\entity\Player.h">
+      <Filter>src\Engine\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\entity\PlayerInputComponent.h">
+      <Filter>src\Engine\entity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Engine\Application.cpp">
@@ -1369,24 +1369,24 @@
     <ClCompile Include="src\Engine\Log.cpp">
       <Filter>src\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="src\Engine\event\Subject.cpp">
-      <Filter>src\Engine\event</Filter>
-    </ClCompile>
     <ClCompile Include="src\Engine\imgui\ImGuiBuild.cpp">
       <Filter>src\Engine\imgui</Filter>
     </ClCompile>
     <ClCompile Include="src\Engine\imgui\ImGuiLayer.cpp">
       <Filter>src\Engine\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="src\Engine\platform\windows\WindowsInput.cpp">
-      <Filter>src\Engine\platform\windows</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Engine\platform\windows\WindowsWindow.cpp">
-      <Filter>src\Engine\platform\windows</Filter>
-    </ClCompile>
     <ClCompile Include="src\engpch.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Engine\platform\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="src\platform\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="src\platform\windows\WindowsInput.cpp">
+      <Filter>src\Engine\platform\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="src\platform\windows\WindowsWindow.cpp">
+      <Filter>src\Engine\platform\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\event\Subject.cpp">
+      <Filter>src\Engine\event</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

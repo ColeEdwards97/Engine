@@ -8,6 +8,6 @@ namespace Engine
 	{
 	public:
 		virtual ~Component() {}
-		virtual void onUpdate(Entity& entity) = 0;
+		virtual void OnUpdate(Entity& entity) = 0;
 	};
 }

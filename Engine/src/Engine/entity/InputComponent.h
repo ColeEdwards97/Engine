@@ -9,6 +9,6 @@ namespace Engine
 	{
 	public:
 		virtual ~InputComponent() {}
-		virtual void onUpdate(Entity& e) = 0;
+		virtual void OnUpdate(Entity& e) = 0;
 	};
 }

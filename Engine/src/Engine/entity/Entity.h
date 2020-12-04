@@ -8,10 +8,10 @@ namespace Engine
 	public:
 		Entity() {}
 		virtual ~Entity() {}
-		virtual void onUpdate() = 0;
+		virtual void OnUpdate() = 0;
 
-		void addComponent(Component* component);
-		void removeComponent(Component* component);
+		void AddComponent(Component* component);
+		void RemoveComponent(Component* component);
 
 	};
 

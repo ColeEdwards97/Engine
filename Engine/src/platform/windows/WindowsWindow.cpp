@@ -7,7 +7,7 @@
 #include "Engine/event/KeyEvent.h"
 #include "Engine/event/MouseEvent.h"
 
-#include "Engine/platform/OpenGL/OpenGLContext.h"
+#include "platform/OpenGL/OpenGLContext.h"
 
 namespace Engine {
 	
