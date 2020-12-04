@@ -6,7 +6,7 @@
 namespace Engine
 {
 
-	class ENGINE_API Observer
+	class Observer
 	{
 
 	public:

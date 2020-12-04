@@ -28,10 +28,10 @@ group ""
 -- ENGINE PROJECT -------------------------------
 project "Engine"
 	location "Engine"
-	kind "SharedLib"
+	kind "StaticLib"
 	language "C++"
 	cppdialect "C++17"
-	staticruntime "off"
+	staticruntime "on"
 	
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -57,6 +57,11 @@ project "Engine"
 		"%{includeDir.imgui}"
 	}
 	
+    defines
+    {
+        "_CRT_SECURE_NO_WARNINGS"
+    }
+    
 	links
 	{
 		"glad",
@@ -75,25 +80,20 @@ project "Engine"
 			"GLFW_INCLUDE_NONE"
 		}
 		
-		postbuildcommands
-		{
-			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
-		}
-		
 	filter "configurations:Debug"
 		defines "ENG_DEBUG"
 		runtime "Debug"
-		symbols "On"
+		symbols "on"
 		
 	filter "configurations:Release"
 		defines "ENG_RELEASE"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 	
 	filter "configurations:Dist"
 		defines "ENG_DIST"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 		
 
 -- SANDBOX PROJECT ------------------------------
@@ -102,7 +102,7 @@ project "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
 	cppdialect "C++17"
-	staticruntime "off"
+	staticruntime "on"
 	
 	targetdir ("bin/" ..outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -137,14 +137,14 @@ project "Sandbox"
 	filter "configurations:Debug"
 		defines "ENG_DEBUG"
 		runtime "Debug"
-		symbols "On"
+		symbols "on"
 		
 	filter "configurations:Release"
 		defines "ENG_RELEASE"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 	
 	filter "configurations:Dist"
 		defines "ENG_DIST"
 		runtime "Release"
-		optimize "On"
+		optimize "on"

@@ -38,7 +38,8 @@ namespace Engine
 		io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;	// enable gamepad controls
 		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;		// enable docking
 		
-		// TODO: possible imgui memory leak. RAM usage increases when window is moved outside main window
+																// TODO: possible imgui memory leak. RAM usage increases when window is moved outside main window
+		// TODO: possibly confirmed issue with RivaTuner Statistics Server
 		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;		// enable multiple viewports
 		
 		//io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoTaskBarIcons;
@@ -90,7 +91,7 @@ namespace Engine
 	{
 		ImGuiIO& io = ImGui::GetIO();
 		Application& app = Application::get();
-		io.DisplaySize = ImVec2(app.getWindow().getWidth(), app.getWindow().getHeight());
+		io.DisplaySize = ImVec2((float) app.getWindow().getWidth(), (float) app.getWindow().getHeight());
 
 		// rendering
 		ImGui::Render();

@@ -7,7 +7,7 @@
 namespace Engine
 {
 
-	class ENGINE_API KeyEvent : public Event
+	class KeyEvent : public Event
 	{
 	
 	public:
@@ -29,7 +29,7 @@ namespace Engine
 	};
 
 
-	class ENGINE_API KeyPressedEvent : public KeyEvent
+	class KeyPressedEvent : public KeyEvent
 	{
 	public:
 
@@ -48,7 +48,7 @@ namespace Engine
 	};
 
 
-	class ENGINE_API KeyReleasedEvent : public KeyEvent
+	class KeyReleasedEvent : public KeyEvent
 	{
 	public:
 
@@ -61,7 +61,7 @@ namespace Engine
 	};
 
 
-	class ENGINE_API KeyTypedEvent : public KeyEvent
+	class KeyTypedEvent : public KeyEvent
 	{
 	public:
 

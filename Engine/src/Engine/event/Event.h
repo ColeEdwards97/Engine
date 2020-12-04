@@ -15,7 +15,7 @@ namespace Engine
 		EventCategoryMouseButton = BIT(4)
 	};
 
-	class ENGINE_API Event
+	class Event
 	{
 
 	public:

@@ -20,7 +20,7 @@ namespace Engine {
 
 	};
 
-	class ENGINE_API Window : public Subject {
+	class Window : public Subject {
 
 	public:
 

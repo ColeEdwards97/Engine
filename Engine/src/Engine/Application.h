@@ -14,7 +14,7 @@
 
 namespace Engine {
 
-	class ENGINE_API Application : public Observer
+	class Application : public Observer
 	{
 	public:
 

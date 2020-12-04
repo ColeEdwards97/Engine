@@ -8,7 +8,7 @@
 namespace Engine
 {
 
-	class ENGINE_API Subject
+	class Subject
 	{
 
 	public:

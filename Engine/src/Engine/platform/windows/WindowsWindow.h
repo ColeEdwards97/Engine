@@ -8,7 +8,7 @@
 namespace Engine {
 
 
-	class ENGINE_API WindowsWindow : public Window
+	class WindowsWindow : public Window
 	{
 
 	public:

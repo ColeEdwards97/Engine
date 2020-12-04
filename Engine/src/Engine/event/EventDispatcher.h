@@ -7,7 +7,7 @@
 namespace Engine
 {
 
-	class ENGINE_API EventDispatcher
+	class EventDispatcher
 	{
 
 	public:
