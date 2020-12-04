@@ -1,12 +1,13 @@
 #include "engpch.h"
 
 #include "WindowsWindow.h"
+#include "Engine/renderer/GraphicsContext.h"
 
 #include "Engine/event/WindowEvent.h"
 #include "Engine/event/KeyEvent.h"
 #include "Engine/event/MouseEvent.h"
 
-#include <glad/glad.h>
+#include "Engine/platform/OpenGL/OpenGLContext.h"
 
 namespace Engine {
 	
@@ -14,7 +15,7 @@ namespace Engine {
 
 	// IMPLEMENTATION OF THE Window CLASS
 	// (this is how the code knows to create a Windows Window and not a BlaBlaWindow)
-	Window* Window::create(const WindowProperties& props) 
+	Window* Window::Create(const WindowProperties& props) 
 	{
 		return new WindowsWindow(props);
 	}
@@ -22,23 +23,23 @@ namespace Engine {
 
 	WindowsWindow::WindowsWindow(const WindowProperties& props)
 	{
-		init(props);
+		Init(props);
 	}
 	
 
 	WindowsWindow::~WindowsWindow()
 	{
-		shutdown();
+		Shutdown();
 	}
 
 
-	void WindowsWindow::init(const WindowProperties& props) 
+	void WindowsWindow::Init(const WindowProperties& props) 
 	{
 
 		m_data.width = props.width;
 		m_data.height = props.height;
 		m_data.title = props.title;
-		setEventCallback(ENG_BIND_EVENT_FN(notify));
+		SetEventCallback(ENG_BIND_EVENT_FN(Notify));
 
 		// Error Callback
 		glfwSetErrorCallback([](int error, const char* description)
@@ -59,8 +60,12 @@ namespace Engine {
 		// FOR macOS:
 		//		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
+		// GLFWwindow creation
 		m_window = glfwCreateWindow((int)props.width, (int)props.height, props.title.c_str(), NULL, NULL);
-		// TODO: window create event
+		
+		// OpenGL Context initialization
+		m_context = new OpenGLContext(m_window);
+		m_context->Init();
 
 		if (m_window == NULL) {
 			ENGINE_CORE_ERROR("Failed to create GLFW window");
@@ -72,14 +77,8 @@ namespace Engine {
 			ENGINE_CORE_INFO("Created Windows Window: {0}; {1} x {2}", props.title, props.width, props.height);
 		}
 
-		glfwMakeContextCurrent(m_window);
-		
-		// initialize glad
-		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		ENGINE_CORE_ASSERT(status, "Failed to initialize glad");
-
 		glfwSetWindowUserPointer(m_window, &m_data);
-		setVSync(true);
+		SetVSync(true);
 
 
 		// GLFW Callbacks -----------------------
@@ -192,33 +191,33 @@ namespace Engine {
 	}
 
 
-	void WindowsWindow::onUpdate() 
+	void WindowsWindow::OnUpdate() 
 	{
 		glfwPollEvents();
-		glfwSwapBuffers(m_window);
+		m_context->SwapBuffers();
 	}
 
 
-	void WindowsWindow::shutdown() 
+	void WindowsWindow::Shutdown() 
 	{
 		glfwDestroyWindow(m_window);
 	}
 
 
-	void WindowsWindow::setVSync(bool enabled) 
+	void WindowsWindow::SetVSync(bool enabled) 
 	{
 		glfwSwapInterval(enabled);
 		m_data.vSync = enabled;
 	}
 
 
-	bool WindowsWindow::isVSync() const
+	bool WindowsWindow::IsVSync() const
 	{
 		return m_data.vSync;
 	}
 
 
-	void WindowsWindow::onEvent(Event& e)
+	void WindowsWindow::OnEvent(Event& e)
 	{
 	}
 

@@ -8,7 +8,7 @@ public:
 
 	Sandbox() 
 	{
-		pushLayer(new TestLayer());
+		PushLayer(new TestLayer());
 	}
 
 	~Sandbox() 
@@ -18,7 +18,7 @@ public:
 	
 };
 
-Engine::Application* Engine::createApplication() 
+Engine::Application* Engine::CreateApplication() 
 {
 	return new Sandbox();
 }

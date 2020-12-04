@@ -18,7 +18,7 @@ namespace Engine
 
 
 		template<typename E, typename F>
-		bool dispatch(const F& func)
+		bool Dispatch(const F& func)
 		{
 			if (typeid(E) == typeid(m_event))
 			{

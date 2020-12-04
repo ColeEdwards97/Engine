@@ -3,6 +3,8 @@
 #include "Engine/Window.h"
 #include "Engine/Log.h"
 
+#include "Engine/renderer/GraphicsContext.h"
+
 #include <GLFW/glfw3.h>
 
 namespace Engine {
@@ -16,27 +18,28 @@ namespace Engine {
 		WindowsWindow(const WindowProperties& props);
 		virtual ~WindowsWindow();
 
-		void onUpdate() override;
+		void OnUpdate() override;
+		void OnEvent(Event& e) override;
 
-		unsigned int getWidth() const override { return m_data.width; }
-		unsigned int getHeight() const override { return m_data.height; }
+		unsigned int GetWidth() const override { return m_data.width; }
+		unsigned int GetHeight() const override { return m_data.height; }
 
-		void setEventCallback(const eventCallbackFn& callback) override { m_data.eventCallback = callback; }
-		void setVSync(bool enabled) override;
-		bool isVSync() const override;
-
-		void onEvent(Event& e) override;
-
-		virtual void* getNativeWindow() const override { return m_window; }
+		void SetEventCallback(const EventCallbackFn& callback) override { m_data.eventCallback = callback; }
+		void SetVSync(bool enabled) override;
+		bool IsVSync() const override;
+		
+		virtual void* GetNativeWindow() const override { return m_window; }
 
 
 	private:
-		virtual void init(const WindowProperties& props);
-		virtual void shutdown();
+
+		virtual void Init(const WindowProperties& props);
+		virtual void Shutdown();
 
 	private:
 
 		GLFWwindow* m_window;
+		GraphicsContext* m_context;
 
 		struct WindowData {
 			std::string title;
@@ -44,7 +47,7 @@ namespace Engine {
 			unsigned int height;
 			bool vSync;
 
-			eventCallbackFn eventCallback;
+			EventCallbackFn eventCallback;
 		};
 
 		WindowData m_data;

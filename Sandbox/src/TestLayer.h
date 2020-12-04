@@ -12,17 +12,17 @@ public:
 		: Layer("Test Layer")
 	{}
 
-	void onUpdate() override
+	void OnUpdate() override
 	{
 		//ENGINE_INFO("Layer: {0} onUpdate()", this->getName());
 	}
 
-	void onEvent(Engine::Event& e) override
+	void OnEvent(Engine::Event& e) override
 	{
 		//ENGINE_TRACE("An Event Occurred!");
 	}
 
-	void onImGuiRender() override
+	void OnImGuiRender() override
 	{
 		ImGui::Begin("Test");
 		ImGui::Text("Hello world!");

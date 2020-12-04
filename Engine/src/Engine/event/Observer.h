@@ -12,7 +12,7 @@ namespace Engine
 	public:
 
 		virtual ~Observer() = default;
-		virtual void onEvent(Event& e) = 0;
+		virtual void OnEvent(Event& e) = 0;
 
 	};
 

@@ -12,13 +12,13 @@ namespace Engine
 		Layer(const std::string& name = "Layer");
 		virtual ~Layer();
 
-		virtual void onAttach() {}
-		virtual void onDetach() {}
-		virtual void onUpdate() {}
-		virtual void onImGuiRender() {}
-		virtual void onEvent(Event& e) {}
+		virtual void OnAttach() {}
+		virtual void OnDetach() {}
+		virtual void OnUpdate() {}
+		virtual void OnImGuiRender() {}
+		virtual void OnEvent(Event& e) {}
 
-		const std::string& getName() const { return m_debugName; }
+		const std::string& GetName() const { return m_debugName; }
 
 		bool enabled = true;
 

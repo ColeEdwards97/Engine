@@ -27,7 +27,7 @@ namespace Engine
 
 	}
 
-	void ImGuiLayer::onAttach()
+	void ImGuiLayer::OnAttach()
 	{
 
 		IMGUI_CHECKVERSION();
@@ -38,7 +38,7 @@ namespace Engine
 		io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;	// enable gamepad controls
 		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;		// enable docking
 		
-																// TODO: possible imgui memory leak. RAM usage increases when window is moved outside main window
+		// TODO: possible imgui memory leak. RAM usage increases when window is moved outside main window
 		// TODO: possibly confirmed issue with RivaTuner Statistics Server
 		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;		// enable multiple viewports
 		
@@ -58,8 +58,8 @@ namespace Engine
 		}
 
 		// get the native window so we can initialize imgui for opengl3
-		Application& app = Application::get();
-		GLFWwindow* window = static_cast<GLFWwindow*>(app.getWindow().getNativeWindow());
+		Application& app = Application::Get();
+		GLFWwindow* window = static_cast<GLFWwindow*>(app.GetWindow().GetNativeWindow());
 
 		// platform and render bindings
 		if (!m_ImGuiInitialized)
@@ -71,7 +71,7 @@ namespace Engine
 
 	}
 
-	void ImGuiLayer::onDetach()
+	void ImGuiLayer::OnDetach()
 	{
 		ImGui_ImplOpenGL3_Shutdown();
 		ImGui_ImplGlfw_Shutdown();
@@ -79,7 +79,7 @@ namespace Engine
 	}
 
 
-	void ImGuiLayer::begin()
+	void ImGuiLayer::Begin()
 	{
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
@@ -87,11 +87,11 @@ namespace Engine
 	}
 
 	
-	void ImGuiLayer::end()
+	void ImGuiLayer::End()
 	{
 		ImGuiIO& io = ImGui::GetIO();
-		Application& app = Application::get();
-		io.DisplaySize = ImVec2((float) app.getWindow().getWidth(), (float) app.getWindow().getHeight());
+		Application& app = Application::Get();
+		io.DisplaySize = ImVec2((float) app.GetWindow().GetWidth(), (float) app.GetWindow().GetHeight());
 
 		// rendering
 		ImGui::Render();
@@ -108,20 +108,20 @@ namespace Engine
 	}
 
 
-	void ImGuiLayer::onImGuiRender()
+	void ImGuiLayer::OnImGuiRender()
 	{
 		static bool show = true;
 		ImGui::ShowDemoWindow(&show);
 	}
 
 
-	void ImGuiLayer::onEvent(Event& e)
+	void ImGuiLayer::OnEvent(Event& e)
 	{
 		if (m_blockEvents)
 		{
 			ImGuiIO& io = ImGui::GetIO();
-			e.handled |= e.isInCategory(EventCategoryMouse) & io.WantCaptureMouse;
-			e.handled |= e.isInCategory(EventCategoryKeyboard) & io.WantCaptureKeyboard;
+			e.handled |= e.IsInCategory(EventCategoryMouse) & io.WantCaptureMouse;
+			e.handled |= e.IsInCategory(EventCategoryKeyboard) & io.WantCaptureKeyboard;
 		}
 	}
 

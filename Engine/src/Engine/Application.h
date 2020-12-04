@@ -21,20 +21,20 @@ namespace Engine {
 		Application();
 		virtual ~Application();
 
-		void run();
+		void Run();
 
-		void onEvent(Event& e) override;
+		void OnEvent(Event& e) override;
 		
-		void pushLayer(Layer* layer);
-		void pushOverlay(Layer* overlay);
+		void PushLayer(Layer* layer);
+		void PushOverlay(Layer* overlay);
 
-		Window& getWindow() { return *m_window; }
+		Window& GetWindow() { return *m_window; }
 
-		static Application& get() { return *s_instance; }
+		static Application& Get() { return *s_instance; }
 
 	private:
 
-		bool onWindowCloseEvent(WindowCloseEvent& e);
+		bool OnWindowCloseEvent(WindowCloseEvent& e);
 
 		std::unique_ptr<Window> m_window;
 		ImGuiLayer* m_ImGuiLayer;
@@ -47,7 +47,7 @@ namespace Engine {
 
 	};
 
-	Application* createApplication();  // to be defined in CLIENT
+	Application* CreateApplication();  // to be defined in CLIENT
 
 }
 

@@ -2,16 +2,16 @@
 
 #ifdef ENG_PLATFORM_WINDOWS
 
-extern Engine::Application* Engine::createApplication();
+extern Engine::Application* Engine::CreateApplication();
 
 int main(int argc, char** argv) {
 
-	Engine::Log::init();
+	Engine::Log::Init();
 	ENGINE_CORE_INFO("Core logger initialized");
 	ENGINE_INFO("Client logger initialized");
 
-	auto app = Engine::createApplication();
-	app->run();
+	auto app = Engine::CreateApplication();
+	app->Run();
 	delete app;
 }
 

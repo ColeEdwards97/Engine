@@ -17,13 +17,13 @@ namespace Engine {
 		ENGINE_CORE_ASSERT(!s_instance, "Application already exists");
 		s_instance = this;
 		m_running = true;
-		m_window = std::unique_ptr<Window>(Window::create());
+		m_window = std::unique_ptr<Window>(Window::Create());
 		
 		m_ImGuiLayer = new ImGuiLayer();
-		pushOverlay(m_ImGuiLayer);
+		PushOverlay(m_ImGuiLayer);
 
 		// REGISTER OBSERVER
-		m_window->registerObserver(this);
+		m_window->RegisterObserver(this);
 	}
 
 	Application::~Application() 
@@ -31,7 +31,7 @@ namespace Engine {
 
 	}
 
-	void Application::run() 
+	void Application::Run() 
 	{
 		while (m_running)
 		{
@@ -43,31 +43,31 @@ namespace Engine {
 			{
 				if (layer->enabled) 
 				{
-					layer->onUpdate();
+					layer->OnUpdate();
 				}
 			}
 
 			// LAYER :: OnImGuiRender()
-			m_ImGuiLayer->begin();
+			m_ImGuiLayer->Begin();
 			for (Layer* layer : m_layerStack)
 			{
-				layer->onImGuiRender();
+				layer->OnImGuiRender();
 			}
-			m_ImGuiLayer->end();
+			m_ImGuiLayer->End();
 
 
 			// WINDOW :: On Update()
-			m_window->onUpdate();
+			m_window->OnUpdate();
 
 		}
 	}
 
-	void Application::onEvent(Event& e)
+	void Application::OnEvent(Event& e)
 	{
 		//ENGINE_CORE_TRACE("An Event Occurred!");
 		
 		EventDispatcher dispatcher(e);
-		dispatcher.dispatch<WindowCloseEvent>(ENG_BIND_EVENT_FN(Application::onWindowCloseEvent));
+		dispatcher.Dispatch<WindowCloseEvent>(ENG_BIND_EVENT_FN(Application::OnWindowCloseEvent));
 
 		for (auto it = m_layerStack.rbegin(); it != m_layerStack.rend(); ++it)
 		{
@@ -77,14 +77,14 @@ namespace Engine {
 			}
 			else
 			{
-				(*it)->onEvent(e);
+				(*it)->OnEvent(e);
 			}
 		}
 
 	}
 
 
-	bool Application::onWindowCloseEvent(WindowCloseEvent& e)
+	bool Application::OnWindowCloseEvent(WindowCloseEvent& e)
 	{
 		ENGINE_CORE_TRACE("Window Close Event! goodbye!");
 		m_running = false;
@@ -93,16 +93,16 @@ namespace Engine {
 
 
 	// LAYER STACK
-	void Application::pushLayer(Layer* layer)
+	void Application::PushLayer(Layer* layer)
 	{
-		m_layerStack.pushLayer(layer);
-		layer->onAttach();
+		m_layerStack.PushLayer(layer);
+		layer->OnAttach();
 	}
 
-	void Application::pushOverlay(Layer* overlay)
+	void Application::PushOverlay(Layer* overlay)
 	{
-		m_layerStack.pushOverlay(overlay);
-		overlay->onAttach();
+		m_layerStack.PushOverlay(overlay);
+		overlay->OnAttach();
 	}
 
 }

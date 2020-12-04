@@ -25,11 +25,11 @@ namespace Engine
 		bool handled = false;
 		bool cancelled = false;
 
-		virtual int getEventCategoryFlags() const = 0;
+		virtual int GetEventCategoryFlags() const = 0;
 
-		bool isInCategory(EventCategory category)
+		bool IsInCategory(EventCategory category)
 		{
-			return getEventCategoryFlags() & category;
+			return GetEventCategoryFlags() & category;
 		}
 		
 

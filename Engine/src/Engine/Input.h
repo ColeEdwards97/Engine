@@ -9,20 +9,20 @@ namespace Engine
 	public:
 
 		// Public static "Accessor" methods
-		static bool isKeyPressed(int keyCode) { return s_instance->isKeyPressedImp(keyCode); }
-		static bool isMouseButtonPressed(int button) { return s_instance->isMouseButtonPressedImp(button); }
-		static std::pair<float, float> getMousePosition() { return s_instance->getMousePositionImp(); }
-		static float getMouseX() { return s_instance->getMouseXImp(); }
-		static float getMouseY() { return s_instance->getMouseYImp(); }
+		static bool IsKeyPressed(int keyCode) { return s_instance->IsKeyPressedImp(keyCode); }
+		static bool IsMouseButtonPressed(int button) { return s_instance->IsMouseButtonPressedImp(button); }
+		static std::pair<float, float> GetMousePosition() { return s_instance->GetMousePositionImp(); }
+		static float GetMouseX() { return s_instance->GetMouseXImp(); }
+		static float GetMouseY() { return s_instance->GetMouseYImp(); }
 
 	protected:
 
 		// Interface methods to be overriden
-		virtual bool isKeyPressedImp(int keyCode) = 0;
-		virtual bool isMouseButtonPressedImp(int button) = 0;
-		virtual std::pair<float, float> getMousePositionImp() = 0;
-		virtual float getMouseXImp() = 0;
-		virtual float getMouseYImp() = 0;
+		virtual bool IsKeyPressedImp(int keyCode) = 0;
+		virtual bool IsMouseButtonPressedImp(int button) = 0;
+		virtual std::pair<float, float> GetMousePositionImp() = 0;
+		virtual float GetMouseXImp() = 0;
+		virtual float GetMouseYImp() = 0;
 
 
 	private:

@@ -9,11 +9,11 @@ namespace Engine
 
 	protected:
 
-		virtual bool isKeyPressedImp(int keyCode) override;
-		virtual bool isMouseButtonPressedImp(int button) override;
-		virtual std::pair<float, float> getMousePositionImp() override;
-		virtual float getMouseXImp() override;
-		virtual float getMouseYImp() override;
+		virtual bool IsKeyPressedImp(int keyCode) override;
+		virtual bool IsMouseButtonPressedImp(int button) override;
+		virtual std::pair<float, float> GetMousePositionImp() override;
+		virtual float GetMouseXImp() override;
+		virtual float GetMouseYImp() override;
 
 	};
 }

@@ -12,9 +12,9 @@ namespace Engine
 	
 	public:
 
-		int getKeyCode() const { return m_keyCode; }
+		int GetKeyCode() const { return m_keyCode; }
 
-		int getEventCategoryFlags() const override { return (EventCategoryKeyboard); }
+		int GetEventCategoryFlags() const override { return (EventCategoryKeyboard); }
 
 	protected:
 
@@ -37,9 +37,9 @@ namespace Engine
 			: KeyEvent(keyCode), m_repeats(repeats)
 		{}
 
-		uint16_t getRepeatCount() const { return m_repeats; }
+		uint16_t GetRepeatCount() const { return m_repeats; }
 
-		int getEventCategoryFlags() const override { return (EventCategoryKeyboard | EventCategoryInput); }
+		int GetEventCategoryFlags() const override { return (EventCategoryKeyboard | EventCategoryInput); }
 
 	private:
 
@@ -56,7 +56,7 @@ namespace Engine
 			: KeyEvent(keyCode)
 		{}
 
-		int getEventCategoryFlags() const override { return (EventCategoryKeyboard | EventCategoryInput); }
+		int GetEventCategoryFlags() const override { return (EventCategoryKeyboard | EventCategoryInput); }
 
 	};
 
@@ -69,7 +69,7 @@ namespace Engine
 			: KeyEvent(keyCode)
 		{}
 
-		int getEventCategoryFlags() const override { return (EventCategoryKeyboard | EventCategoryInput); }
+		int GetEventCategoryFlags() const override { return (EventCategoryKeyboard | EventCategoryInput); }
 
 	};
 }

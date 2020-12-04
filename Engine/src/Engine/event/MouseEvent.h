@@ -9,7 +9,7 @@ namespace Engine
 	{
 	public:
 
-		int getEventCategoryFlags() const override { return (EventCategoryMouse); }
+		int GetEventCategoryFlags() const override { return (EventCategoryMouse); }
 
 	protected:
 		
@@ -27,10 +27,10 @@ namespace Engine
 			: m_posX(posX), m_posY(posY)
 		{}
 
-		float getMouseX() const { return m_posX; }
-		float getMouseY() const { return m_posY; }
+		float GetMouseX() const { return m_posX; }
+		float GetMouseY() const { return m_posY; }
 		
-		int getEventCategoryFlags() const override { return (EventCategoryInput | EventCategoryMouse); }
+		int GetEventCategoryFlags() const override { return (EventCategoryInput | EventCategoryMouse); }
 
 	private:
 
@@ -48,10 +48,10 @@ namespace Engine
 			: m_offsetX(offsetX), m_offsetY(offsetY)
 		{}
 
-		float getOffsetX() const { return m_offsetX; }
-		float getOffsetY() const { return m_offsetY; }
+		float GetOffsetX() const { return m_offsetX; }
+		float GetOffsetY() const { return m_offsetY; }
 
-		int getEventCategoryFlags() const override { return (EventCategoryInput | EventCategoryMouse); }
+		int GetEventCategoryFlags() const override { return (EventCategoryInput | EventCategoryMouse); }
 
 	private:
 
@@ -65,9 +65,9 @@ namespace Engine
 	{
 	public:
 
-		int getMouseButton() const { return m_button; }
+		int GetMouseButton() const { return m_button; }
 
-		int getEventCategoryFlags() const override { return (EventCategoryInput | EventCategoryMouse | EventCategoryMouseButton); }
+		int GetEventCategoryFlags() const override { return (EventCategoryInput | EventCategoryMouse | EventCategoryMouseButton); }
 
 	protected:
 
@@ -89,7 +89,7 @@ namespace Engine
 			: MouseButtonEvent(button), m_repeats(repeats)
 		{}
 
-		uint16_t getRepeatCount() const { return m_repeats; }
+		uint16_t GetRepeatCount() const { return m_repeats; }
 
 	private:
 		

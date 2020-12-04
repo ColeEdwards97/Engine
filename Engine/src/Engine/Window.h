@@ -24,26 +24,26 @@ namespace Engine {
 
 	public:
 
-		using eventCallbackFn = std::function<void(Event&)>;
+		using EventCallbackFn = std::function<void(Event&)>;
 
 		virtual ~Window() {}
 
-		virtual void onUpdate() = 0;
+		virtual void OnUpdate() = 0;
 
-		virtual unsigned int getWidth() const = 0;
-		virtual unsigned int getHeight() const = 0;
+		virtual unsigned int GetWidth() const = 0;
+		virtual unsigned int GetHeight() const = 0;
 
-		virtual void setEventCallback(const eventCallbackFn& callback) = 0;
-		virtual void setVSync(bool enabled) = 0;
-		virtual bool isVSync() const = 0;
-
-
-		virtual void* getNativeWindow() const = 0;
+		virtual void SetEventCallback(const EventCallbackFn& callback) = 0;
+		virtual void SetVSync(bool enabled) = 0;
+		virtual bool IsVSync() const = 0;
 
 
-		static Window* create(const WindowProperties& props = WindowProperties());
+		virtual void* GetNativeWindow() const = 0;
 
-		virtual void onEvent(Event& e) = 0;
+
+		static Window* Create(const WindowProperties& props = WindowProperties());
+
+		virtual void OnEvent(Event& e) = 0;
 
 	};
 

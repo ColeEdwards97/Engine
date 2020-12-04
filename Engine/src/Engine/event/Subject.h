@@ -15,10 +15,10 @@ namespace Engine
 
 		virtual ~Subject() {}
 
-		void registerObserver(Observer* observer);
-		void unregisterObserver(Observer* observer);
+		void RegisterObserver(Observer* observer);
+		void UnregisterObserver(Observer* observer);
 
-		void notify(Event& e);
+		void Notify(Event& e);
 
 	private:
 
