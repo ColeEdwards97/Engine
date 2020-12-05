@@ -14,16 +14,92 @@ namespace Engine {
 
 	Application::Application() 
 	{
+		// initialize application and create window
 		ENGINE_CORE_ASSERT(!s_instance, "Application already exists");
 		s_instance = this;
 		m_running = true;
 		m_window = std::unique_ptr<Window>(Window::Create());
 		
+		// create default imgui layer
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
 
-		// REGISTER OBSERVER
+		// register observer
 		m_window->RegisterObserver(this);
+
+
+
+
+		/* HACKING IN A TRIANGLE */
+		
+		// VAO
+		glGenVertexArrays(1, &VAO);
+		glBindVertexArray(VAO);
+
+		// VBO
+		glGenBuffers(1, &VBO);
+		glBindBuffer(GL_ARRAY_BUFFER, VBO);
+
+		// vertices
+		float vertices[3 * 3] =
+		{
+			-0.5f, -0.5f, 0.0f,
+			 0.5f, -0.5f, 0.0f,
+			 0.0f,  0.5f, 0.0f
+		};
+
+		// buffer data
+		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+		// vertex attrib arrays
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
+
+
+		// VIO
+		glGenBuffers(1, &VIO);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, VIO);
+
+		// indices
+		unsigned int indices[3] =
+		{
+			0, 1, 2
+		};
+
+		// buffer data
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+		// shader
+		std::string fragShaderSrc = R"(
+			#version 330 core
+			layout(location=0) out vec4 color;
+			in vec3 v_Position;
+			void main()
+			{
+				color = vec4(v_Position * 0.5 + 0.5, 1.0);
+			}
+		)";
+
+
+		std::string vertShaderSrc = R"(
+			#version 330 core
+			layout(location=0) in vec3 a_Position;
+			out vec3 v_Position;
+			void main()
+			{
+				v_Position = a_Position;
+				gl_Position = vec4(a_Position, 1.0);
+			}
+		)";
+
+		m_shader.reset(new Shader(fragShaderSrc, vertShaderSrc));
+
+
+		/* HACKING IN A TRIANGLE */
+
+
+
+
 	}
 
 	Application::~Application() 
@@ -35,8 +111,16 @@ namespace Engine {
 	{
 		while (m_running)
 		{
-			glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+			glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
+
+
+			/* HACKING IN A TRIANGLE */
+			m_shader->Bind();
+			glBindVertexArray(VAO);
+			glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
+			/* HACKING IN A TRIANGLE */
+
 
 			// LAYER :: OnUpdate()
 			for (Layer* layer : m_layerStack)

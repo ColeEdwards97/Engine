@@ -12,6 +12,11 @@
 #include "Engine/imgui/ImGuiLayer.h"
 #include "Engine/LayerStack.h"
 
+/* HACKING IN A TRIANGLE */
+#include "Engine/renderer/Shader.h"
+/* HACKING IN A TRIANGLE */
+
+
 namespace Engine {
 
 	class Application : public Observer
@@ -44,6 +49,11 @@ namespace Engine {
 	private:
 
 		static Application* s_instance;
+
+
+		/* hacking in triangle */
+		unsigned int VAO, VBO, VIO;
+		std::unique_ptr<Shader> m_shader;
 
 	};
 

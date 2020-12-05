@@ -1355,6 +1355,7 @@
     <ClInclude Include="src\Engine\entity\PlayerInputComponent.h">
       <Filter>src\Engine\entity</Filter>
     </ClInclude>
+    <ClInclude Include="src\Engine\renderer\Shader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Engine\Application.cpp">
@@ -1388,5 +1389,6 @@
     <ClCompile Include="src\Engine\event\Subject.cpp">
       <Filter>src\Engine\event</Filter>
     </ClCompile>
+    <ClCompile Include="src\Engine\renderer\Shader.cpp" />
   </ItemGroup>
 </Project>
