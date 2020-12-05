@@ -8,26 +8,11 @@ namespace Engine
 
 	public:
 
-		Shader(const char* fragShaderPath, const char* vertShaderPath);
-		Shader(std::string fragShaderSrc, std::string vertShaderSrc);
-		~Shader();
+		static Shader* Create(const char* fragShaderPath, const char* vertShaderPath);
+		static Shader* Create(std::string fragShaderSrc, std::string vertShaderSrc);
 		
-		void Bind() const;
-		void Unbind() const;
-
-		// utility methods for shader uniforms
-		void SetInt(const std::string& name, int value);
-		void SetFloat(const std::string& name, float value);
-		void SetBool(const std::string& name, bool value);
-
-
-	private:
-
-		unsigned int m_programID;
-
-	private:
-
-		std::string LoadShader(const char* shaderPath);
+		virtual void Bind() const = 0;
+		virtual void Unbind() const = 0;
 
 	};
 

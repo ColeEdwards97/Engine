@@ -92,7 +92,8 @@ namespace Engine {
 			}
 		)";
 
-		m_shader.reset(new Shader(fragShaderSrc, vertShaderSrc));
+
+		m_shader.reset(Shader::Create(fragShaderSrc, vertShaderSrc));
 
 
 		/* HACKING IN A TRIANGLE */

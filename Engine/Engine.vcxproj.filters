@@ -1356,6 +1356,7 @@
       <Filter>src\Engine\entity</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\renderer\Shader.h" />
+    <ClInclude Include="src\platform\OpenGL\OpenGLShader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Engine\Application.cpp">
@@ -1390,5 +1391,6 @@
       <Filter>src\Engine\event</Filter>
     </ClCompile>
     <ClCompile Include="src\Engine\renderer\Shader.cpp" />
+    <ClCompile Include="src\platform\OpenGL\OpenGLShader.cpp" />
   </ItemGroup>
 </Project>
