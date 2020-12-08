@@ -144,7 +144,11 @@
     <ClInclude Include="src\Engine\Application.h" />
     <ClInclude Include="src\Engine\Core.h" />
     <ClInclude Include="src\Engine\EntryPoint.h" />
+    <ClInclude Include="src\Engine\renderer\Buffer.h" />
+    <ClInclude Include="src\Engine\renderer\Renderer.h" />
     <ClInclude Include="src\Engine\renderer\Shader.h" />
+    <ClInclude Include="src\Engine\renderer\VertexArray.h" />
+    <ClInclude Include="src\platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Engine\renderer\GraphicsContext.h" />
     <ClInclude Include="src\Engine\Input.h" />
@@ -169,6 +173,7 @@
     <ClInclude Include="src\Engine\event\WindowEvent.h" />
     <ClInclude Include="src\Engine\imgui\ImGuiLayer.h" />
     <ClInclude Include="src\platform\OpenGL\OpenGLShader.h" />
+    <ClInclude Include="src\platform\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="src\platform\windows\WindowsInput.h" />
     <ClInclude Include="src\platform\windows\WindowsWindow.h" />
     <ClInclude Include="src\engpch.h" />
@@ -589,9 +594,14 @@
     <ClCompile Include="src\Engine\event\Subject.cpp" />
     <ClCompile Include="src\Engine\imgui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Engine\imgui\ImGuiLayer.cpp" />
+    <ClCompile Include="src\Engine\renderer\Buffer.cpp" />
+    <ClCompile Include="src\Engine\renderer\Renderer.cpp" />
     <ClCompile Include="src\Engine\renderer\Shader.cpp" />
+    <ClCompile Include="src\Engine\renderer\VertexArray.cpp" />
+    <ClCompile Include="src\platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\platform\OpenGL\OpenGLShader.cpp" />
+    <ClCompile Include="src\platform\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="src\platform\windows\WindowsInput.cpp" />
     <ClCompile Include="src\platform\windows\WindowsWindow.cpp" />
     <ClCompile Include="src\engpch.cpp">

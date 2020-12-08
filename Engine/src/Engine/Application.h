@@ -14,6 +14,8 @@
 
 /* HACKING IN A TRIANGLE */
 #include "Engine/renderer/Shader.h"
+#include "Engine/renderer/Buffer.h"
+#include "Engine/renderer/VertexArray.h"
 /* HACKING IN A TRIANGLE */
 
 
@@ -41,19 +43,19 @@ namespace Engine {
 
 		bool OnWindowCloseEvent(WindowCloseEvent& e);
 
-		std::unique_ptr<Window> m_window;
+		Scope<Window> m_window;
 		ImGuiLayer* m_ImGuiLayer;
 		bool m_running;
 		LayerStack m_layerStack;
 
+		/* hacking in triangle */
+		Ref<Shader> m_shader;
+		Ref<VertexArray> m_VertexArray;
+		/* hacking in triangle */
+
 	private:
 
 		static Application* s_instance;
-
-
-		/* hacking in triangle */
-		unsigned int VAO, VBO, VIO;
-		std::unique_ptr<Shader> m_shader;
 
 	};
 

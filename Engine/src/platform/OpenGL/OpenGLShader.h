@@ -17,13 +17,14 @@ namespace Engine
 		virtual void Bind() const override;
 		virtual void Unbind() const override;
 
-		void SetInt(const std::string& name, int value);
-		void SetFloat(const std::string& name, float value);
-		void SetBool(const std::string& name, bool value);
+		virtual void SetInt(const std::string& name, int value) override;
+		virtual void SetFloat(const std::string& name, float value) override;
+		virtual void SetBool(const std::string& name, bool value) override;
+		// TODO: set vecs and mats
 
 
 	private:
-
+		
 		unsigned int m_programID;
 
 	private:

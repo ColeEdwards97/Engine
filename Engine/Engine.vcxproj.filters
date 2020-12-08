@@ -1357,6 +1357,11 @@
     </ClInclude>
     <ClInclude Include="src\Engine\renderer\Shader.h" />
     <ClInclude Include="src\platform\OpenGL\OpenGLShader.h" />
+    <ClInclude Include="src\Engine\renderer\Buffer.h" />
+    <ClInclude Include="src\platform\OpenGL\OpenGLBuffer.h" />
+    <ClInclude Include="src\Engine\renderer\Renderer.h" />
+    <ClInclude Include="src\Engine\renderer\VertexArray.h" />
+    <ClInclude Include="src\platform\OpenGL\OpenGLVertexArray.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Engine\Application.cpp">
@@ -1392,5 +1397,10 @@
     </ClCompile>
     <ClCompile Include="src\Engine\renderer\Shader.cpp" />
     <ClCompile Include="src\platform\OpenGL\OpenGLShader.cpp" />
+    <ClCompile Include="src\Engine\renderer\Buffer.cpp" />
+    <ClCompile Include="src\platform\OpenGL\OpenGLBuffer.cpp" />
+    <ClCompile Include="src\Engine\renderer\Renderer.cpp" />
+    <ClCompile Include="src\Engine\renderer\VertexArray.cpp" />
+    <ClCompile Include="src\platform\OpenGL\OpenGLVertexArray.cpp" />
   </ItemGroup>
 </Project>

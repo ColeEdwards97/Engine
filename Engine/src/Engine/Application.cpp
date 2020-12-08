@@ -18,7 +18,7 @@ namespace Engine {
 		ENGINE_CORE_ASSERT(!s_instance, "Application already exists");
 		s_instance = this;
 		m_running = true;
-		m_window = std::unique_ptr<Window>(Window::Create());
+		m_window = Scope<Window>(Window::Create());
 		
 		// create default imgui layer
 		m_ImGuiLayer = new ImGuiLayer();
@@ -31,67 +31,65 @@ namespace Engine {
 
 
 		/* HACKING IN A TRIANGLE */
-		
+
 		// VAO
-		glGenVertexArrays(1, &VAO);
-		glBindVertexArray(VAO);
+		m_VertexArray.reset(VertexArray::Create());
 
-		// VBO
-		glGenBuffers(1, &VBO);
-		glBindBuffer(GL_ARRAY_BUFFER, VBO);
-
+		
 		// vertices
-		float vertices[3 * 3] =
+		float vertices[3 * 7] =
 		{
-			-0.5f, -0.5f, 0.0f,
-			 0.5f, -0.5f, 0.0f,
-			 0.0f,  0.5f, 0.0f
+			-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+			 0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
+			 0.0f,  0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f
 		};
 
-		// buffer data
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+		// VBO
+		Ref<VertexBuffer> vertexBuffer;
+		vertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
+		vertexBuffer->SetLayout({
+			{ ShaderDataType::Float3, "a_Position" },
+			{ ShaderDataType::Float4, "a_Color" }
+			});
+		m_VertexArray->AddVertexBuffer(vertexBuffer);
 
-		// vertex attrib arrays
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
-
-
-		// VIO
-		glGenBuffers(1, &VIO);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, VIO);
 
 		// indices
-		unsigned int indices[3] =
+		uint32_t indices[3] =
 		{
 			0, 1, 2
 		};
 
-		// buffer data
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+		// VIO
+		Ref<IndexBuffer> indexBuffer;
+		indexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
+		m_VertexArray->SetIndexBuffer(indexBuffer);
 
-		// shader
-		std::string fragShaderSrc = R"(
-			#version 330 core
-			layout(location=0) out vec4 color;
-			in vec3 v_Position;
-			void main()
-			{
-				color = vec4(v_Position * 0.5 + 0.5, 1.0);
-			}
-		)";
-
+		// shaders
 
 		std::string vertShaderSrc = R"(
 			#version 330 core
 			layout(location=0) in vec3 a_Position;
+			layout(location=1) in vec4 a_Color;
 			out vec3 v_Position;
+			out vec4 v_Color;
 			void main()
 			{
 				v_Position = a_Position;
+				v_Color = a_Color;
 				gl_Position = vec4(a_Position, 1.0);
 			}
 		)";
 
+		std::string fragShaderSrc = R"(
+			#version 330 core
+			layout(location=0) out vec4 color;
+			in vec4 v_Color;
+			void main()
+			{
+				color = v_Color;
+			}
+		)";
 
 		m_shader.reset(Shader::Create(fragShaderSrc, vertShaderSrc));
 
@@ -118,8 +116,8 @@ namespace Engine {
 
 			/* HACKING IN A TRIANGLE */
 			m_shader->Bind();
-			glBindVertexArray(VAO);
-			glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
+			m_VertexArray->Bind();
+			glDrawElements(GL_TRIANGLES, m_VertexArray->GetIndexBuffers()->GetCount(), GL_UNSIGNED_INT, nullptr);
 			/* HACKING IN A TRIANGLE */
 
 
