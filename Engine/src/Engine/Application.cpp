@@ -2,11 +2,9 @@
 
 #include "Application.h"
 
-#include "glad/glad.h"
-
-#include "Input.h"
-
-#include "event/EventDispatcher.h"
+#include "Engine/Input.h"
+#include "Engine/event/EventDispatcher.h"
+#include "Engine/renderer/Renderer.h"
 
 namespace Engine {
 
@@ -110,14 +108,14 @@ namespace Engine {
 	{
 		while (m_running)
 		{
-			glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-			glClear(GL_COLOR_BUFFER_BIT);
-
 
 			/* HACKING IN A TRIANGLE */
+			RenderCommand::Clear({ 0.0f, 0.0f, 0.0f, 1.0f });
+
+			Renderer::BeginScene();
 			m_shader->Bind();
-			m_VertexArray->Bind();
-			glDrawElements(GL_TRIANGLES, m_VertexArray->GetIndexBuffers()->GetCount(), GL_UNSIGNED_INT, nullptr);
+			Renderer::Submit(m_VertexArray);
+			Renderer::EndScene();
 			/* HACKING IN A TRIANGLE */
 
 

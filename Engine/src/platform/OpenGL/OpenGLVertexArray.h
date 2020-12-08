@@ -20,7 +20,7 @@ namespace Engine
 		virtual void SetIndexBuffer(const Ref<IndexBuffer>& indexBuffer) override;
 
 		virtual const std::vector<Ref<VertexBuffer>>& GetVertexBuffers() const override { return m_VertexBuffers; }
-		virtual const Ref<IndexBuffer>& GetIndexBuffers() const override { return m_IndexBuffer; }
+		virtual const Ref<IndexBuffer>& GetIndexBuffer() const override { return m_IndexBuffer; }
 
 	private:
 

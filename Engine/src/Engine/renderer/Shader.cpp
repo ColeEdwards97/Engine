@@ -11,11 +11,8 @@ namespace Engine
 	{
 		switch (Renderer::GetAPI())
 		{
-		case RendererAPI::None:
-			return nullptr;
-
-		case RendererAPI::OpenGL:
-			return new OpenGLShader(fragShaderPath, vertShaderPath);
+		case RendererAPI::API::None:	return nullptr;
+		case RendererAPI::API::OpenGL:	return new OpenGLShader(fragShaderPath, vertShaderPath);
 		}
 
 		ENGINE_CORE_ASSERT(false, "Unknown RendererAPI");
@@ -26,11 +23,8 @@ namespace Engine
 	{
 		switch (Renderer::GetAPI())
 		{
-		case RendererAPI::None:
-			return nullptr;
-
-		case RendererAPI::OpenGL:
-			return new OpenGLShader(fragShaderSrc, vertShaderSrc);
+		case RendererAPI::API::None:	return nullptr;
+		case RendererAPI::API::OpenGL:	return new OpenGLShader(fragShaderSrc, vertShaderSrc);
 		}
 
 		ENGINE_CORE_ASSERT(false, "Unknown RendererAPI");

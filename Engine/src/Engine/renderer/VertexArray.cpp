@@ -12,8 +12,8 @@ namespace Engine
 	{
 		switch (Renderer::GetAPI())
 		{
-		case RendererAPI::None:		return nullptr;
-		case RendererAPI::OpenGL:	return new OpenGLVertexArray();
+		case RendererAPI::API::None:	return nullptr;
+		case RendererAPI::API::OpenGL:	return new OpenGLVertexArray();
 		}
 
 		ENGINE_CORE_ASSERT(false, "Unknown RendererAPI");
