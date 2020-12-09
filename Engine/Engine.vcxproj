@@ -153,6 +153,7 @@
     <ClInclude Include="src\Engine\renderer\RendererAPI.h" />
     <ClInclude Include="src\Engine\renderer\Shader.h" />
     <ClInclude Include="src\Engine\renderer\VertexArray.h" />
+    <ClInclude Include="src\Engine\utils\QuaternionUtils.h" />
     <ClInclude Include="src\Engine\world\Scene.h" />
     <ClInclude Include="src\platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\platform\OpenGL\OpenGLContext.h" />
@@ -602,6 +603,7 @@
     <ClCompile Include="src\Engine\imgui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Engine\imgui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Engine\renderer\Buffer.cpp" />
+    <ClCompile Include="src\Engine\renderer\Camera.cpp" />
     <ClCompile Include="src\Engine\renderer\OrthographicCamera.cpp" />
     <ClCompile Include="src\Engine\renderer\PerspectiveCamera.cpp" />
     <ClCompile Include="src\Engine\renderer\RenderCommand.cpp" />
@@ -609,6 +611,7 @@
     <ClCompile Include="src\Engine\renderer\RendererAPI.cpp" />
     <ClCompile Include="src\Engine\renderer\Shader.cpp" />
     <ClCompile Include="src\Engine\renderer\VertexArray.cpp" />
+    <ClCompile Include="src\Engine\utils\QuaternionUtils.cpp" />
     <ClCompile Include="src\platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\platform\OpenGL\OpenGLRendererAPI.cpp" />

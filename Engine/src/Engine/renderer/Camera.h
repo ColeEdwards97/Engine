@@ -10,15 +10,18 @@ namespace Engine
 
 	public:
 
-		virtual const glm::vec3& GetPosition() const = 0;
-		virtual const glm::vec3& GetRotation() const = 0;
-		virtual void SetPosition(const glm::vec3& position) = 0;
-		virtual void SetRotation(const glm::vec3& rotation) = 0;
+		Camera(glm::mat4& projectionMatrix, glm::mat4& viewMatrix);
 
-		virtual const glm::mat4& GetViewProjectionMatrix() const = 0;
-		virtual const glm::mat4& GetProjectionMatrix() const = 0;
-		virtual const glm::mat4& GetViewMatrix() const = 0;
+		const glm::vec3& GetPosition() { return m_Position; }
+		const glm::vec3& GetRotation() { return m_Rotation; }
+		void SetPosition(const glm::vec3& position);
+		void SetRotation(const glm::vec3& rotation);
 
+		void LookAt(const glm::vec3& target);
+
+		const glm::mat4& GetViewProjectionMatrix() { return m_ViewProjectionMatrix; }
+		const glm::mat4& GetProjectionMatrix() { return m_ProjectionMatrix; }
+		const glm::mat4& GetViewMatrix() { return m_ViewMatrix; }
 
 		// ON UPDATE
 		// TODO: make entity or something
@@ -26,8 +29,17 @@ namespace Engine
 
 	private:
 
-		virtual void RecalculateViewMatrix() = 0;
+		glm::mat4 m_ViewProjectionMatrix = glm::mat4(0.0f);
+		glm::mat4 m_ProjectionMatrix;
+		glm::mat4 m_ViewMatrix;
 
+		glm::vec3 m_Position = glm::vec3(0.0f);
+		glm::vec3 m_Rotation = glm::vec3(0.0f);
+
+	private:
+
+		void RecalculateViewMatrix();
+		
 	};
 
 }

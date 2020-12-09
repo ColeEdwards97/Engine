@@ -119,8 +119,8 @@ namespace Engine {
 
 			/* HACKING IN A TRIANGLE */
 			RenderCommand::Clear({ 0.0f, 0.0f, 0.0f, 1.0f });
-			m_Camera.SetPosition(glm::vec3(0.0f, 0.0f, 1.0f));
-			m_Camera.SetRotation(glm::vec3(0.0f, 0.0f, 0.0f));
+			m_Camera.SetPosition(glm::vec3(0.0f, 0.0f, 2.0f));
+			m_Camera.LookAt(glm::vec3(0.0f, 0.0f, 0.0f));
 			Renderer::BeginScene(m_Camera);
 			Renderer::Submit(m_Shader, m_VertexArray);
 			Renderer::EndScene();

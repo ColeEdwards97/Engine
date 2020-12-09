@@ -1369,6 +1369,7 @@
     <ClInclude Include="src\Engine\renderer\OrthographicCamera.h" />
     <ClInclude Include="src\Engine\world\Scene.h" />
     <ClInclude Include="src\Engine\renderer\PerspectiveCamera.h" />
+    <ClInclude Include="src\Engine\utils\QuaternionUtils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Engine\Application.cpp">
@@ -1414,5 +1415,7 @@
     <ClCompile Include="src\platform\OpenGL\OpenGLRendererAPI.cpp" />
     <ClCompile Include="src\Engine\renderer\OrthographicCamera.cpp" />
     <ClCompile Include="src\Engine\renderer\PerspectiveCamera.cpp" />
+    <ClCompile Include="src\Engine\renderer\Camera.cpp" />
+    <ClCompile Include="src\Engine\utils\QuaternionUtils.cpp" />
   </ItemGroup>
 </Project>
