@@ -25,7 +25,7 @@ namespace Engine
 
 		// ON UPDATE
 		// TODO: make entity or something
-		virtual void OnUpdate() = 0;
+		void OnUpdate();
 
 	private:
 

@@ -12,10 +12,6 @@ namespace Engine
 
 		PerspectiveCamera(float fov, float aspect, float zNear, float zFar);
 
-		// ON UPDATE
-		// TODO: make entity or something
-		void OnUpdate() override;
-
 	};
 
 }

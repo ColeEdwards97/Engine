@@ -13,10 +13,6 @@ namespace Engine
 		OrthographicCamera(float left, float right, float bottom, float top, float zNear, float zFar);
 		OrthographicCamera(float left, float right, float bottom, float top);
 
-		// ON UPDATE
-		// TODO: make entity or something
-		void OnUpdate() override;
-
 	};
 
 }

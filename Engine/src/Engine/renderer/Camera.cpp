@@ -3,7 +3,6 @@
 #include "Camera.h"
 
 #include "Engine/utils/QuaternionUtils.h"
-
 #include <glm/gtc/matrix_transform.hpp>
 
 namespace Engine
@@ -14,6 +13,7 @@ namespace Engine
 	{
 		m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
 	}
+
 
 	void Camera::SetPosition(const glm::vec3& position)
 	{
@@ -30,6 +30,12 @@ namespace Engine
 	void Camera::LookAt(const glm::vec3& target)
 	{
 		SetRotation(LookAtTarget(m_Position, target, glm::vec3(0.0f, 1.0f, 0.0f)));
+	}
+
+	void Camera::OnUpdate()
+	{
+		SetPosition(m_Position);
+		SetRotation(m_Rotation);
 	}
 
 	void Camera::RecalculateViewMatrix()

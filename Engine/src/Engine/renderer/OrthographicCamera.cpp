@@ -14,11 +14,5 @@ namespace Engine
 	OrthographicCamera::OrthographicCamera(float left, float right, float bottom, float top)
 		: Camera(glm::ortho(left, right, bottom, top), glm::mat4(1.0f))
 	{}
-
-	void OrthographicCamera::OnUpdate()
-	{
-		//RecalculateViewMatrix();
-		//RecalculateCameraVectors();
-	}
-
+	
 }
