@@ -2,7 +2,8 @@
 
 #include "OpenGLShader.h"
 
-#include "glad/glad.h"
+#include <glad/glad.h>
+#include <glm/gtc/type_ptr.hpp>
 
 namespace Engine
 {
@@ -179,6 +180,12 @@ namespace Engine
 		glUniform1i(glGetUniformLocation(m_programID, name.c_str()), (int)value);
 	}
 
+
+	// TODO: other mats and vecs
+	void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& value)
+	{
+		glUniformMatrix4fv(glGetUniformLocation(m_programID, name.c_str()), 1, GL_FALSE, glm::value_ptr(value));
+	}
 
 
 }

@@ -19,6 +19,8 @@ namespace Engine
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		ENGINE_CORE_ASSERT(status, "Failed to initialize glad");
 
+		glEnable(GL_DEPTH_TEST);
+
 		// get what graphics vendor, card, and driver we're using
 		ENGINE_CORE_INFO("Renderer intitialized graphics context. Using:");
 		ENGINE_CORE_INFO("  VENDOR:\t{0}", glGetString(GL_VENDOR));

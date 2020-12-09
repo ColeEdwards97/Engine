@@ -4,26 +4,29 @@
 
 #include "Engine/Input.h"
 #include "Engine/event/EventDispatcher.h"
+
 #include "Engine/renderer/Renderer.h"
 
 namespace Engine {
 
-	Application* Application::s_instance = nullptr;
-
-	Application::Application() 
+	Application* Application::s_Instance = nullptr;
+	
+	Application::Application()
+		: m_Camera(45.0f, (1024.0f/720.0f), 0.1f, 100.0f)
+		//: m_Camera(-1.0f, 1.0f, -1.0f, 1.0f)
 	{
 		// initialize application and create window
-		ENGINE_CORE_ASSERT(!s_instance, "Application already exists");
-		s_instance = this;
-		m_running = true;
-		m_window = Scope<Window>(Window::Create());
+		ENGINE_CORE_ASSERT(!s_Instance, "Application already exists");
+		s_Instance = this;
+		m_Running = true;
+		m_Window = Scope<Window>(Window::Create());
 		
 		// create default imgui layer
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
 
 		// register observer
-		m_window->RegisterObserver(this);
+		m_Window->RegisterObserver(this);
 
 
 
@@ -67,15 +70,20 @@ namespace Engine {
 
 		std::string vertShaderSrc = R"(
 			#version 330 core
+			
 			layout(location=0) in vec3 a_Position;
 			layout(location=1) in vec4 a_Color;
+
+			uniform mat4 u_ViewProjection;
+			
 			out vec3 v_Position;
 			out vec4 v_Color;
+			
 			void main()
 			{
 				v_Position = a_Position;
 				v_Color = a_Color;
-				gl_Position = vec4(a_Position, 1.0);
+				gl_Position = u_ViewProjection * vec4(a_Position, 1.0);
 			}
 		)";
 
@@ -89,7 +97,7 @@ namespace Engine {
 			}
 		)";
 
-		m_shader.reset(Shader::Create(fragShaderSrc, vertShaderSrc));
+		m_Shader.reset(Shader::Create(fragShaderSrc, vertShaderSrc));
 
 
 		/* HACKING IN A TRIANGLE */
@@ -106,21 +114,21 @@ namespace Engine {
 
 	void Application::Run() 
 	{
-		while (m_running)
+		while (m_Running)
 		{
 
 			/* HACKING IN A TRIANGLE */
 			RenderCommand::Clear({ 0.0f, 0.0f, 0.0f, 1.0f });
-
-			Renderer::BeginScene();
-			m_shader->Bind();
-			Renderer::Submit(m_VertexArray);
+			m_Camera.SetPosition(glm::vec3(0.0f, 0.0f, 1.0f));
+			m_Camera.SetRotation(glm::vec3(0.0f, 0.0f, 0.0f));
+			Renderer::BeginScene(m_Camera);
+			Renderer::Submit(m_Shader, m_VertexArray);
 			Renderer::EndScene();
 			/* HACKING IN A TRIANGLE */
 
 
 			// LAYER :: OnUpdate()
-			for (Layer* layer : m_layerStack)
+			for (Layer* layer : m_LayerStack)
 			{
 				if (layer->enabled) 
 				{
@@ -130,7 +138,7 @@ namespace Engine {
 
 			// LAYER :: OnImGuiRender()
 			m_ImGuiLayer->Begin();
-			for (Layer* layer : m_layerStack)
+			for (Layer* layer : m_LayerStack)
 			{
 				layer->OnImGuiRender();
 			}
@@ -138,7 +146,7 @@ namespace Engine {
 
 
 			// WINDOW :: On Update()
-			m_window->OnUpdate();
+			m_Window->OnUpdate();
 
 		}
 	}
@@ -150,7 +158,7 @@ namespace Engine {
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(ENG_BIND_EVENT_FN(Application::OnWindowCloseEvent));
 
-		for (auto it = m_layerStack.rbegin(); it != m_layerStack.rend(); ++it)
+		for (auto it = m_LayerStack.rbegin(); it != m_LayerStack.rend(); ++it)
 		{
 			if (e.handled) 
 			{
@@ -168,7 +176,7 @@ namespace Engine {
 	bool Application::OnWindowCloseEvent(WindowCloseEvent& e)
 	{
 		ENGINE_CORE_TRACE("Window Close Event! goodbye!");
-		m_running = false;
+		m_Running = false;
 		return true;
 	}
 
@@ -176,13 +184,13 @@ namespace Engine {
 	// LAYER STACK
 	void Application::PushLayer(Layer* layer)
 	{
-		m_layerStack.PushLayer(layer);
+		m_LayerStack.PushLayer(layer);
 		layer->OnAttach();
 	}
 
 	void Application::PushOverlay(Layer* overlay)
 	{
-		m_layerStack.PushOverlay(overlay);
+		m_LayerStack.PushOverlay(overlay);
 		overlay->OnAttach();
 	}
 

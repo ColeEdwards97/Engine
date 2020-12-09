@@ -145,11 +145,15 @@
     <ClInclude Include="src\Engine\Core.h" />
     <ClInclude Include="src\Engine\EntryPoint.h" />
     <ClInclude Include="src\Engine\renderer\Buffer.h" />
+    <ClInclude Include="src\Engine\renderer\Camera.h" />
+    <ClInclude Include="src\Engine\renderer\OrthographicCamera.h" />
+    <ClInclude Include="src\Engine\renderer\PerspectiveCamera.h" />
     <ClInclude Include="src\Engine\renderer\RenderCommand.h" />
     <ClInclude Include="src\Engine\renderer\Renderer.h" />
     <ClInclude Include="src\Engine\renderer\RendererAPI.h" />
     <ClInclude Include="src\Engine\renderer\Shader.h" />
     <ClInclude Include="src\Engine\renderer\VertexArray.h" />
+    <ClInclude Include="src\Engine\world\Scene.h" />
     <ClInclude Include="src\platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Engine\renderer\GraphicsContext.h" />
@@ -598,6 +602,8 @@
     <ClCompile Include="src\Engine\imgui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Engine\imgui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Engine\renderer\Buffer.cpp" />
+    <ClCompile Include="src\Engine\renderer\OrthographicCamera.cpp" />
+    <ClCompile Include="src\Engine\renderer\PerspectiveCamera.cpp" />
     <ClCompile Include="src\Engine\renderer\RenderCommand.cpp" />
     <ClCompile Include="src\Engine\renderer\Renderer.cpp" />
     <ClCompile Include="src\Engine\renderer\RendererAPI.cpp" />

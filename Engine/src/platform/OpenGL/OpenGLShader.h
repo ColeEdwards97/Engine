@@ -21,6 +21,7 @@ namespace Engine
 		virtual void SetFloat(const std::string& name, float value) override;
 		virtual void SetBool(const std::string& name, bool value) override;
 		// TODO: set vecs and mats
+		virtual void SetMat4(const std::string& name, const glm::mat4& value) override;
 
 
 	private:

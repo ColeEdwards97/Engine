@@ -16,6 +16,8 @@
 #include "Engine/renderer/Shader.h"
 #include "Engine/renderer/Buffer.h"
 #include "Engine/renderer/VertexArray.h"
+#include "Engine/renderer/OrthographicCamera.h"
+#include "Engine/renderer/PerspectiveCamera.h"
 /* HACKING IN A TRIANGLE */
 
 
@@ -35,27 +37,30 @@ namespace Engine {
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* overlay);
 
-		Window& GetWindow() { return *m_window; }
+		Window& GetWindow() { return *m_Window; }
 
-		static Application& Get() { return *s_instance; }
+		static Application& Get() { return *s_Instance; }
 
 	private:
 
 		bool OnWindowCloseEvent(WindowCloseEvent& e);
 
-		Scope<Window> m_window;
+		Scope<Window> m_Window;
 		ImGuiLayer* m_ImGuiLayer;
-		bool m_running;
-		LayerStack m_layerStack;
+		bool m_Running;
+		LayerStack m_LayerStack;
 
 		/* hacking in triangle */
-		Ref<Shader> m_shader;
+		Ref<Shader> m_Shader;
 		Ref<VertexArray> m_VertexArray;
+
+		PerspectiveCamera m_Camera;
+		//OrthographicCamera m_Camera;
 		/* hacking in triangle */
 
 	private:
 
-		static Application* s_instance;
+		static Application* s_Instance;
 
 	};
 
