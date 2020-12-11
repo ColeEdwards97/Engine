@@ -8,10 +8,10 @@
 namespace Engine
 {
 	Transform::Transform()
-		:m_Location(glm::vec3(0.0f)), m_Orientation(glm::quat(glm::vec3(0.0f))), m_Scale(glm::vec3(1.0f)), m_TransformMatrix(CalculateTransformMatrix())
+		: m_Location(glm::vec3(0.0f)), m_Orientation(glm::quat(glm::vec3(0.0f))), m_Scale(glm::vec3(1.0f)), m_TransformMatrix(CalculateTransformMatrix())
 	{}
 
-	Transform::Transform(glm::vec3& location, glm::quat& orientation, glm::vec3& scale)
+	Transform::Transform(const glm::vec3& location, const glm::quat& orientation, const glm::vec3& scale)
 		: m_Location(location), m_Orientation(orientation), m_Scale(scale), m_TransformMatrix(CalculateTransformMatrix())
 	{}
 
@@ -37,19 +37,19 @@ namespace Engine
 
 	void Transform::Translate(const float delta, const glm::vec3& axis)
 	{
-		SetLocation(m_Location + (delta * axis));
+		m_Location += (delta * axis);
 	}
 	void Transform::Rotate(const float angle, const glm::vec3& axis)
 	{
-		SetOrientation(glm::angleAxis(glm::radians(angle), glm::normalize(axis)) * m_Orientation);
+		m_Orientation = glm::angleAxis(glm::radians(angle), glm::normalize(axis)) * m_Orientation;
 	}
 	void Transform::Rotate(const glm::quat& quat)
 	{
-		SetOrientation(quat * m_Orientation);
+		m_Orientation = quat * m_Orientation;
 	}
 	void Transform::Scale(const float scale, const glm::vec3& axis)
 	{
-		SetScale(m_Scale * (scale * axis));
+		m_Scale *= (scale * axis);
 	}
 	
 	void Transform::LookAt(const glm::vec3& target)

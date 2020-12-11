@@ -16,10 +16,8 @@ namespace Engine
 	// TODO: adjust aspect ratio of camera based on new screen size
 
 	PerspectiveCameraController::PerspectiveCameraController(float fov, float aspectRatio)
-		: m_Camera(fov, aspectRatio, 0.1f, 100.0f), m_Transform(Transform()), m_FOV(fov), m_AspectRatio(aspectRatio)
-	{
-		m_Camera.SetTransform(m_Transform);
-	}
+		: m_Camera(fov, aspectRatio, 0.1f, 100.0f)
+	{}
 
 
 	void PerspectiveCameraController::OnUpdate(TimeStep ts)
@@ -27,111 +25,96 @@ namespace Engine
 		
 		if (Input::IsMouseButtonPressed(INPUT_MOUSE_BUTTON_MIDDLE))
 		{
-			// MIDDLE MOUSE + LEFT MOUSE = Orbit
-			if (Input::IsMouseButtonPressed(INPUT_MOUSE_BUTTON_LEFT))
+
+			// get mouse delta
+			glm::vec2 mousePos = Input::GetMousePosition();
+			glm::vec2 deltaPos = glm::normalize(mousePos - m_LastMousePos);
+
+			if (!glm::isnan(deltaPos).x && !glm::isnan(deltaPos.y))
 			{
-				Orbit(ts);
+				
+				// MIDDLE MOUSE + LEFT MOUSE = Orbit
+				if (Input::IsMouseButtonPressed(INPUT_MOUSE_BUTTON_LEFT))
+				{
+					Orbit(ts, deltaPos);
+				}
+
+				// MIDDLE MOUSE + LEFT SHIFT = Look
+				else if (Input::IsKeyPressed(INPUT_KEY_LEFT_SHIFT))
+				{
+					Look(ts, deltaPos);
+				}
+
+				// MIDDLE MOUSE + LEFT CTRL = Zoom
+				else if (Input::IsKeyPressed(INPUT_KEY_LEFT_CONTROL))
+				{
+					Zoom(ts, deltaPos);
+				}
+
+				// MIDDLE MOUSE ONLY = Pan or Center View
+				else
+				{
+					Pan(ts, deltaPos);
+				}
+
 			}
 
-			// MIDDLE MOUSE + LEFT SHIFT = Look
-			else if (Input::IsKeyPressed(INPUT_KEY_LEFT_SHIFT))
-			{
-				Look(ts);
-			}
-
-			// MIDDLE MOUSE + LEFT CTRL = Zoom
-			else if (Input::IsKeyPressed(INPUT_KEY_LEFT_CONTROL))
-			{
-				Zoom(ts);
-			}
-
-			// MIDDLE MOUSE ONLY = Pan or Center View
-			else
-			{
-				Pan(ts);
-			}
 		}
 
 		// update values
 		m_LastMousePos = Input::GetMousePosition();
-		m_Camera.SetTransform(m_Transform);
+
+		m_Camera.RecalculateViewMatrix();
 
 	}
 
 
 	/* MANIPULATION */
-	void PerspectiveCameraController::Pan(TimeStep ts)
+	void PerspectiveCameraController::Pan(TimeStep ts, const glm::vec2& deltaPos)
 	{
-		glm::vec2 mousePos = Input::GetMousePosition();
-		glm::vec2 deltaPos = glm::normalize(mousePos - m_LastMousePos);
-
-		if (!glm::isnan(deltaPos).x && !glm::isnan(deltaPos.y))
-		{
-			m_Transform.Translate(ts * m_PanSpeed * -deltaPos.x, m_Transform.GetRight());
-			m_Transform.Translate(ts * m_PanSpeed * -deltaPos.y, m_Transform.GetDown());
-		}
+		m_Camera.GetTransform().Translate(ts * m_PanSpeed * -deltaPos.x, m_Camera.GetTransform().GetRight());
+		m_Camera.GetTransform().Translate(ts * m_PanSpeed * -deltaPos.y, m_Camera.GetTransform().GetDown());
 	}
 	
-	void PerspectiveCameraController::Orbit(TimeStep ts)
+	void PerspectiveCameraController::Orbit(TimeStep ts, const glm::vec2& deltaPos)
 	{
-		glm::vec2 mousePos = Input::GetMousePosition();
-		glm::vec2 deltaPos = glm::normalize(mousePos - m_LastMousePos);
+		// Set location to orbit location
+		m_Camera.GetTransform().SetLocation(m_Camera.GetTransform().GetLocation() + (m_OrbitDistance * m_Camera.GetTransform().GetFront()));
 
-		if (!glm::isnan(deltaPos).x && !glm::isnan(deltaPos.y))
-		{
-			// Set location to orbit location
-			m_Transform.SetLocation(m_Transform.GetLocation() + (m_OrbitDistance * m_Transform.GetFront()));
+		// Rotate
+		m_Camera.GetTransform().Rotate(ts * m_RevolveSpeed * -deltaPos.x, m_Camera.GetTransform().GetUp());
+		m_Camera.GetTransform().Rotate(ts * m_RevolveSpeed * -deltaPos.y, m_Camera.GetTransform().GetRight());
 
-			// Rotate
-			m_Transform.Rotate(ts * m_RevolveSpeed * -deltaPos.x, m_Transform.GetUp());
-			m_Transform.Rotate(ts * m_RevolveSpeed * -deltaPos.y, m_Transform.GetRight());
-
-			// Move back by the orbit distance
-			m_Transform.Translate(m_OrbitDistance, m_Transform.GetBack());
-		}
+		// Move back by the orbit distance
+		m_Camera.GetTransform().Translate(m_OrbitDistance, m_Camera.GetTransform().GetBack());
 	}
 	
-	void PerspectiveCameraController::Look(TimeStep ts)
+	void PerspectiveCameraController::Look(TimeStep ts, const glm::vec2& deltaPos)
 	{
-		glm::vec2 mousePos = Input::GetMousePosition();
-		glm::vec2 deltaPos = glm::normalize(mousePos - m_LastMousePos);
-
-		if (!glm::isnan(deltaPos).x && !glm::isnan(deltaPos.y))
-		{
-			m_Transform.Rotate(ts * m_RevolveSpeed * -deltaPos.x, m_Transform.GetUp());
-			m_Transform.Rotate(ts * m_RevolveSpeed * -deltaPos.y, m_Transform.GetRight());
-		}
+		m_Camera.GetTransform().Rotate(ts * m_RevolveSpeed * -deltaPos.x, m_Camera.GetTransform().GetUp());
+		m_Camera.GetTransform().Rotate(ts * m_RevolveSpeed * -deltaPos.y, m_Camera.GetTransform().GetRight());
 	}
 	
-	void PerspectiveCameraController::Zoom(TimeStep ts)
+	void PerspectiveCameraController::Zoom(TimeStep ts, const glm::vec2& deltaPos)
 	{
-		glm::vec2 mousePos = Input::GetMousePosition();
-		glm::vec2 deltaPos = glm::normalize(mousePos - m_LastMousePos);
-
-		if (!glm::isnan(deltaPos).x && !glm::isnan(deltaPos.y))
-		{
-			m_Transform.Translate(ts * m_ZoomSpeed * deltaPos.y, m_Transform.GetBack());
-		}
+		m_Camera.GetTransform().Translate(ts * m_ZoomSpeed * deltaPos.y, m_Camera.GetTransform().GetBack());
 	}
 
-	void PerspectiveCameraController::CenterView()
+	void PerspectiveCameraController::CenterView(const glm::vec2& mousePos, const glm::vec2& deltaPos)
 	{
-		glm::vec2 mousePos = Input::GetMousePosition();
-		glm::vec2 deltaPos = glm::normalize(mousePos - m_LastMousePos);
-
 		// only do this if there is no change in mouse movement
 		if (glm::isnan(deltaPos).x && glm::isnan(deltaPos.y))
 		{
-			glm::vec3 worldSpace = ScreenToWorld(m_Camera.GetViewProjectionMatrix(), mousePos, glm::vec2(1024.0f, 720.0f));
+			glm::vec3 worldSpace = ScreenToWorld(m_Camera.GetProjectionViewMatrix(), mousePos, glm::vec2(1024.0f, 720.0f));
 			
 			// Look at the clicked location
-			m_Transform.LookAt(worldSpace);
+			m_Camera.GetTransform().LookAt(worldSpace);
 
 			// Move to the clicked location
-			m_Transform.SetLocation(worldSpace);
+			m_Camera.GetTransform().SetLocation(worldSpace);
 
 			// Move back by the orbit distance
-			m_Transform.Translate(m_OrbitDistance, m_Transform.GetBack());
+			m_Camera.GetTransform().Translate(m_OrbitDistance, m_Camera.GetTransform().GetBack());
 		}
 	}
 
@@ -141,26 +124,29 @@ namespace Engine
 	{
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<MouseButtonPressedEvent>(ENG_BIND_EVENT_FN(PerspectiveCameraController::OnMouseButtonPressedEvent));
-		dispatcher.Dispatch<WindowResizeEvent>(ENG_BIND_EVENT_FN(PerspectiveCameraController::OnWindowResizedEvent));
+		dispatcher.Dispatch<WindowResizedEvent>(ENG_BIND_EVENT_FN(PerspectiveCameraController::OnWindowResizedEvent));
 	}
 
 
 	bool PerspectiveCameraController::OnMouseButtonPressedEvent(MouseButtonPressedEvent& e)
 	{
+		glm::vec2 mousePos = Input::GetMousePosition();
+		glm::vec2 deltaPos = mousePos - m_LastMousePos;
+
 		if (e.GetMouseButton() == INPUT_MOUSE_BUTTON_MIDDLE)
 		{
-			m_LastMousePos = Input::GetMousePosition();
+			m_LastMousePos = mousePos;
 		}
 		if (e.GetMouseButton() == INPUT_MOUSE_BUTTON_RIGHT)
 		{
-			CenterView();
+			CenterView(mousePos, deltaPos);
 		}
 		return false;
 	}
 
-	bool PerspectiveCameraController::OnWindowResizedEvent(WindowResizeEvent& e)
+	bool PerspectiveCameraController::OnWindowResizedEvent(WindowResizedEvent& e)
 	{
-		// Reset Aspect Ratio
+		m_Camera.SetAspectRatio((float)e.GetWidth() / (float)e.GetHeight());
 		return false;
 	}
 

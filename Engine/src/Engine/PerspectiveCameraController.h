@@ -20,19 +20,20 @@ namespace Engine
 		virtual void OnEvent(Event& e) override;
 
 		virtual Camera& GetCamera() override { return m_Camera; }
+		virtual const Camera& GetCamera() const override { return m_Camera; }
 
 	private:
 
 		// MANIPULATION
-		void Pan(TimeStep ts);
-		void Orbit(TimeStep ts);
-		void Look(TimeStep ts);
-		void Zoom(TimeStep);
-		void CenterView();
+		void Pan(TimeStep ts, const glm::vec2& deltaPos);
+		void Orbit(TimeStep ts, const glm::vec2& deltaPos);
+		void Look(TimeStep ts, const glm::vec2& deltaPos);
+		void Zoom(TimeStep, const glm::vec2& deltaPos);
+		void CenterView(const glm::vec2& mousePos, const glm::vec2& deltaPos);
 
 		// EVENTS
 		bool OnMouseButtonPressedEvent(MouseButtonPressedEvent& e);
-		bool OnWindowResizedEvent(WindowResizeEvent& e);
+		bool OnWindowResizedEvent(WindowResizedEvent& e);
 
 	private:
 
@@ -43,8 +44,7 @@ namespace Engine
 		float m_OrbitDistance = 5.0f;
 
 		glm::vec2 m_LastMousePos = glm::vec2(0.0f);
-
-		Transform m_Transform;
+		
 		PerspectiveCamera m_Camera;
 
 	};

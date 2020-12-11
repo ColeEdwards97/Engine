@@ -18,11 +18,11 @@ namespace Engine
 
 	};
 
-	class WindowResizeEvent : public WindowEvent
+	class WindowResizedEvent : public WindowEvent
 	{
 	public:
 
-		WindowResizeEvent(unsigned int width, unsigned int height)
+		WindowResizedEvent(unsigned int width, unsigned int height)
 			: m_width(width), m_height(height)
 		{}
 		
@@ -38,11 +38,11 @@ namespace Engine
 
 	};
 
-	class WindowCloseEvent : public WindowEvent
+	class WindowClosedEvent : public WindowEvent
 	{
 	public:
 
-		WindowCloseEvent() = default;
+		WindowClosedEvent() = default;
 
 		int GetEventCategoryFlags() const override { return (EventCategoryApplication); }
 		

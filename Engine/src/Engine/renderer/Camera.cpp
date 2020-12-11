@@ -8,10 +8,10 @@
 namespace Engine
 {
 
-	Camera::Camera(glm::mat4& projectionMatrix, glm::mat4& viewMatrix)
+	Camera::Camera(const glm::mat4& projectionMatrix, const glm::mat4& viewMatrix)
 		: m_ProjectionMatrix(projectionMatrix), m_ViewMatrix(viewMatrix)
 	{
-		m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
+		m_ProjectionViewMatrix = m_ProjectionMatrix * m_ViewMatrix;
 	}
 
 
@@ -22,13 +22,17 @@ namespace Engine
 	}
 	
 	
-	/* PROJECTION */
+	/* PROJECTION / VIEW MATRICES */
 
 	void Camera::RecalculateViewMatrix()
 	{
 		m_ViewMatrix = glm::lookAt(m_Transform.GetLocation(), m_Transform.GetLocation() + m_Transform.GetFront(), glm::vec3(0.0f, 1.0f, 0.0f));
-		m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
+		m_ProjectionViewMatrix = m_ProjectionMatrix * m_ViewMatrix;
 	}
 	
+	void Camera::RecalculateProjectionViewMatrix()
+	{
+		m_ProjectionViewMatrix = m_ProjectionMatrix * m_ViewMatrix;
+	}
 
 }

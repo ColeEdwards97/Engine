@@ -43,6 +43,7 @@ namespace Engine
 	void PerspectiveCamera::RecalculateProjectionMatrix()
 	{
 		m_ProjectionMatrix = glm::perspective(glm::radians(m_FOV), m_AspectRatio, m_ZNear, m_ZFar);
+		m_ProjectionViewMatrix = m_ProjectionMatrix * m_ViewMatrix;
 	}
 
 }

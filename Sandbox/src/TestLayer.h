@@ -9,7 +9,6 @@ class TestLayer : public Engine::Layer
 public:
 
 	TestLayer()
-		//: Layer("Test Layer"), m_Camera(-1.0f, 1.0f, -1.0f, 1.0f, 0.1f, 100.0f), m_CameraPosition(glm::vec3(0.0f)), m_CameraRotation(glm::vec3(0.0f))		// orthographic cam
 		: Layer("Test Layer"), m_CameraController(45.0f, (1024.0f / 720.0f)), m_TriangleTransform()		// perspective cam
 	{
 
@@ -135,7 +134,6 @@ private:
 	Engine::Ref<Engine::VertexArray> m_VertexArray;
 
 	Engine::PerspectiveCameraController m_CameraController;
-	//Engine::OrthographicCamera m_Camera;
 
 	Engine::Transform m_TriangleTransform;
 	float totalTime = 0.0f;

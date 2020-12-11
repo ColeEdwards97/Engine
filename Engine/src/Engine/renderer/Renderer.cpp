@@ -9,7 +9,7 @@ namespace Engine
 
 	void Renderer::BeginScene(Camera& camera)
 	{
-		s_SceneData->viewProjectionMatrix = camera.GetViewProjectionMatrix();
+		s_SceneData->viewProjectionMatrix = camera.GetProjectionViewMatrix();
 	}
 
 	void Renderer::EndScene()
@@ -27,5 +27,12 @@ namespace Engine
 		vertexArray->Bind();
 		RenderCommand::DrawIndexed(vertexArray);
 	}
+
+
+	void Renderer::OnWindowResized(uint32_t width, uint32_t height)
+	{
+		RenderCommand::SetViewport(0, 0, width, height);
+	}
+
 
 }

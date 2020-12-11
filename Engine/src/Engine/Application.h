@@ -36,7 +36,8 @@ namespace Engine {
 
 	private:
 
-		bool OnWindowClosedEvent(WindowCloseEvent& e);
+		bool OnWindowClosedEvent(WindowClosedEvent& e);
+		bool OnWindowResizedEvent(WindowResizedEvent& e);
 
 	private:
 
@@ -44,6 +45,7 @@ namespace Engine {
 		Scope<Window> m_Window;
 		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running;
+		bool m_Minimized = false;
 		LayerStack m_LayerStack;
 
 	private:

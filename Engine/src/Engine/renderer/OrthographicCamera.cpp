@@ -8,7 +8,7 @@ namespace Engine
 {
 
 	OrthographicCamera::OrthographicCamera(float left, float right, float bottom, float top, float zNear, float zFar, float zoom)
-		: Camera(glm::ortho(left, right, bottom, top, zNear, zFar), glm::mat4(1.0f)), 
+		: Camera(glm::ortho(left, right, bottom, top, zNear, zFar), glm::mat4(1.0f)),
 		m_ZNear(zNear), m_ZFar(zFar), m_Zoom(zoom)
 	{
 		m_AspectRatio = (right - left) / (top - bottom);

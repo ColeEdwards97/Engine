@@ -45,15 +45,25 @@ namespace Engine {
 			float time = (float)glfwGetTime(); // Platform::GetTime()
 			TimeStep timeStep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
+
+			// only call on update if we're not minimized
 			
-			// LAYER :: OnUpdate()
-			for (Layer* layer : m_LayerStack)
+			if (!m_Minimized)
 			{
-				if (layer->enabled) 
+
+				// LAYER :: OnUpdate()
+				for (Layer* layer : m_LayerStack)
 				{
-					layer->OnUpdate(timeStep);
+					if (layer->enabled)
+					{
+						layer->OnUpdate(timeStep);
+					}
 				}
+
 			}
+
+
+			// still update imgui though
 
 			// LAYER :: OnImGuiRender()
 			m_ImGuiLayer->Begin();
@@ -75,7 +85,8 @@ namespace Engine {
 		//ENGINE_CORE_TRACE("An Event Occurred!");
 		
 		EventDispatcher dispatcher(e);
-		dispatcher.Dispatch<WindowCloseEvent>(ENG_BIND_EVENT_FN(Application::OnWindowClosedEvent));
+		dispatcher.Dispatch<WindowClosedEvent>(ENG_BIND_EVENT_FN(Application::OnWindowClosedEvent));
+		dispatcher.Dispatch<WindowResizedEvent>(ENG_BIND_EVENT_FN(Application::OnWindowResizedEvent));
 
 		for (auto it = m_LayerStack.rbegin(); it != m_LayerStack.rend(); ++it)
 		{
@@ -92,15 +103,33 @@ namespace Engine {
 	}
 
 
-	bool Application::OnWindowClosedEvent(WindowCloseEvent& e)
+	/* EVENT CALLBACKS */
+
+	bool Application::OnWindowClosedEvent(WindowClosedEvent& e)
 	{
 		ENGINE_CORE_TRACE("Window Close Event! goodbye!");
 		m_Running = false;
 		return true;
 	}
 
+	bool Application::OnWindowResizedEvent(WindowResizedEvent& e)
+	{
 
-	// LAYER STACK
+		if (e.GetWidth() == 0 || e.GetHeight() == 0)
+		{
+			m_Minimized = true;
+			return false;
+		}
+
+		m_Minimized = false;
+		
+		Renderer::OnWindowResized(e.GetWidth(), e.GetHeight());
+
+		return false;
+	}
+
+	/* LAYER STACK */
+
 	void Application::PushLayer(Layer* layer)
 	{
 		m_LayerStack.PushLayer(layer);

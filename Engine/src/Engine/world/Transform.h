@@ -13,7 +13,7 @@ namespace Engine
 
 		// TODO: take in world or scene
 		Transform();
-		Transform(glm::vec3& location, glm::quat& orientation, glm::vec3& scale);
+		Transform(const glm::vec3& location, const glm::quat& orientation, const glm::vec3& scale);
 		~Transform() {}
 
 		const glm::vec3& GetLocation() const { return m_Location; }

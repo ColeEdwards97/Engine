@@ -88,8 +88,7 @@ namespace Engine {
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 				data.width = width;
 				data.height = height;
-
-				WindowResizeEvent event(width, height);
+				WindowResizedEvent event(width, height);
 				data.eventCallback(event);
 			}
 		);
@@ -97,7 +96,7 @@ namespace Engine {
 		glfwSetWindowCloseCallback(m_window, [](GLFWwindow* window)
 			{
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
-				WindowCloseEvent event;
+				WindowClosedEvent event;
 				data.eventCallback(event);
 			}
 		);
