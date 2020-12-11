@@ -3,7 +3,7 @@
 #include "WindowsWindow.h"
 #include "Engine/renderer/GraphicsContext.h"
 
-#include "Engine/event/WindowEvent.h"
+#include "Engine/event/ApplicationEvent.h"
 #include "Engine/event/KeyEvent.h"
 #include "Engine/event/MouseEvent.h"
 

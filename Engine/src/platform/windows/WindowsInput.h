@@ -11,7 +11,7 @@ namespace Engine
 
 		virtual bool IsKeyPressedImp(int keyCode) override;
 		virtual bool IsMouseButtonPressedImp(int button) override;
-		virtual std::pair<float, float> GetMousePositionImp() override;
+		virtual glm::vec2 GetMousePositionImp() override;
 		virtual float GetMouseXImp() override;
 		virtual float GetMouseYImp() override;
 

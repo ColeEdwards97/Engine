@@ -4,7 +4,7 @@
 
 #include "Engine/Application.h"
 
-#include "GLFW/glfw3.h"
+#include <GLFW/glfw3.h>
 
 namespace Engine
 {
@@ -24,23 +24,23 @@ namespace Engine
 		return (state == GLFW_PRESS || state == GLFW_REPEAT);
 	}
 
-	std::pair<float, float> WindowsInput::GetMousePositionImp()
+	glm::vec2 WindowsInput::GetMousePositionImp()
 	{
 		double xpos;
 		double ypos;
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 		glfwGetCursorPos(window, &xpos, &ypos);
-		return std::make_pair((float)xpos, (float)ypos);
+		return glm::vec2((float)xpos, (float)ypos);
 	}
 
 	float WindowsInput::GetMouseXImp()
 	{
-		return GetMousePositionImp().first;
+		return GetMousePositionImp().x;
 	}
 
 	float WindowsInput::GetMouseYImp()
 	{
-		return GetMousePositionImp().second;
+		return GetMousePositionImp().y;
 	}
 
 

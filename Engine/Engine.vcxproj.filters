@@ -1334,9 +1334,6 @@
     <ClInclude Include="src\Engine\event\Subject.h">
       <Filter>src\Engine\event</Filter>
     </ClInclude>
-    <ClInclude Include="src\Engine\event\WindowEvent.h">
-      <Filter>src\Engine\event</Filter>
-    </ClInclude>
     <ClInclude Include="src\Engine\entity\Component.h">
       <Filter>src\Engine\entity</Filter>
     </ClInclude>
@@ -1370,6 +1367,14 @@
     <ClInclude Include="src\Engine\world\Scene.h" />
     <ClInclude Include="src\Engine\renderer\PerspectiveCamera.h" />
     <ClInclude Include="src\Engine\utils\QuaternionUtils.h" />
+    <ClInclude Include="src\Engine\core\TimeStep.h" />
+    <ClInclude Include="src\Engine\world\Transform.h" />
+    <ClInclude Include="src\Engine\CameraController.h" />
+    <ClInclude Include="src\Engine\event\ApplicationEvent.h">
+      <Filter>src\Engine\event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\PerspectiveCameraController.h" />
+    <ClInclude Include="src\Engine\math\Math.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Engine\Application.cpp">
@@ -1417,5 +1422,8 @@
     <ClCompile Include="src\Engine\renderer\PerspectiveCamera.cpp" />
     <ClCompile Include="src\Engine\renderer\Camera.cpp" />
     <ClCompile Include="src\Engine\utils\QuaternionUtils.cpp" />
+    <ClCompile Include="src\Engine\world\Transform.cpp" />
+    <ClCompile Include="src\Engine\PerspectiveCameraController.cpp" />
+    <ClCompile Include="src\Engine\math\Math.cpp" />
   </ItemGroup>
 </Project>

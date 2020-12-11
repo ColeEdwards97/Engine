@@ -142,8 +142,12 @@
   <ItemGroup>
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\Engine\Application.h" />
+    <ClInclude Include="src\Engine\CameraController.h" />
     <ClInclude Include="src\Engine\Core.h" />
+    <ClInclude Include="src\Engine\core\TimeStep.h" />
     <ClInclude Include="src\Engine\EntryPoint.h" />
+    <ClInclude Include="src\Engine\math\Math.h" />
+    <ClInclude Include="src\Engine\PerspectiveCameraController.h" />
     <ClInclude Include="src\Engine\renderer\Buffer.h" />
     <ClInclude Include="src\Engine\renderer\Camera.h" />
     <ClInclude Include="src\Engine\renderer\OrthographicCamera.h" />
@@ -155,6 +159,7 @@
     <ClInclude Include="src\Engine\renderer\VertexArray.h" />
     <ClInclude Include="src\Engine\utils\QuaternionUtils.h" />
     <ClInclude Include="src\Engine\world\Scene.h" />
+    <ClInclude Include="src\Engine\world\Transform.h" />
     <ClInclude Include="src\platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Engine\renderer\GraphicsContext.h" />
@@ -177,7 +182,7 @@
     <ClInclude Include="src\Engine\event\MouseEvent.h" />
     <ClInclude Include="src\Engine\event\Observer.h" />
     <ClInclude Include="src\Engine\event\Subject.h" />
-    <ClInclude Include="src\Engine\event\WindowEvent.h" />
+    <ClInclude Include="src\Engine\event\ApplicationEvent.h" />
     <ClInclude Include="src\Engine\imgui\ImGuiLayer.h" />
     <ClInclude Include="src\platform\OpenGL\OpenGLRendererAPI.h" />
     <ClInclude Include="src\platform\OpenGL\OpenGLShader.h" />
@@ -602,6 +607,8 @@
     <ClCompile Include="src\Engine\event\Subject.cpp" />
     <ClCompile Include="src\Engine\imgui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Engine\imgui\ImGuiLayer.cpp" />
+    <ClCompile Include="src\Engine\math\Math.cpp" />
+    <ClCompile Include="src\Engine\PerspectiveCameraController.cpp" />
     <ClCompile Include="src\Engine\renderer\Buffer.cpp" />
     <ClCompile Include="src\Engine\renderer\Camera.cpp" />
     <ClCompile Include="src\Engine\renderer\OrthographicCamera.cpp" />
@@ -612,6 +619,7 @@
     <ClCompile Include="src\Engine\renderer\Shader.cpp" />
     <ClCompile Include="src\Engine\renderer\VertexArray.cpp" />
     <ClCompile Include="src\Engine\utils\QuaternionUtils.cpp" />
+    <ClCompile Include="src\Engine\world\Transform.cpp" />
     <ClCompile Include="src\platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\platform\OpenGL\OpenGLRendererAPI.cpp" />

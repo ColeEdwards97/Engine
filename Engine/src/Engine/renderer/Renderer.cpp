@@ -18,10 +18,11 @@ namespace Engine
 	}
 
 
-	void Renderer::Submit(const Ref<Shader>& shader, const Ref<VertexArray>& vertexArray)
+	void Renderer::Submit(const Ref<Shader>& shader, const Ref<VertexArray>& vertexArray, const glm::mat4& transform)
 	{
 		shader->Bind();
 		shader->SetMat4("u_ViewProjection", s_SceneData->viewProjectionMatrix);
+		shader->SetMat4("u_TransformMatrix", transform);
 
 		vertexArray->Bind();
 		RenderCommand::DrawIndexed(vertexArray);

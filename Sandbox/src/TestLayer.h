@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Engine.h"
+#include <Engine.h>
 
 #include "imgui/imgui.h"
 
@@ -9,7 +9,8 @@ class TestLayer : public Engine::Layer
 public:
 
 	TestLayer()
-		: Layer("Test Layer"), m_Camera(45.0f, (1024.0f / 720.0f), 0.1f, 100.0f), m_CameraPosition(glm::vec3(0.0f))
+		//: Layer("Test Layer"), m_Camera(-1.0f, 1.0f, -1.0f, 1.0f, 0.1f, 100.0f), m_CameraPosition(glm::vec3(0.0f)), m_CameraRotation(glm::vec3(0.0f))		// orthographic cam
+		: Layer("Test Layer"), m_CameraController(45.0f, (1024.0f / 720.0f)), m_TriangleTransform()		// perspective cam
 	{
 
 		/* HACKING IN A TRIANGLE */
@@ -25,6 +26,7 @@ public:
 			 0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
 			 0.0f,  0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f
 		};
+
 
 		// VBO
 		Engine::Ref<Engine::VertexBuffer> vertexBuffer;
@@ -56,6 +58,7 @@ public:
 			layout(location=1) in vec4 a_Color;
 
 			uniform mat4 u_ViewProjection;
+			uniform mat4 u_TransformMatrix;
 			
 			out vec3 v_Position;
 			out vec4 v_Color;
@@ -64,7 +67,7 @@ public:
 			{
 				v_Position = a_Position;
 				v_Color = a_Color;
-				gl_Position = u_ViewProjection * vec4(a_Position, 1.0);
+				gl_Position = u_ViewProjection * u_TransformMatrix * vec4(a_Position, 1.0);
 			}
 		)";
 
@@ -80,45 +83,30 @@ public:
 
 		m_Shader.reset(Engine::Shader::Create(fragShaderSrc, vertShaderSrc));
 
-
-		// camera setup
-		m_Camera.SetPosition(glm::vec3(0.0f, 0.0f, 2.0f));
-		m_Camera.LookAt(glm::vec3(0.0f, 0.0f, 0.0f));
-
+		// transform setup
+		m_TriangleTransform.SetLocation(glm::vec3(0.0f, 0.0f, 0.0f));
 
 		/* HACKING IN A TRIANGLE */
 
 
 	}
 
-	void OnUpdate() override
+	void OnUpdate(Engine::TimeStep ts) override
 	{
 
-		if (Engine::Input::IsKeyPressed(INPUT_KEY_W))
-		{
-			m_CameraPosition.x += 0.1f;
-		}
-		if (Engine::Input::IsKeyPressed(INPUT_KEY_A))
-		{
-			m_CameraPosition.z += -0.1f;
-		}
-		if (Engine::Input::IsKeyPressed(INPUT_KEY_S))
-		{
-			m_CameraPosition.x += -0.1f;
-		}
-		if (Engine::Input::IsKeyPressed(INPUT_KEY_D))
-		{
-			m_CameraPosition.z += 0.1f;
-		}
+		// CAMERA CONTROLLER UPDATE
+		m_CameraController.OnUpdate(ts);
 
-
-		m_Camera.SetPosition(m_CameraPosition);
-		m_Camera.LookAt(glm::vec3(0.0f));
+		// TRIANGLE TRANSFORM
+		//m_TriangleTransform.Rotate(ts * 30.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+		//m_TriangleTransform.SetScale((glm::sin(totalTime) * 0.4f + 0.5f) * glm::vec3(1.0f));
+		//m_TriangleTransform.Scale(1.0f, glm::vec3(1.0f));
+		totalTime += ts;
 
 		/* HACKING IN A TRIANGLE */
 		Engine::RenderCommand::Clear({ 0.0f, 0.0f, 0.0f, 1.0f });
-		Engine::Renderer::BeginScene(m_Camera);
-		Engine::Renderer::Submit(m_Shader, m_VertexArray);
+		Engine::Renderer::BeginScene(m_CameraController.GetCamera());
+		Engine::Renderer::Submit(m_Shader, m_VertexArray, m_TriangleTransform.GetTransformMatrix());
 		Engine::Renderer::EndScene();
 		/* HACKING IN A TRIANGLE */
 
@@ -127,6 +115,9 @@ public:
 	void OnEvent(Engine::Event& e) override
 	{
 		//ENGINE_TRACE("An Event Occurred!");
+
+		// CAMERA CONTROLLER EVENT
+		m_CameraController.OnEvent(e);
 	}
 
 	void OnImGuiRender() override
@@ -143,10 +134,12 @@ private:
 	Engine::Ref<Engine::Shader> m_Shader;
 	Engine::Ref<Engine::VertexArray> m_VertexArray;
 
-	Engine::PerspectiveCamera m_Camera;
+	Engine::PerspectiveCameraController m_CameraController;
 	//Engine::OrthographicCamera m_Camera;
 
-	glm::vec3 m_CameraPosition;
+	Engine::Transform m_TriangleTransform;
+	float totalTime = 0.0f;
+
 	/* hacking in triangle */
 
 

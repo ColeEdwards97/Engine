@@ -7,6 +7,8 @@
 
 #include "Engine/renderer/Renderer.h"
 
+#include <GLFW/glfw3.h>
+
 namespace Engine {
 
 	Application* Application::s_Instance = nullptr;
@@ -38,13 +40,18 @@ namespace Engine {
 
 		while (m_Running)
 		{
+
+			// Time Calculation
+			float time = (float)glfwGetTime(); // Platform::GetTime()
+			TimeStep timeStep = time - m_LastFrameTime;
+			m_LastFrameTime = time;
 			
 			// LAYER :: OnUpdate()
 			for (Layer* layer : m_LayerStack)
 			{
 				if (layer->enabled) 
 				{
-					layer->OnUpdate();
+					layer->OnUpdate(timeStep);
 				}
 			}
 

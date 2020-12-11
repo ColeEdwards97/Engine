@@ -3,8 +3,10 @@
 #include "Core.h"
 #include "Window.h"
 
+#include "Engine/core/TimeStep.h"
+
 #include "Engine/event/Event.h"
-#include "Engine/event/WindowEvent.h"
+#include "Engine/event/ApplicationEvent.h"
 #include "Engine/event/KeyEvent.h"
 #include "Engine/event/MouseEvent.h"
 #include "Engine/event/Observer.h"
@@ -36,11 +38,14 @@ namespace Engine {
 
 		bool OnWindowClosedEvent(WindowCloseEvent& e);
 
+	private:
+
+		float m_LastFrameTime = 0.0f;
 		Scope<Window> m_Window;
 		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running;
 		LayerStack m_LayerStack;
-	
+
 	private:
 
 		static Application* s_Instance;
