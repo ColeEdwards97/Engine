@@ -2,10 +2,10 @@
 
 #include "Application.h"
 
-#include "Engine/Input.h"
-#include "Engine/event/EventDispatcher.h"
+#include "Engine/Core/Input.h"
+#include "Engine/Event/EventDispatcher.h"
 
-#include "Engine/renderer/Renderer.h"
+#include "Engine/Renderer/Renderer.h"
 
 #include <GLFW/glfw3.h>
 

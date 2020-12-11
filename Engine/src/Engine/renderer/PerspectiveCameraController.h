@@ -1,10 +1,7 @@
 #pragma once
 
-#include "Engine/CameraController.h"
-
-#include "Engine/world/Transform.h"
-
-#include "Engine/renderer/PerspectiveCamera.h"
+#include "Engine/Renderer/PerspectiveCamera.h"
+#include "Engine/Renderer/CameraController.h"
 
 namespace Engine
 {

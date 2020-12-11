@@ -1,11 +1,11 @@
 #include "engpch.h"
 
 #include "WindowsWindow.h"
-#include "Engine/renderer/GraphicsContext.h"
+#include "Engine/Renderer/GraphicsContext.h"
 
-#include "Engine/event/ApplicationEvent.h"
-#include "Engine/event/KeyEvent.h"
-#include "Engine/event/MouseEvent.h"
+#include "Engine/Event/ApplicationEvent.h"
+#include "Engine/Event/KeyEvent.h"
+#include "Engine/Event/MouseEvent.h"
 
 #include "platform/OpenGL/OpenGLContext.h"
 

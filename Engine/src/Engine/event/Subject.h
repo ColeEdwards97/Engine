@@ -2,8 +2,8 @@
 
 #include "engpch.h"
 
-#include "Event.h"
-#include "Observer.h"
+#include "Engine/Event/Event.h"
+#include "Engine/Event/Observer.h"
 
 namespace Engine
 {

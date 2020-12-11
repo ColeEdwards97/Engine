@@ -1,8 +1,10 @@
 #include "engpch.h"
 #include "OpenGLContext.h"
 
-#include "GLFW/glfw3.h"
-#include "glad/glad.h"
+#include "Engine/Core/Core.h"
+
+#include <GLFW/glfw3.h>
+#include <glad/glad.h>
 
 namespace Engine
 {

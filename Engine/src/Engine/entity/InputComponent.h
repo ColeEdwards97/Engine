@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Entity.h"
-#include "Component.h"
+#include "Engine/Entity/Entity.h"
+#include "Engine/Entity/Component.h"
 
 namespace Engine
 {

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "LivingEntity.h"
+#include "Engine/Entity/LivingEntity.h"
 
 namespace Engine
 {

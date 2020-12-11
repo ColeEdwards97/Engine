@@ -1,9 +1,8 @@
 #pragma once
 
-#include "RenderCommand.h"
-
-#include "Camera.h"
-#include "Shader.h"
+#include "Engine/Renderer/RenderCommand.h"
+#include "Engine/Renderer/Camera.h"
+#include "Engine/Renderer/Shader.h"
 
 namespace Engine
 {

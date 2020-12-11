@@ -1,18 +1,18 @@
 #pragma once
 
-#include "Core.h"
-#include "Window.h"
+#include "Engine/Core/Core.h"
+#include "Engine/Core/Window.h"
 
-#include "Engine/core/TimeStep.h"
+#include "Engine/Core/TimeStep.h"
 
-#include "Engine/event/Event.h"
-#include "Engine/event/ApplicationEvent.h"
-#include "Engine/event/KeyEvent.h"
-#include "Engine/event/MouseEvent.h"
-#include "Engine/event/Observer.h"
+#include "Engine/Event/Event.h"
+#include "Engine/Event/ApplicationEvent.h"
+#include "Engine/Event/KeyEvent.h"
+#include "Engine/Event/MouseEvent.h"
+#include "Engine/Event/Observer.h"
 
-#include "Engine/imgui/ImGuiLayer.h"
-#include "Engine/LayerStack.h"
+#include "Engine/ImGui/ImGuiLayer.h"
+#include "Engine/Core/LayerStack.h"
 
 namespace Engine {
 

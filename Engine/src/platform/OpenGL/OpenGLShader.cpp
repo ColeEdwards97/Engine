@@ -2,6 +2,8 @@
 
 #include "OpenGLShader.h"
 
+#include "Engine/Core/Core.h"
+
 #include <glad/glad.h>
 #include <glm/gtc/type_ptr.hpp>
 

@@ -2,13 +2,13 @@
 
 #include "PerspectiveCameraController.h"
 
-#include "Engine/Input.h"
-#include "Engine/KeyCodes.h"
-#include "Engine/MouseButtonCodes.h"
+#include "Engine/Core/Input.h"
+#include "Engine/Core/KeyCodes.h"
+#include "Engine/Core/MouseButtonCodes.h"
 
-#include "Engine/event/EventDispatcher.h"
+#include "Engine/Event/EventDispatcher.h"
 
-#include "Engine/math/Math.h"
+#include "Engine/Math/Math.h"
 
 namespace Engine
 {

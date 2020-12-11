@@ -18,7 +18,7 @@
 
 
 // Engine Includes
-#include "Engine/Log.h"
+#include "Engine/Core/Log.h"
 
 
 #ifdef ENG_PLATFORM_WINDOWS

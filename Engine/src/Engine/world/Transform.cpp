@@ -2,7 +2,7 @@
 
 #include "Transform.h"
 
-#include "Engine/utils/QuaternionUtils.h"
+#include "Engine/Utils/QuaternionUtils.h"
 #include <glm/ext/matrix_transform.hpp>
 
 namespace Engine

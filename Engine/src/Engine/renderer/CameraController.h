@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Engine/core/TimeStep.h"
+#include "Engine/Core/TimeStep.h"
 
-#include "Engine/event/KeyEvent.h"
-#include "Engine/event/MouseEvent.h"
-#include "Engine/event/ApplicationEvent.h"
+#include "Engine/Event/KeyEvent.h"
+#include "Engine/Event/MouseEvent.h"
+#include "Engine/Event/ApplicationEvent.h"
 
-#include "Engine/renderer/Camera.h"
+#include "Engine/Renderer/Camera.h"
 
 namespace Engine
 {

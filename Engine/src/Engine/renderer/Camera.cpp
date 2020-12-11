@@ -2,7 +2,7 @@
 
 #include "Camera.h"
 
-#include "Engine/utils/QuaternionUtils.h"
+#include "Engine/Utils/QuaternionUtils.h"
 #include <glm/gtc/matrix_transform.hpp>
 
 namespace Engine

@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Engine/Window.h"
-#include "Engine/Log.h"
+#include "Engine/Core/Window.h"
+#include "Engine/Core/Log.h"
 
-#include "Engine/renderer/GraphicsContext.h"
+#include "Engine/Renderer/GraphicsContext.h"
 
 #include <GLFW/glfw3.h>
 
