@@ -2,7 +2,7 @@
 
 #include "Shader.h"
 #include "Engine/Renderer/Renderer.h"
-#include "platform/OpenGL/OpenGLShader.h"
+#include "Platform/OpenGL/OpenGLShader.h"
 
 namespace Engine
 {

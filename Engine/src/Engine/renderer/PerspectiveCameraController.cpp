@@ -103,18 +103,9 @@ namespace Engine
 	void PerspectiveCameraController::CenterView(const glm::vec2& mousePos, const glm::vec2& deltaPos)
 	{
 		// only do this if there is no change in mouse movement
-		if (glm::isnan(deltaPos).x && glm::isnan(deltaPos.y))
+		if (deltaPos.x == 0.0f && deltaPos.y == 0.0f)
 		{
-			glm::vec3 worldSpace = ScreenToWorld(m_Camera.GetProjectionViewMatrix(), mousePos, glm::vec2(1024.0f, 720.0f));
 			
-			// Look at the clicked location
-			m_Camera.GetTransform().LookAt(worldSpace);
-
-			// Move to the clicked location
-			m_Camera.GetTransform().SetLocation(worldSpace);
-
-			// Move back by the orbit distance
-			m_Camera.GetTransform().Translate(m_OrbitDistance, m_Camera.GetTransform().GetBack());
 		}
 	}
 

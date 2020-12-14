@@ -39,6 +39,10 @@ namespace Engine
 	{
 		m_Location += (delta * axis);
 	}
+	void Transform::Translate(const glm::vec3& translation)
+	{
+		m_Location += translation;
+	}
 	void Transform::Rotate(const float angle, const glm::vec3& axis)
 	{
 		m_Orientation = glm::angleAxis(glm::radians(angle), glm::normalize(axis)) * m_Orientation;

@@ -9,8 +9,6 @@ namespace Engine
 	{
 	public:
 
-		int GetEventCategoryFlags() const override { return (EventCategoryApplication); }
-
 	protected:
 
 		WindowEvent()
@@ -29,8 +27,6 @@ namespace Engine
 		unsigned int GetWidth() const { return m_width; }
 		unsigned int GetHeight() const { return m_height; }
 
-		int GetEventCategoryFlags() const override { return (EventCategoryApplication); }
-
 	private:
 
 		unsigned int m_width;
@@ -44,8 +40,6 @@ namespace Engine
 
 		WindowClosedEvent() = default;
 
-		int GetEventCategoryFlags() const override { return (EventCategoryApplication); }
-		
 	};
 
 }

@@ -14,7 +14,7 @@ namespace Engine
 
 		Camera(const glm::mat4& projectionMatrix, const glm::mat4& viewMatrix);
 
-		Transform& GetTransform() const { return m_Transform; }
+		Transform& GetTransform() { return m_Transform; }
 		void SetTransform(const Transform& transform);
 
 		const glm::mat4& GetProjectionViewMatrix() const { return m_ProjectionViewMatrix; }
@@ -33,7 +33,7 @@ namespace Engine
 		glm::mat4 m_ProjectionMatrix;
 		glm::mat4 m_ViewMatrix;
 
-		Transform& m_Transform = Transform();
+		Transform m_Transform = Transform();
 		
 	public:
 

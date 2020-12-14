@@ -22,6 +22,7 @@ namespace Engine
 		ENGINE_CORE_ASSERT(status, "Failed to initialize glad");
 
 		glEnable(GL_DEPTH_TEST);
+		glDepthFunc(GL_LESS);
 
 		// get what graphics vendor, card, and driver we're using
 		ENGINE_CORE_INFO("Renderer intitialized graphics context. Using:");

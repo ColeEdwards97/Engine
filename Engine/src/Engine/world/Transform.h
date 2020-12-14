@@ -30,6 +30,7 @@ namespace Engine
 		void SetScale(const glm::vec3& scale);
 
 		void Translate(const float delta, const glm::vec3& axis);
+		void Translate(const glm::vec3& translation);
 		void Rotate(const float angle, const glm::vec3& axis);
 		void Rotate(const glm::quat& quat);
 		void Scale(const float scale, const glm::vec3& axis);

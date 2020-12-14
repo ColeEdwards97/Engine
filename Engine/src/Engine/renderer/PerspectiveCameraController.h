@@ -37,7 +37,6 @@ namespace Engine
 		float m_PanSpeed = 5.0f;
 		float m_ZoomSpeed = 10.0f;
 		float m_RevolveSpeed = 90.0f;
-
 		float m_OrbitDistance = 5.0f;
 
 		glm::vec2 m_LastMousePos = glm::vec2(0.0f);

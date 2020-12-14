@@ -85,6 +85,9 @@ public:
 		// transform setup
 		m_TriangleTransform.SetLocation(glm::vec3(0.0f, 0.0f, 0.0f));
 
+		// camera setup
+		m_CameraController.GetCamera().GetTransform().SetLocation(glm::vec3(0.0f, 0.0f, -2.0f));
+
 		/* HACKING IN A TRIANGLE */
 
 

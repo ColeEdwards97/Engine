@@ -7,6 +7,7 @@ namespace Engine
 {
 
 	glm::vec3 ScreenToWorld(const glm::mat4& viewProjectionMatrix, const glm::vec2& mousePosition, const glm::vec2& screenDimensions);
+	glm::vec3 ScreenToWorld(const glm::mat4& modelMatrix, const glm::mat4& viewMatrix, const glm::mat4& projectionMatrix, const glm::vec2& mousePosition, const glm::vec4& viewPort);
 
 
 

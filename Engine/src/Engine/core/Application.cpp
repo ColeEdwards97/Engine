@@ -62,7 +62,6 @@ namespace Engine {
 
 			}
 
-
 			// still update imgui though
 
 			// LAYER :: OnImGuiRender()

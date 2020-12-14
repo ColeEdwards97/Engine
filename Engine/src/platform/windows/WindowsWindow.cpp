@@ -7,7 +7,7 @@
 #include "Engine/Event/KeyEvent.h"
 #include "Engine/Event/MouseEvent.h"
 
-#include "platform/OpenGL/OpenGLContext.h"
+#include "Platform/OpenGL/OpenGLContext.h"
 
 namespace Engine {
 	
@@ -17,6 +17,7 @@ namespace Engine {
 	// (this is how the code knows to create a Windows Window and not a BlaBlaWindow)
 	Window* Window::Create(const WindowProperties& props) 
 	{
+		// TODO: platform detection
 		return new WindowsWindow(props);
 	}
 

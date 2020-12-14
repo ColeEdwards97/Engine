@@ -8,9 +8,7 @@ namespace Engine
 	class MouseEvent : public Event
 	{
 	public:
-
-		int GetEventCategoryFlags() const override { return (EventCategoryMouse); }
-
+		
 	protected:
 		
 		MouseEvent()
@@ -30,8 +28,6 @@ namespace Engine
 		float GetMouseX() const { return m_posX; }
 		float GetMouseY() const { return m_posY; }
 		
-		int GetEventCategoryFlags() const override { return (EventCategoryInput | EventCategoryMouse); }
-
 	private:
 
 		float m_posX;
@@ -51,8 +47,6 @@ namespace Engine
 		float GetOffsetX() const { return m_offsetX; }
 		float GetOffsetY() const { return m_offsetY; }
 
-		int GetEventCategoryFlags() const override { return (EventCategoryInput | EventCategoryMouse); }
-
 	private:
 
 		float m_offsetX;
@@ -66,8 +60,6 @@ namespace Engine
 	public:
 
 		int GetMouseButton() const { return m_button; }
-
-		int GetEventCategoryFlags() const override { return (EventCategoryInput | EventCategoryMouse | EventCategoryMouseButton); }
 
 	protected:
 

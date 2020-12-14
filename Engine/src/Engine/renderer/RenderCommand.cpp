@@ -2,7 +2,7 @@
 
 #include "RenderCommand.h"
 
-#include "platform/OpenGL/OpenGLRendererAPI.h"
+#include "Platform/OpenGL/OpenGLRendererAPI.h"
 
 namespace Engine
 {
