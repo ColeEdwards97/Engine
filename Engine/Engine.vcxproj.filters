@@ -7,6 +7,9 @@
     <Filter Include="src\Engine">
       <UniqueIdentifier>{12A1320E-FE58-745B-6760-4DB753370F4C}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Engine\Assets">
+      <UniqueIdentifier>{B4BF66A7-20D6-643D-694D-F05ED5A235C5}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Engine\Core">
       <UniqueIdentifier>{AA407579-16CC-E23D-1FDD-65328BE73E3E}</UniqueIdentifier>
     </Filter>
@@ -65,6 +68,15 @@
   <ItemGroup>
     <ClInclude Include="src\Engine.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Assets\Mesh.h">
+      <Filter>src\Engine\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Assets\Model.h">
+      <Filter>src\Engine\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Assets\ModelLoader.h">
+      <Filter>src\Engine\Assets</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Core\Application.h">
       <Filter>src\Engine\Core</Filter>
@@ -1439,6 +1451,12 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Engine\Assets\Model.cpp">
+      <Filter>src\Engine\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Assets\ModelLoader.cpp">
+      <Filter>src\Engine\Assets</Filter>
+    </ClCompile>
     <ClCompile Include="src\Engine\Core\Application.cpp">
       <Filter>src\Engine\Core</Filter>
     </ClCompile>

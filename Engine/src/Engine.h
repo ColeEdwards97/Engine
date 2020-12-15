@@ -33,6 +33,10 @@
 #include "Engine/Renderer/Shader.h"
 #include "Engine/Renderer/VertexArray.h"
 
+#include "Engine/Assets/Mesh.h"
+#include "Engine/Assets/Model.h"
+#include "Engine/Assets/ModelLoader.h"
+
 
 #include "Engine/World/Transform.h"
 

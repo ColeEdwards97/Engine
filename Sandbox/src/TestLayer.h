@@ -91,6 +91,15 @@ public:
 		/* HACKING IN A TRIANGLE */
 
 
+
+		/* MESH TEST */
+		
+		Engine::Model* model = Engine::ModelLoader::LoadModel("C:/users/edwar/desktop/test.fbx");
+
+		/* MESH TEST */
+
+
+
 	}
 
 	void OnUpdate(Engine::TimeStep ts) override
