@@ -17,6 +17,12 @@
 #include "Engine/Renderer/CameraController.h"
 #include "Engine/Renderer/PerspectiveCameraController.h"
 
+#include "Engine/Entity/Entity.h"
+#include "Engine/Entity/Component.h"
+#include "Engine/Entity/Camera.h"
+#include "Engine/Entity/CameraComponent.h"
+#include "Engine/Entity/TransformComponent.h"
+
 #include "Engine/Event/Event.h"
 #include "Engine/Event/EventDispatcher.h"
 #include "Engine/Event/KeyEvent.h"
@@ -25,9 +31,6 @@
 
 #include "Engine/Renderer/Buffer.h"
 #include "Engine/Renderer/GraphicsContext.h"
-#include "Engine/Renderer/Camera.h"
-#include "Engine/Renderer/OrthographicCamera.h"
-#include "Engine/Renderer/PerspectiveCamera.h"
 #include "Engine/Renderer/RenderCommand.h"
 #include "Engine/Renderer/Renderer.h"
 #include "Engine/Renderer/Shader.h"

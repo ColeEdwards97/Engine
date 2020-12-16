@@ -6,7 +6,7 @@
 #include "Engine/Event/MouseEvent.h"
 #include "Engine/Event/ApplicationEvent.h"
 
-#include "Engine/Renderer/Camera.h"
+#include "Engine/Entity/Camera.h"
 
 namespace Engine
 {

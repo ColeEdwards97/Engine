@@ -18,6 +18,7 @@
 
 
 // Engine Includes
+#include "Engine/Core/Core.h"
 #include "Engine/Core/Log.h"
 
 

@@ -1,13 +1,18 @@
 #pragma once
 
-#include "Engine/Entity/Entity.h"
-
 namespace Engine
 {
 	class Component
 	{
 	public:
+
 		virtual ~Component() {}
-		virtual void OnUpdate(Entity& entity) = 0;
+
+		virtual bool AllowsMultiple() const = 0;
+
+#define ALLOWS_MULTIPLE(b) static bool AllowsMultipleStatic() { return b; }\
+							virtual bool AllowsMultiple() const override { return AllowsMultipleStatic(); }
+
 	};
+
 }

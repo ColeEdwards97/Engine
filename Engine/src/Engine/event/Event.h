@@ -18,7 +18,8 @@ namespace Engine
 		template<typename EB>
 		bool IsEventType()
 		{
-			return typeid(EB) == typeid(*this);
+			EB* e = dynamic_cast<EB*>(this);
+			return (e != nullptr);
 		}
 
 

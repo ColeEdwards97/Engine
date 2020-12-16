@@ -15,9 +15,11 @@ namespace Engine
 
 	// TODO: adjust aspect ratio of camera based on new screen size
 
-	PerspectiveCameraController::PerspectiveCameraController(float fov, float aspectRatio)
-		: m_Camera(fov, aspectRatio, 0.1f, 100.0f)
-	{}
+	PerspectiveCameraController::PerspectiveCameraController()
+		: m_Camera(ProjectionMode::Perspective)
+	{
+		m_Camera.SetPerspective(45.0f, (1024.0f / 720.0f), 0.1f, 100.0f);
+	}
 
 
 	void PerspectiveCameraController::OnUpdate(TimeStep ts)
@@ -72,32 +74,37 @@ namespace Engine
 	/* MANIPULATION */
 	void PerspectiveCameraController::Pan(TimeStep ts, const glm::vec2& deltaPos)
 	{
-		m_Camera.GetTransform().Translate(ts * m_PanSpeed * -deltaPos.x, m_Camera.GetTransform().GetRight());
-		m_Camera.GetTransform().Translate(ts * m_PanSpeed * -deltaPos.y, m_Camera.GetTransform().GetDown());
+		Transform& t = m_Camera.GetTransform();
+		t.Translate(ts * m_PanSpeed * -deltaPos.x, t.GetRight());
+		t.Translate(ts * m_PanSpeed * -deltaPos.y, t.GetDown());
 	}
 	
 	void PerspectiveCameraController::Orbit(TimeStep ts, const glm::vec2& deltaPos)
 	{
+		Transform& t = m_Camera.GetTransform();
+		
 		// Set location to orbit location
-		m_Camera.GetTransform().SetLocation(m_Camera.GetTransform().GetLocation() + (m_OrbitDistance * m_Camera.GetTransform().GetFront()));
+		t.SetLocation(t.GetLocation() + (m_OrbitDistance * t.GetFront()));
 
 		// Rotate
-		m_Camera.GetTransform().Rotate(ts * m_RevolveSpeed * -deltaPos.x, m_Camera.GetTransform().GetUp());
-		m_Camera.GetTransform().Rotate(ts * m_RevolveSpeed * -deltaPos.y, m_Camera.GetTransform().GetRight());
+		t.Rotate(ts * m_RevolveSpeed * -deltaPos.x, t.GetUp());
+		t.Rotate(ts * m_RevolveSpeed * -deltaPos.y, t.GetRight());
 
 		// Move back by the orbit distance
-		m_Camera.GetTransform().Translate(m_OrbitDistance, m_Camera.GetTransform().GetBack());
+		t.Translate(m_OrbitDistance, t.GetBack());
 	}
 	
 	void PerspectiveCameraController::Look(TimeStep ts, const glm::vec2& deltaPos)
 	{
-		m_Camera.GetTransform().Rotate(ts * m_RevolveSpeed * -deltaPos.x, m_Camera.GetTransform().GetUp());
-		m_Camera.GetTransform().Rotate(ts * m_RevolveSpeed * -deltaPos.y, m_Camera.GetTransform().GetRight());
+		Transform& t = m_Camera.GetTransform();
+		t.Rotate(ts * m_RevolveSpeed * -deltaPos.x, t.GetUp());
+		t.Rotate(ts * m_RevolveSpeed * -deltaPos.y, t.GetRight());
 	}
 	
 	void PerspectiveCameraController::Zoom(TimeStep ts, const glm::vec2& deltaPos)
 	{
-		m_Camera.GetTransform().Translate(ts * m_ZoomSpeed * deltaPos.y, m_Camera.GetTransform().GetBack());
+		Transform& t = m_Camera.GetTransform();
+		t.Translate(ts * m_ZoomSpeed * deltaPos.y, t.GetBack());
 	}
 
 	void PerspectiveCameraController::CenterView(const glm::vec2& mousePos, const glm::vec2& deltaPos)

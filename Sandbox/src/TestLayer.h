@@ -9,7 +9,7 @@ class TestLayer : public Engine::Layer
 public:
 
 	TestLayer()
-		: Layer("Test Layer"), m_CameraController(45.0f, (1024.0f / 720.0f)), m_TriangleTransform()		// perspective cam
+		: Layer("Test Layer"), m_CameraController(), m_TriangleTransform()		// perspective cam
 	{
 
 		/* HACKING IN A TRIANGLE */
@@ -91,13 +91,20 @@ public:
 		/* HACKING IN A TRIANGLE */
 
 
-
 		/* MESH TEST */
 		
-		Engine::Model* model = Engine::ModelLoader::LoadModel("C:/users/edwar/desktop/test.fbx");
-
 		/* MESH TEST */
 
+
+		/* ENTITY TEST
+		Engine::Entity* e = new Engine::Entity();
+		Engine::TransformComponent& c = e->AddComponent(new Engine::TransformComponent());
+		Engine::CameraComponent& cc = e->AddComponent(new Engine::CameraComponent(new Engine::Camera(Engine::ProjectionMode::Perspective)));
+		Engine::TransformComponent& c2 = e->GetComponent<Engine::TransformComponent>();
+		c.GetTransform().Translate(1.0f, glm::vec3(1.0f));
+
+		delete e;
+		ENTITY TEST */
 
 
 	}
@@ -130,7 +137,7 @@ public:
 		// CAMERA CONTROLLER EVENT
 		m_CameraController.OnEvent(e);
 	}
-
+	
 	void OnImGuiRender() override
 	{
 		ImGui::Begin("Test");

@@ -9,6 +9,7 @@ namespace Engine
 	{
 	public:
 		virtual ~InputComponent() {}
-		virtual void OnUpdate(Entity& e) = 0;
+
+		ALLOWS_MULTIPLE(false);
 	};
 }

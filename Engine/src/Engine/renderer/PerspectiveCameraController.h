@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Engine/Renderer/PerspectiveCamera.h"
+#include "Engine/Entity/Camera.h"
 #include "Engine/Renderer/CameraController.h"
 
 namespace Engine
@@ -10,7 +10,7 @@ namespace Engine
 	{
 	public:
 
-		PerspectiveCameraController(float fov, float aspectRatio);
+		PerspectiveCameraController();
 		~PerspectiveCameraController() {}
 
 		virtual void OnUpdate(TimeStep ts) override;
@@ -41,7 +41,7 @@ namespace Engine
 
 		glm::vec2 m_LastMousePos = glm::vec2(0.0f);
 		
-		PerspectiveCamera m_Camera;
+		Camera m_Camera;
 
 	};
 

@@ -2,8 +2,6 @@
 
 #include "Engine/Assets/Model.h"
 
-#include <assimp/scene.h>
-
 namespace Engine
 {
 
@@ -16,8 +14,8 @@ namespace Engine
 
 	private:
 
-		static Model ProcessAssimpNode(const aiNode* painode, const aiScene* paiscene);
-		static Mesh ProcessAssimpMesh(const aiMesh* paimesh);
+		//static Model ProcessAssimpNode(const aiNode* painode, const aiScene* paiscene);
+		//static Mesh ProcessAssimpMesh(const aiMesh* paimesh);
 
 	};
 

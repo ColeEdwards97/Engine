@@ -18,7 +18,7 @@ namespace Engine
 		template<typename E, typename F>
 		bool Dispatch(const F& func)
 		{
-			if (m_event.IsEventType<E>())
+			if (typeid(E) == typeid(m_event))
 			{
 				m_event.handled |= func(static_cast<E&>(m_event));
 				return true;
