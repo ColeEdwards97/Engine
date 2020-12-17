@@ -47,6 +47,11 @@
 #include "Engine/imgui/ImGuiLayer.h"
 
 
+
+#include "Engine/SparseSet.h"
+#include "Engine/SparseMap.h"
+
+
 // ENTRY POINT ----------------------------------
 #include "Engine/Core/EntryPoint.h"
 // ----------------------------------------------

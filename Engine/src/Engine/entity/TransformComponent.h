@@ -8,17 +8,14 @@ namespace Engine
 
 	class TransformComponent : public Component
 	{
-
 	public:
 
-		TransformComponent() = default;
-		TransformComponent(const Transform& transform) :
-			m_Transform(transform)
+		TransformComponent() {}
+		TransformComponent(Transform& transform)
+			: m_Transform(transform)
 		{}
 
 		Transform& GetTransform() { return m_Transform; }
-
-		ALLOWS_MULTIPLE(false);
 
 	private:
 

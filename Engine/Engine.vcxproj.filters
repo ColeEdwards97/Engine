@@ -1441,6 +1441,9 @@
       <Filter>vendor\glm\glm</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Entity\Camera.h" />
+    <ClInclude Include="src\Engine\Entity\Registry.h" />
+    <ClInclude Include="src\Engine\SparseSet.h" />
+    <ClInclude Include="src\Engine\SparseMap.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Engine\Assets\Model.cpp">

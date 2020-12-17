@@ -107,6 +107,30 @@ public:
 		ENTITY TEST */
 
 
+
+		/* SPARSE SET TEST */
+		Engine::SparseSet<uint32_t> sparseSet;
+		sparseSet.Insert(400);
+		sparseSet.Insert(2);
+		sparseSet.Insert(0);
+		sparseSet.Insert(999999);
+		sparseSet.Erase(2);
+		/* SPARSE SET TEST*/
+
+		/* SPARSE MAP TEST */
+		Engine::SparseMap<uint32_t, float> sparseMap;
+		sparseMap.Insert(0, 1.0f);
+		sparseMap.Insert(1, 420.0f);
+		sparseMap.Insert(2, 0.6667f);
+		sparseMap.Erase(1);
+
+		float f3 = sparseMap.Get(3);
+		float f2 = sparseMap.Get(2);
+		
+		sparseMap.Set(2, 99.0f);
+		/* SPARSE MAP TEST */
+
+
 	}
 
 	void OnUpdate(Engine::TimeStep ts) override

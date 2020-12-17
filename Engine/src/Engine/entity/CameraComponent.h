@@ -3,6 +3,9 @@
 #include "Engine/Entity/Camera.h"
 #include "Engine/Entity/Component.h"
 
+#include "Engine/Core/TimeStep.h"
+#include "Engine/Event/Event.h"
+
 namespace Engine
 {
 
@@ -11,19 +14,8 @@ namespace Engine
 
 	public:
 
-		CameraComponent() = default;
-		CameraComponent(const CameraComponent&) = default;
-		CameraComponent(Camera* camera)
-			: m_Camera(*camera)
-		{}
-
-		Camera& GetCamera() { return m_Camera; }
-
-		ALLOWS_MULTIPLE(false);
-
-	private:
-
-		Camera m_Camera;
+		void OnUpdate(Camera& camera, TimeStep ts) {}
+		void OnEvent(Camera& camera, Event& e) {}
 
 	};
 

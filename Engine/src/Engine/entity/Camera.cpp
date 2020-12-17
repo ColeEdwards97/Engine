@@ -12,10 +12,9 @@ namespace Engine
 	{
 		// ADD COMPONENTS
 		AddComponent<TransformComponent>(new TransformComponent());
-		//AddComponent<CameraComponent>(new CameraComponent(this));	// dummy component so another camera isnt added
-																	// however, this is calling the entity destructor again after the component was already deleted resulting in an access violation
-																	// do not add a camera component
-
+		AddComponent<CameraComponent>(new CameraComponent());	// dummy component so another camera isnt added
+		//AddComponent<CameraControllerComponent>(cameraController);
+																	
 		// Matrix Calculation
 		RecalculateViewMatrix();
 		RecalculateProjectionMatrix();

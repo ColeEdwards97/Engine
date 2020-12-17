@@ -161,6 +161,7 @@
     <ClInclude Include="src\Engine\Entity\Entity.h" />
     <ClInclude Include="src\Engine\Entity\InputComponent.h" />
     <ClInclude Include="src\Engine\Entity\LivingEntity.h" />
+    <ClInclude Include="src\Engine\Entity\Registry.h" />
     <ClInclude Include="src\Engine\Entity\TransformComponent.h" />
     <ClInclude Include="src\Engine\Event\ApplicationEvent.h" />
     <ClInclude Include="src\Engine\Event\Event.h" />
@@ -180,6 +181,8 @@
     <ClInclude Include="src\Engine\Renderer\RendererAPI.h" />
     <ClInclude Include="src\Engine\Renderer\Shader.h" />
     <ClInclude Include="src\Engine\Renderer\VertexArray.h" />
+    <ClInclude Include="src\Engine\SparseMap.h" />
+    <ClInclude Include="src\Engine\SparseSet.h" />
     <ClInclude Include="src\Engine\Utils\QuaternionUtils.h" />
     <ClInclude Include="src\Engine\World\Scene.h" />
     <ClInclude Include="src\Engine\World\Transform.h" />
