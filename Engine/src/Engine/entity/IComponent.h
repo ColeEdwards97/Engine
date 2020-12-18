@@ -3,6 +3,7 @@
 namespace Engine
 {
 
+	using EntityID = uint32_t;
 	using ComponentTypeID = std::size_t;
 
 	class IComponent

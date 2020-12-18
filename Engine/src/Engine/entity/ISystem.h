@@ -9,6 +9,7 @@ namespace Engine
 
 	class ISystem
 	{
+
 	public:
 
 		ISystem()

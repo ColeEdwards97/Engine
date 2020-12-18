@@ -112,6 +112,7 @@ public:
 		
 		/* ENTITY TEST */
 		TestEntity entity;
+		Engine::Camera camera;
 		/* ENTITY TEST */
 
 	}
