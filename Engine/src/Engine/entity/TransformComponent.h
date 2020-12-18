@@ -6,14 +6,13 @@
 namespace Engine
 {
 
-	class TransformComponent : public Component
+	class TransformComponent : public Component<TransformComponent>
 	{
+
 	public:
 
 		TransformComponent() {}
-		TransformComponent(Transform& transform)
-			: m_Transform(transform)
-		{}
+		virtual ~TransformComponent() {}
 
 		Transform& GetTransform() { return m_Transform; }
 

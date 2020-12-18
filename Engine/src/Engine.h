@@ -18,10 +18,12 @@
 #include "Engine/Renderer/PerspectiveCameraController.h"
 
 #include "Engine/Entity/Entity.h"
+#include "Engine/Entity/IEntity.h"
 #include "Engine/Entity/Component.h"
+#include "Engine/Entity/IComponent.h"
 #include "Engine/Entity/Camera.h"
-#include "Engine/Entity/CameraComponent.h"
-#include "Engine/Entity/TransformComponent.h"
+#include "Engine/Entity/EntityManager.h"
+#include "Engine/Entity/GameObject.h"
 
 #include "Engine/Event/Event.h"
 #include "Engine/Event/EventDispatcher.h"
@@ -49,7 +51,7 @@
 
 
 #include "Engine/SparseSet.h"
-#include "Engine/SparseMap.h"
+#include "Engine/Math/Random.h"
 
 
 // ENTRY POINT ----------------------------------

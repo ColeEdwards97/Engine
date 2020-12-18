@@ -1,6 +1,6 @@
 #include "engpch.h"
 
-#include "Entity.h"
+#include "System.h"
 
 namespace Engine
 {

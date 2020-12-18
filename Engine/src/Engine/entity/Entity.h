@@ -1,75 +1,40 @@
 #pragma once
 
-#include "Engine/Entity/Component.h"
+#include "Engine/Entity/EntityManager.h"
+#include "Engine/Entity/IEntity.h"
+#include "Engine/Entity/EntityUtil.h"
 
 namespace Engine
 {
-	class Entity
+	
+	template<typename E>
+	class Entity : public IEntity
 	{
+	
+		// deletion is handled by EntityManager
+		void operator delete(void*) = delete;
+		void operator delete[](void*) = delete;
 
 	public:
 
-		Entity() {};
-		Entity(const Entity&) = default;
-		virtual ~Entity();
+		// CONSTRUCTOR & DESTRUCTOR
+		Entity()
+		{}
 
-		// TODO: dont override and just look into registry
-		//virtual void OnUpdate(TimeStep ts) = 0;
-		//virtual void OnEvent(Event& e) = 0;
+		virtual ~Entity()
+		{}
 
+		// ACCESSOR
+		virtual const uint32_t GetTypeID() const override { return s_EntityTypeID; };
 
-		template<typename T>
-		T& GetComponent()
-		{
-			ENGINE_CORE_ASSERT(HasComponent<T>(), "Entity does not have a Component of provided type");
-			auto found = std::find_if(
-				m_Components.begin(),
-				m_Components.end(),
-				[](Component* const c) { return typeid(T) == typeid(*c); }
-			);
-			return static_cast<T&>(**found);
-		}
 		
-		template<typename T>
-		T& AddComponent(T* component)
-		{
-			ENGINE_CORE_ASSERT(!(HasComponent<T>()), "Entity already has Component of provided type");
-			m_Components.push_back(component);
-			return static_cast<T&>(*(m_Components.back()));
-		}
-
-		template<typename T>
-		void RemoveComponent()
-		{
-			ENGINE_CORE_ASSERT(HasComponent<T>(), "Entity does not have a Component of provided type");
-			m_Components.erase(
-				std::remove_if(
-					m_Components.begin(), 
-					m_Components.end(), 
-					[](Component* const c) { return typeid(T) == typeid(*c); }
-				),
-				m_Components.end()
-			);
-		}
-
-		template<typename T>
-		bool HasComponent()
-		{
-			return std::any_of(
-				m_Components.begin(),
-				m_Components.end(),
-				[](Component* const c) { return typeid(T) == typeid(*c); }
-			);
-		}
-
 	private:
-		
-		// TODO: initialize id
-		int m_ID = 0;
-		std::vector<Component*> m_Components;
-		
+
+		static const uint32_t s_EntityTypeID;
 
 	};
 
+	template<typename E>
+	const uint32_t Entity<E>::s_EntityTypeID = GetEntityTypeID<E>();
 
 }

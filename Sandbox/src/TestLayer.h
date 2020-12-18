@@ -86,7 +86,7 @@ public:
 		m_TriangleTransform.SetLocation(glm::vec3(0.0f, 0.0f, 0.0f));
 
 		// camera setup
-		m_CameraController.GetCamera().GetTransform().SetLocation(glm::vec3(0.0f, 0.0f, -2.0f));
+		m_CameraController.GetCamera().GetComponent<Engine::TransformComponent>()->GetTransform().SetLocation(glm::vec3(0.0f, 0.0f, -2.0f));
 
 		/* HACKING IN A TRIANGLE */
 
@@ -110,26 +110,25 @@ public:
 
 		/* SPARSE SET TEST */
 		Engine::SparseSet<uint32_t> sparseSet;
-		sparseSet.Insert(400);
+		sparseSet.Insert(62);
 		sparseSet.Insert(2);
 		sparseSet.Insert(0);
-		sparseSet.Insert(999999);
+		sparseSet.Insert(10);
 		sparseSet.Erase(2);
-		/* SPARSE SET TEST*/
-
-		/* SPARSE MAP TEST */
-		Engine::SparseMap<uint32_t, float> sparseMap;
-		sparseMap.Insert(0, 1.0f);
-		sparseMap.Insert(1, 420.0f);
-		sparseMap.Insert(2, 0.6667f);
-		sparseMap.Erase(1);
-
-		float f3 = sparseMap.Get(3);
-		float f2 = sparseMap.Get(2);
 		
-		sparseMap.Set(2, 99.0f);
-		/* SPARSE MAP TEST */
+		
+		Engine::SparseSet<uint32_t, float> sparseSet2;
+		sparseSet2.Insert(0, 0.0f);
+		sparseSet2.Insert(1, 2.0f);
+		sparseSet2.Insert(2, 4.0f);
+		sparseSet2.Insert(3, 8.0f);
+		sparseSet2.Erase(2);
+		/* SPARSE SET TEST*/
+		
+		/* ENTITY TEST */
 
+
+		/* ENTITY TEST */
 
 	}
 

@@ -111,24 +111,6 @@
     <ClInclude Include="src\Engine\Core\Window.h">
       <Filter>src\Engine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Engine\Entity\CameraComponent.h">
-      <Filter>src\Engine\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Entity\Component.h">
-      <Filter>src\Engine\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Entity\Entity.h">
-      <Filter>src\Engine\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Entity\InputComponent.h">
-      <Filter>src\Engine\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Entity\LivingEntity.h">
-      <Filter>src\Engine\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Entity\TransformComponent.h">
-      <Filter>src\Engine\Entity</Filter>
-    </ClInclude>
     <ClInclude Include="src\Engine\Event\ApplicationEvent.h">
       <Filter>src\Engine\Event</Filter>
     </ClInclude>
@@ -1440,10 +1422,20 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp">
       <Filter>vendor\glm\glm</Filter>
     </ClInclude>
-    <ClInclude Include="src\Engine\Entity\Camera.h" />
-    <ClInclude Include="src\Engine\Entity\Registry.h" />
     <ClInclude Include="src\Engine\SparseSet.h" />
-    <ClInclude Include="src\Engine\SparseMap.h" />
+    <ClInclude Include="src\Engine\Entity\Entity.h" />
+    <ClInclude Include="src\Engine\Entity\EntityUtil.h" />
+    <ClInclude Include="src\Engine\Entity\IEntity.h" />
+    <ClInclude Include="src\Engine\Entity\IComponent.h" />
+    <ClInclude Include="src\Engine\Entity\Component.h" />
+    <ClInclude Include="src\Engine\Entity\EntityManager.h" />
+    <ClInclude Include="src\Engine\Entity\ISystem.h" />
+    <ClInclude Include="src\Engine\Entity\System.h" />
+    <ClInclude Include="src\Engine\Math\Random.h" />
+    <ClInclude Include="src\Engine\Entity\Camera.h" />
+    <ClInclude Include="src\Engine\Entity\TransformComponent.h" />
+    <ClInclude Include="src\Engine\Entity\CameraComponent.h" />
+    <ClInclude Include="src\Engine\Entity\GameObject.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Engine\Assets\Model.cpp">
@@ -1463,9 +1455,6 @@
     </ClCompile>
     <ClCompile Include="src\Engine\Core\Log.cpp">
       <Filter>src\Engine\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Engine\Entity\Entity.cpp">
-      <Filter>src\Engine\Entity</Filter>
     </ClCompile>
     <ClCompile Include="src\Engine\Event\Subject.cpp">
       <Filter>src\Engine\Event</Filter>
@@ -1530,6 +1519,12 @@
     <ClCompile Include="src\engpch.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Engine\Entity\Camera.cpp" />
+    <ClCompile Include="src\Engine\Entity\Entity.cpp" />
+    <ClCompile Include="src\Engine\Entity\IEntity.cpp" />
+    <ClCompile Include="src\Engine\Entity\IComponent.cpp" />
+    <ClCompile Include="src\Engine\Entity\ISystem.cpp" />
+    <ClCompile Include="src\Engine\Entity\System.cpp" />
+    <ClCompile Include="src\Engine\Entity\EntityManager.cpp" />
+    <ClCompile Include="src\Engine\Entity\CameraComponent.cpp" />
   </ItemGroup>
 </Project>
