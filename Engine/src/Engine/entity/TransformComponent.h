@@ -16,6 +16,10 @@ namespace Engine
 
 		Transform& GetTransform() { return m_Transform; }
 
+		// virtual
+		virtual void OnEnable() override {}
+		virtual void OnDisable() override {}
+
 	private:
 
 		Transform m_Transform;

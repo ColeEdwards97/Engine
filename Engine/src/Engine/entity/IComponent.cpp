@@ -5,26 +5,19 @@
 namespace Engine
 {
 
-	IComponent::IComponent()
-		: m_Active(true)
-	{}
-
-	IComponent::~IComponent()
-	{}
-
-	void IComponent::SetActive(bool active)
+	void IComponent::SetEnabled(bool enabled)
 	{
 
-		if (IsActive() == active)
+		if (IsEnabled() == enabled)
 			return;
 
-		if (active)
+		if (enabled)
 			OnEnable();
 
 		else
 			OnDisable();
 
-		m_Active = active;
+		m_Enabled = enabled;
 
 	}
 

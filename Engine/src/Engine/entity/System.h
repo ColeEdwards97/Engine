@@ -2,35 +2,37 @@
 
 #include "Engine/Entity/ISystem.h"
 
+#include "Engine/Utils/FamilyTypeID.h"
+
 namespace Engine
 {
 
 	template<typename S>
 	class System : public ISystem
 	{
-
+	
 	public:
 
-		// CONSTRUCTOR & DESTRUCTOR
-		System()
-		{}
+		const SystemTypeID GetTypeID() const override { return s_SystemTypeID; }
 
-		virtual ~System()
-		{}
+		virtual void OnEnable() override {}
+		virtual void OnDisable() override {}
 
-		// ACCESSOR
-		virtual const uint32_t GetTypeID() override { return s_SystemTypeID; }
+	protected:
+
+		System() = default;
+		System(const System&) = default;
+		System(System&&) = default;
+		System& operator=(const System&) = delete;
+		System& operator=(System&&) = delete;
 
 	private:
 
-		static const uint32_t s_SystemTypeID;
-		static System<S>* s_SystemInstance;
-
-		static std::unordered_map<uint32_t, std::vector<uint32_t>> m_OwnedComponents;
-
+		static const SystemTypeID s_SystemTypeID;
+		
 	};
 
 	template<typename S>
-	const uint32_t System<S>::s_SystemTypeID = GetSystemTypeID<S>();
+	const SystemTypeID System<S>::s_SystemTypeID = GetFamilyTypeID<ISystem, S>();
 
 }

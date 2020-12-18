@@ -3,29 +3,33 @@
 namespace Engine
 {
 
+	using ComponentTypeID = std::size_t;
+
 	class IComponent
 	{
-
 	public:
 
 		// CONSTRUCTOR & DESTRUCTOR
-		IComponent();
-		virtual ~IComponent();
+		IComponent()
+			: m_Owner(0), m_Enabled(true)
+		{}
+		virtual ~IComponent() = default;
+		virtual const ComponentTypeID GetTypeID() const = 0;
 
-		// VIRTUAL
-		virtual void OnEnable() {};
-		virtual void OnDisable() {};
+		virtual void OnEnable() = 0;
+		virtual void OnDisable() = 0;
 
 		// ACCESSOR
-		virtual const uint32_t GetTypeID() const = 0;
+		bool IsEnabled() { return m_Enabled; }
+		void SetEnabled(bool enabled);
 
-		// STATE
-		bool IsActive() const { return m_Active; }
-		void SetActive(bool active);
+		// ENTITY MANAGER HELPERS
 
-	private:
 
-		bool m_Active;
+	protected:
+
+		EntityID m_Owner;
+		bool m_Enabled;
 
 	};
 

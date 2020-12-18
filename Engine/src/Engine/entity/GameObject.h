@@ -19,9 +19,6 @@ namespace Engine
 
 		virtual ~GameObject() {}
 
-		virtual void OnEnable() override {}
-		virtual void OnDisable() override {}
-
 	};
 
 }

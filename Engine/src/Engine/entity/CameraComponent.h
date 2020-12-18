@@ -43,6 +43,10 @@ namespace Engine
 		void SetZNear(float zNear);
 		void SetZFar(float zFar);
 
+		// virtual
+		virtual void OnEnable() override {}
+		virtual void OnDisable() override {}
+
 	private:
 
 		void RecalculateProjectionViewMatrix();

@@ -145,6 +145,7 @@
     <ClInclude Include="src\Engine\Assets\Model.h" />
     <ClInclude Include="src\Engine\Assets\ModelLoader.h" />
     <ClInclude Include="src\Engine\Core\Application.h" />
+    <ClInclude Include="src\Engine\Entity\ComponentContainer.h" />
     <ClInclude Include="src\Engine\Core\Core.h" />
     <ClInclude Include="src\Engine\Core\EntryPoint.h" />
     <ClInclude Include="src\Engine\Core\Input.h" />
@@ -158,9 +159,9 @@
     <ClInclude Include="src\Engine\Entity\Camera.h" />
     <ClInclude Include="src\Engine\Entity\CameraComponent.h" />
     <ClInclude Include="src\Engine\Entity\Component.h" />
+    <ClInclude Include="src\Engine\Entity\ComponentManager.h" />
     <ClInclude Include="src\Engine\Entity\Entity.h" />
     <ClInclude Include="src\Engine\Entity\EntityManager.h" />
-    <ClInclude Include="src\Engine\Entity\EntityUtil.h" />
     <ClInclude Include="src\Engine\Entity\GameObject.h" />
     <ClInclude Include="src\Engine\Entity\IComponent.h" />
     <ClInclude Include="src\Engine\Entity\IEntity.h" />
@@ -187,6 +188,7 @@
     <ClInclude Include="src\Engine\Renderer\Shader.h" />
     <ClInclude Include="src\Engine\Renderer\VertexArray.h" />
     <ClInclude Include="src\Engine\SparseSet.h" />
+    <ClInclude Include="src\Engine\Utils\FamilyTypeID.h" />
     <ClInclude Include="src\Engine\Utils\QuaternionUtils.h" />
     <ClInclude Include="src\Engine\World\Scene.h" />
     <ClInclude Include="src\Engine\World\Transform.h" />
@@ -615,12 +617,11 @@
     <ClCompile Include="src\Engine\Core\LayerStack.cpp" />
     <ClCompile Include="src\Engine\Core\Log.cpp" />
     <ClCompile Include="src\Engine\Entity\CameraComponent.cpp" />
-    <ClCompile Include="src\Engine\Entity\Entity.cpp" />
+    <ClCompile Include="src\Engine\Entity\ComponentManager.cpp" />
     <ClCompile Include="src\Engine\Entity\EntityManager.cpp" />
     <ClCompile Include="src\Engine\Entity\IComponent.cpp" />
     <ClCompile Include="src\Engine\Entity\IEntity.cpp" />
     <ClCompile Include="src\Engine\Entity\ISystem.cpp" />
-    <ClCompile Include="src\Engine\Entity\System.cpp" />
     <ClCompile Include="src\Engine\Event\Subject.cpp" />
     <ClCompile Include="src\Engine\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Engine\ImGui\ImGuiLayer.cpp" />

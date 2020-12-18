@@ -1,15 +1,16 @@
 #pragma once
 
 #include <Engine.h>
-
 #include <imgui/imgui.h>
+
+#include "TestEntity.h"
 
 class TestLayer : public Engine::Layer
 {
 public:
 
 	TestLayer()
-		: Layer("Test Layer"), m_CameraController(), m_TriangleTransform()		// perspective cam
+		: Layer("Test Layer"), m_TriangleTransform()		// perspective cam
 	{
 
 		/* HACKING IN A TRIANGLE */
@@ -85,28 +86,12 @@ public:
 		// transform setup
 		m_TriangleTransform.SetLocation(glm::vec3(0.0f, 0.0f, 0.0f));
 
-		// camera setup
-		m_CameraController.GetCamera().GetComponent<Engine::TransformComponent>()->GetTransform().SetLocation(glm::vec3(0.0f, 0.0f, -2.0f));
-
 		/* HACKING IN A TRIANGLE */
 
 
 		/* MESH TEST */
 		
 		/* MESH TEST */
-
-
-		/* ENTITY TEST
-		Engine::Entity* e = new Engine::Entity();
-		Engine::TransformComponent& c = e->AddComponent(new Engine::TransformComponent());
-		Engine::CameraComponent& cc = e->AddComponent(new Engine::CameraComponent(new Engine::Camera(Engine::ProjectionMode::Perspective)));
-		Engine::TransformComponent& c2 = e->GetComponent<Engine::TransformComponent>();
-		c.GetTransform().Translate(1.0f, glm::vec3(1.0f));
-
-		delete e;
-		ENTITY TEST */
-
-
 
 		/* SPARSE SET TEST */
 		Engine::SparseSet<uint32_t> sparseSet;
@@ -126,8 +111,7 @@ public:
 		/* SPARSE SET TEST*/
 		
 		/* ENTITY TEST */
-
-
+		TestEntity entity;
 		/* ENTITY TEST */
 
 	}
@@ -136,7 +120,7 @@ public:
 	{
 
 		// CAMERA CONTROLLER UPDATE
-		m_CameraController.OnUpdate(ts);
+		//m_CameraController.OnUpdate(ts);
 
 		// TRIANGLE TRANSFORM
 		//m_TriangleTransform.Rotate(ts * 30.0f, glm::vec3(0.0f, 1.0f, 0.0f));
@@ -145,10 +129,10 @@ public:
 		totalTime += ts;
 
 		/* HACKING IN A TRIANGLE */
-		Engine::RenderCommand::Clear({ 0.0f, 0.0f, 0.0f, 1.0f });
-		Engine::Renderer::BeginScene(m_CameraController.GetCamera());
-		Engine::Renderer::Submit(m_Shader, m_VertexArray, m_TriangleTransform.GetTransformMatrix());
-		Engine::Renderer::EndScene();
+		//Engine::RenderCommand::Clear({ 0.0f, 0.0f, 0.0f, 1.0f });
+		//Engine::Renderer::BeginScene(m_CameraController.GetCamera());
+		//Engine::Renderer::Submit(m_Shader, m_VertexArray, m_TriangleTransform.GetTransformMatrix());
+		//Engine::Renderer::EndScene();
 		/* HACKING IN A TRIANGLE */
 
 	}
@@ -158,7 +142,6 @@ public:
 		//ENGINE_TRACE("An Event Occurred!");
 
 		// CAMERA CONTROLLER EVENT
-		m_CameraController.OnEvent(e);
 	}
 	
 	void OnImGuiRender() override
@@ -174,8 +157,6 @@ private:
 	/* hacking in triangle */
 	Engine::Ref<Engine::Shader> m_Shader;
 	Engine::Ref<Engine::VertexArray> m_VertexArray;
-
-	Engine::PerspectiveCameraController m_CameraController;
 
 	Engine::Transform m_TriangleTransform;
 	float totalTime = 0.0f;

@@ -45,13 +45,13 @@ namespace Engine
 				m_Sparse[value] != nullptr;
 		}
 
-		T* Get(const T& value)
+		T& Get(const T& value)
 		{
 			if (!Has(value))
 			{
 				Insert(value);
 			}
-			return m_Sparse[value];
+			return *(m_Sparse[value]);
 		}
 
 		void Insert(const T& value)
@@ -142,9 +142,11 @@ namespace Engine
 				m_Sparse[key] != nullptr;
 		}
 
-		V* Get(const K& key)
+		V& Get(const K& key)
 		{
-			return &m_DenseValue[*(m_Sparse[key])];
+			if (!Has(key))
+				Insert(key, nullptr);
+			return m_DenseValue[*(m_Sparse[key])];
 		}
 
 		void Insert(const K& key, const V& value)

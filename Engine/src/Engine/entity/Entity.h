@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Engine/Entity/EntityManager.h"
 #include "Engine/Entity/IEntity.h"
-#include "Engine/Entity/EntityUtil.h"
+
+#include "Engine/Utils/FamilyTypeID.h"
 
 namespace Engine
 {
@@ -10,31 +10,30 @@ namespace Engine
 	template<typename E>
 	class Entity : public IEntity
 	{
-	
-		// deletion is handled by EntityManager
-		void operator delete(void*) = delete;
-		void operator delete[](void*) = delete;
 
 	public:
 
-		// CONSTRUCTOR & DESTRUCTOR
-		Entity()
-		{}
+		const EntityID GetID() const { return m_EntityID; }
+		const EntityTypeID GetTypeID() const override { return s_EntityTypeID; }
 
-		virtual ~Entity()
-		{}
-
-		// ACCESSOR
-		virtual const uint32_t GetTypeID() const override { return s_EntityTypeID; };
-
+		virtual void OnEnable() override {}
+		virtual void OnDisable() override {}
 		
+	protected:
+
+		Entity() = default;
+		Entity(const Entity&) = default;
+		Entity(Entity&&) = default;
+		Entity& operator=(const Entity&) = delete;
+		Entity& operator=(Entity&&) = delete;
+
 	private:
 
-		static const uint32_t s_EntityTypeID;
+		static const EntityTypeID s_EntityTypeID;
 
 	};
 
 	template<typename E>
-	const uint32_t Entity<E>::s_EntityTypeID = GetEntityTypeID<E>();
+	const EntityTypeID Entity<E>::s_EntityTypeID = GetFamilyTypeID<IEntity, E>();
 
 }

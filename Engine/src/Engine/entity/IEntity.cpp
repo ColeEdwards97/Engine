@@ -5,26 +5,19 @@
 namespace Engine
 {
 
-	IEntity::IEntity()
-		: m_Active(true)
-	{}
-
-	IEntity::~IEntity()
-	{}
-
-	void IEntity::SetActive(bool active)
+	void IEntity::SetEnabled(bool enabled)
 	{
 		
-		if (IsActive() == active)
+		if (IsEnabled() == enabled)
 			return;
 
-		if (active)
+		if (enabled)
 			OnEnable();
 
 		else
 			OnDisable();
 
-		m_Active = active;
+		m_Enabled = enabled;
 
 	}
 

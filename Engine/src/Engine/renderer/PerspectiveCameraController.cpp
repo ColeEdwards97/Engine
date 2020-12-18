@@ -18,7 +18,7 @@ namespace Engine
 	PerspectiveCameraController::PerspectiveCameraController()
 		: m_Camera()
 	{
-		m_Camera.GetComponent<CameraComponent>()->SetPerspective(45.0f, (1024.0f / 720.0f), 0.1f, 100.0f);
+		//m_Camera.GetComponent<CameraComponent>()->SetPerspective(45.0f, (1024.0f / 720.0f), 0.1f, 100.0f);
 	}
 
 

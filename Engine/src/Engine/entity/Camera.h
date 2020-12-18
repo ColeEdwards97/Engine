@@ -20,9 +20,6 @@ namespace Engine
 		virtual ~Camera()
 		{}
 
-		virtual void OnEnable() override {}
-		virtual void OnDisable() override {}
-
 	};
 
 }

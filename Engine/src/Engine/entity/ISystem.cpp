@@ -5,11 +5,18 @@
 namespace Engine
 {
 
-	ISystem::ISystem()
-		: m_SystemID(0)
-	{}
+	void ISystem::SetEnabled(bool enabled)
+	{
+		if (IsEnabled() == enabled)
+			return;
 
-	ISystem::~ISystem()
-	{}
+		if (enabled)
+			OnEnable();
+
+		else
+			OnDisable();
+
+		m_Enabled = enabled;
+	}
 
 }

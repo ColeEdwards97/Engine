@@ -13,7 +13,7 @@
 
 #ifdef ENG_ENABLE_ASSERTS
 	#define ENGINE_ASSERT(x, ...) { if(!(x)) { ENGINE_ERROR("Assertion failed: {0}", __VA_ARGS__); __debugbreak(); } }
-	#define ENGINE_CORE_ASSERT(x, ...) {if(!(x)) { ENGINE_CORE_ERROR("Assertion failed: {0}", __VA_ARGS__); __debugbreak(); } }
+	#define ENGINE_CORE_ASSERT(x, ...) { if(!(x)) { ENGINE_CORE_ERROR("Assertion failed: {0}", __VA_ARGS__); __debugbreak(); } }
 #else
 	#define ENGINE_ASSERT(x, ...)
 	#define ENGINE_CORE_ASSERT(x, ...)
@@ -29,9 +29,18 @@ namespace Engine
 
 	template<typename T>
 	using Scope = std::unique_ptr<T>;
+	template<typename T, typename ... ARGS>
+	constexpr Scope<T> CreateScope(ARGS&& ... args)
+	{
+		return std::make_unique<T>(std::forward<ARGS>(args)...);
+	}
 
 	template<typename T>
 	using Ref = std::shared_ptr<T>;
-
+	template<typename T, typename ... ARGS>
+	constexpr Ref<T> CreateRef(ARGS&& ... args)
+	{
+		return std::make_shared<T>(std::forward<ARGS>(args)...);
+	}
 
 }

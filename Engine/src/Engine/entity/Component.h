@@ -1,7 +1,8 @@
 #pragma once
 
 #include "Engine/Entity/IComponent.h"
-#include "Engine/Entity/EntityUtil.h"
+
+#include "Engine/Utils/FamilyTypeID.h"
 
 namespace Engine
 {
@@ -12,23 +13,27 @@ namespace Engine
 
 	public:
 
-		// CONSTRUCTOR & DESTRUCTOR
-		Component()
-		{}
+		const EntityID GetEntityID() const { return m_Owner; }
+		const ComponentTypeID GetTypeID() const override { return s_ComponentTypeID; }
 
-		virtual ~Component()
-		{}
+		virtual void OnEnable() override {}
+		virtual void OnDisable() override {}
+		
+	protected:
 
-		// ACCESSOR
-		virtual const uint32_t GetTypeID() const override { return s_ComponentTypeID; };
+		Component() = default;
+		Component(const Component&) = default;
+		Component(Component&&) = default;
+		Component& operator=(const Component&) = delete;
+		Component& operator=(Component&&) = delete;
 
 	private:
 
-		static const uint32_t s_ComponentTypeID;
+		static const ComponentTypeID s_ComponentTypeID;
 
 	};
 
 	template<typename C>
-	const uint32_t Component<C>::s_ComponentTypeID = GetComponentTypeID<C>();
+	const ComponentTypeID Component<C>::s_ComponentTypeID = GetFamilyTypeID<IComponent, C>();
 
 }

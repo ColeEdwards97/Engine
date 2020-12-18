@@ -5,21 +5,27 @@
 namespace Engine
 {
 
+	using SystemTypeID = std::size_t;
+
 	class ISystem
 	{
-
 	public:
 
-		// CONSTRUCTOR & DESTRUCTOR
-		ISystem();
-		virtual ~ISystem();
+		ISystem()
+			: m_Enabled(true)
+		{}
+		virtual ~ISystem() = default;
+		virtual const SystemTypeID GetTypeID() const = 0;
 
-		// ACCESSOR
-		virtual const uint32_t GetTypeID() const = 0;
+		virtual void OnEnable() = 0;
+		virtual void OnDisable() = 0;
+
+		bool IsEnabled() { return m_Enabled; }
+		void SetEnabled(bool enabled);
 
 	private:
 
-		const uint32_t m_SystemID;
+		bool m_Enabled;
 
 	};
 
