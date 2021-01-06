@@ -117,9 +117,6 @@
     <ClInclude Include="src\Engine\Event\Event.h">
       <Filter>src\Engine\Event</Filter>
     </ClInclude>
-    <ClInclude Include="src\Engine\Event\EventDispatcher.h">
-      <Filter>src\Engine\Event</Filter>
-    </ClInclude>
     <ClInclude Include="src\Engine\Event\KeyEvent.h">
       <Filter>src\Engine\Event</Filter>
     </ClInclude>
@@ -1438,6 +1435,14 @@
     <ClInclude Include="src\Engine\Entity\EntityManager.h" />
     <ClInclude Include="src\Engine\Entity\ComponentManager.h" />
     <ClInclude Include="src\Engine\Entity\ComponentContainer.h" />
+    <ClInclude Include="src\Engine\Entity\CameraSystem.h" />
+    <ClInclude Include="src\Engine\Entity\ControllerComponent.h" />
+    <ClInclude Include="src\Engine\Entity\Controller.h" />
+    <ClInclude Include="src\Engine\Utils\Handle.h" />
+    <ClInclude Include="src\Engine\Event\EntityEvent.h" />
+    <ClInclude Include="src\Engine\Entity\ECS.h" />
+    <ClInclude Include="src\Engine\Entity\IController.h" />
+    <ClInclude Include="src\Engine\Entity\CameraController.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Engine\Assets\Model.cpp">
@@ -1527,5 +1532,8 @@
     <ClCompile Include="src\Engine\Entity\CameraComponent.cpp" />
     <ClCompile Include="src\Engine\Entity\ComponentManager.cpp" />
     <ClCompile Include="src\Engine\Entity\EntityManager.cpp" />
+    <ClCompile Include="src\Engine\Entity\ECS.cpp" />
+    <ClCompile Include="src\Engine\Entity\Controller.cpp" />
+    <ClCompile Include="src\Engine\Entity\CameraController.cpp" />
   </ItemGroup>
 </Project>

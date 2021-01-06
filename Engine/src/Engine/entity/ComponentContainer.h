@@ -6,8 +6,6 @@
 namespace Engine
 {
 
-	using EntityID = uint32_t;
-
 	// ComponentContainer Interface so an unordered map can be stored in the component manager
 	class IComponentContainer
 	{
@@ -31,7 +29,7 @@ namespace Engine
 			m_Components.Insert(id, component);
 		}
 
-		Ref<T>& GetComponent(const EntityID id)
+		Ref<T> GetComponent(const EntityID id)
 		{
 			return m_Components.Get(id);
 		}

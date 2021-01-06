@@ -2,6 +2,7 @@
 
 #include "Engine/Entity/GameObject.h"
 #include "Engine/Entity/CameraComponent.h"
+#include "Engine/Entity/ControllerComponent.h"
 
 namespace Engine
 {
@@ -15,6 +16,7 @@ namespace Engine
 		{
 			// TODO: forward args
 			AddComponent<CameraComponent>();
+			AddComponent<ControllerComponent>();
 		}
 
 		virtual ~Camera()

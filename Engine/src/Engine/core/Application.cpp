@@ -3,7 +3,6 @@
 #include "Application.h"
 
 #include "Engine/Core/Input.h"
-#include "Engine/Event/EventDispatcher.h"
 
 #include "Engine/Renderer/Renderer.h"
 

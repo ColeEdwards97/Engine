@@ -5,12 +5,15 @@
 #include "Engine/SparseSet.h"
 #include "Engine/Entity/ComponentContainer.h"
 
+#include "Engine/Event/Observer.h"
+#include "Engine/Event/EntityEvent.h"
+
 #include "Engine/Utils/FamilyTypeID.h"
 
 namespace Engine
 {
 
-	class ComponentManager
+	class ComponentManager : public Observer
 	{
 
 	public:
@@ -22,18 +25,19 @@ namespace Engine
 		// OPERATIONS
 
 		template<typename T>
-		void AddComponent(const EntityID id)
+		Ref<T> AddComponent(const EntityID id)
 		{
 			if (!IsRegistered<T>())
 			{
 				Register<T>();
 			}
-			GetComponentContainer<T>()->AddComponent(id, CreateRef<T>());
-			
+			Ref<T> component = CreateRef<T>();
+			GetComponentContainer<T>()->AddComponent(id, component);
+			return component;
 		}
 
 		template<typename T>
-		Ref<T>& GetComponent(const EntityID id)
+		Ref<T> GetComponent(const EntityID id)
 		{
 			return GetComponentContainer<T>()->GetComponent(id);
 		}
@@ -55,6 +59,23 @@ namespace Engine
 
 
 	private:
+
+		// EVENT
+		void OnEvent(Event& e)
+		{
+			EventDispatcher dispatcher(e);
+			dispatcher.Dispatch<EntityDestroyedEvent>(ENG_BIND_EVENT_FN(OnEntityDestroyedEvent));
+		}
+
+		bool OnEntityDestroyedEvent(EntityDestroyedEvent& e)
+		{
+			ENGINE_CORE_TRACE("Entity Destroyed Event!");
+			for (auto const& x : m_Components)
+			{
+				x.second->EntityDestroyed(e.GetEntityID());
+			}
+			return false;
+		}
 
 		// HELPER
 

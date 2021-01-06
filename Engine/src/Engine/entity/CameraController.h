@@ -1,23 +1,26 @@
 #pragma once
 
+#include "Engine/Entity/IController.h"
 #include "Engine/Entity/Camera.h"
-#include "Engine/Renderer/CameraController.h"
+
+#include "Engine/Event/MouseEvent.h"
+#include "Engine/Event/ApplicationEvent.h"
 
 namespace Engine
 {
-	/*
-	class PerspectiveCameraController : public CameraController
+	// TODO: split into Keyboard, Gamepad, AI camera controllers
+	class CameraController : public IController
 	{
 	public:
-
-		PerspectiveCameraController();
-		~PerspectiveCameraController() {}
+		CameraController(Ref<Camera> camera);
+		virtual ~CameraController();
 
 		virtual void OnUpdate(TimeStep ts) override;
 		virtual void OnEvent(Event& e) override;
 
-		virtual Camera& GetCamera() override { return m_Camera; }
-		virtual const Camera& GetCamera() const override { return m_Camera; }
+		virtual void Possess(EntityID id) override;
+		virtual void Possess(Ref<IEntity> e) override;
+		virtual void Unpossess() override;
 
 	private:
 
@@ -33,18 +36,14 @@ namespace Engine
 		bool OnWindowResizedEvent(WindowResizedEvent& e);
 
 	private:
+		// TODO: what happens if camera is DESTROYED
+		Ref<Camera> m_Camera;
 
 		float m_PanSpeed = 5.0f;
 		float m_ZoomSpeed = 10.0f;
 		float m_RevolveSpeed = 90.0f;
 		float m_OrbitDistance = 5.0f;
-
-		glm::vec2 m_LastMousePos = glm::vec2(0.0f);
-		
-		Camera m_Camera;
-
+		glm::vec2 m_LastMousePos;
 	};
-
-	*/
 
 }

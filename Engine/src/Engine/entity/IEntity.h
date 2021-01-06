@@ -5,19 +5,12 @@
 namespace Engine
 {
 
-	using EntityID = uint32_t;
-	using EntityTypeID = std::size_t;
+	using EntityID = uint64_t;
+	using EntityTypeID = size_t;
 
 	class IEntity
 	{
-
 	public:
-
-		// CONSTRUCTOR & DESTRUCTOR
-		IEntity()
-			: m_EntityID(0), m_Enabled(true)
-		{}
-		virtual ~IEntity() = default;
 
 		const EntityID GetID() { return m_EntityID; }
 		virtual const EntityTypeID GetTypeID() const = 0;
@@ -32,13 +25,13 @@ namespace Engine
 
 		// COMPONENT MANAGER HELPERS
 		template<typename T>
-		void AddComponent()
+		Ref<T> AddComponent()
 		{
-			m_ComponentManager.AddComponent<T>(m_EntityID);
+			return m_ComponentManager.AddComponent<T>(m_EntityID);
 		}
 		
 		template<typename T>
-		Ref<T>& GetComponent()
+		Ref<T> GetComponent()
 		{
 			return m_ComponentManager.GetComponent<T>(m_EntityID);
 		}
@@ -49,6 +42,18 @@ namespace Engine
 			m_ComponentManager.RemoveComponent<T>(m_EntityID);
 		}
 
+
+	protected:
+
+		// CONSTRUCTOR & DESTRUCTOR
+		IEntity()
+			: m_EntityID(0), m_Enabled(true)
+		{}
+		virtual ~IEntity() = default;
+
+		void SetID(EntityID id) { m_EntityID = id; }
+
+		friend class EntityManager;
 
 	protected:
 

@@ -1,7 +1,9 @@
 #pragma once
 
+#include "Engine/Entity/EntityManager.h"
 #include "Engine/Entity/ISystem.h"
 
+#include "Engine/Core/TimeStep.h"
 #include "Engine/Utils/FamilyTypeID.h"
 
 namespace Engine
@@ -17,6 +19,8 @@ namespace Engine
 
 		virtual void OnEnable() override {}
 		virtual void OnDisable() override {}
+
+		static void OnUpdate(SparseSet<EntityID, Ref<IEntity>> entities, TimeStep ts) { S::OnUpdate(entities, ts); }
 
 	protected:
 

@@ -2,9 +2,8 @@
 
 namespace Engine
 {
-
-	using EntityID = uint32_t;
-	using ComponentTypeID = std::size_t;
+	
+	using ComponentTypeID = size_t;
 
 	class IComponent
 	{
@@ -12,7 +11,7 @@ namespace Engine
 
 		// CONSTRUCTOR & DESTRUCTOR
 		IComponent()
-			: m_Owner(0), m_Enabled(true)
+			: m_Enabled(true)
 		{}
 		virtual ~IComponent() = default;
 		virtual const ComponentTypeID GetTypeID() const = 0;
@@ -28,8 +27,6 @@ namespace Engine
 
 
 	protected:
-
-		EntityID m_Owner;
 		bool m_Enabled;
 
 	};

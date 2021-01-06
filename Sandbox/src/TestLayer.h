@@ -111,14 +111,35 @@ public:
 		/* SPARSE SET TEST*/
 		
 		/* ENTITY TEST */
-		TestEntity entity;
-		Engine::Camera camera;
+		Engine::ECS::Init();
+
+
+		// Create Camera Entity
+		Engine::Ref<Engine::Camera> camera = Engine::EntityManager::Get().CreateEntity<Engine::Camera>();
+		// Create Camera Controller
+		Engine::CameraController* controller = new Engine::CameraController(camera);
+		// Create Controller Component
+		Engine::Ref<Engine::ControllerComponent> controller_comp = camera->AddComponent<Engine::ControllerComponent>();
+		// Attach Camera Controller to Controller Component
+		controller_comp->SetController(controller);
+
+
+		camera->GetComponent<Engine::ControllerComponent>()->GetTypeID();
+
+
 		/* ENTITY TEST */
 
 	}
 
 	void OnUpdate(Engine::TimeStep ts) override
 	{
+
+		/* CAMERA SYSTEM TEST */
+
+		//Engine::CameraSystem::OnUpdate(Engine::EntityManager::Get().GetEntities(), ts);
+
+		/* CAMERA SYSTEM TEST */
+
 
 		// CAMERA CONTROLLER UPDATE
 		//m_CameraController.OnUpdate(ts);

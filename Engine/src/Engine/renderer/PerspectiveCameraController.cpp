@@ -1,4 +1,5 @@
 #include "engpch.h"
+/*
 
 #include "PerspectiveCameraController.h"
 
@@ -6,7 +7,6 @@
 #include "Engine/Core/KeyCodes.h"
 #include "Engine/Core/MouseButtonCodes.h"
 
-#include "Engine/Event/EventDispatcher.h"
 
 #include "Engine/Math/Math.h"
 
@@ -24,56 +24,54 @@ namespace Engine
 
 	void PerspectiveCameraController::OnUpdate(TimeStep ts)
 	{
-		/*
-		if (Input::IsMouseButtonPressed(INPUT_MOUSE_BUTTON_MIDDLE))
-		{
-
-			// get mouse delta
-			glm::vec2 mousePos = Input::GetMousePosition();
-			glm::vec2 deltaPos = glm::normalize(mousePos - m_LastMousePos);
-
-			if (!glm::isnan(deltaPos).x && !glm::isnan(deltaPos.y))
-			{
-				
-				// MIDDLE MOUSE + LEFT MOUSE = Orbit
-				if (Input::IsMouseButtonPressed(INPUT_MOUSE_BUTTON_LEFT))
-				{
-					Orbit(ts, deltaPos);
-				}
-
-				// MIDDLE MOUSE + LEFT SHIFT = Look
-				else if (Input::IsKeyPressed(INPUT_KEY_LEFT_SHIFT))
-				{
-					Look(ts, deltaPos);
-				}
-
-				// MIDDLE MOUSE + LEFT CTRL = Zoom
-				else if (Input::IsKeyPressed(INPUT_KEY_LEFT_CONTROL))
-				{
-					Zoom(ts, deltaPos);
-				}
-
-				// MIDDLE MOUSE ONLY = Pan or Center View
-				else
-				{
-					Pan(ts, deltaPos);
-				}
-
-			}
-
-		}
-
-		// update values
-		m_LastMousePos = Input::GetMousePosition();
-
-		m_Camera.RecalculateViewMatrix();
-
-		*/
+		
+		//if (Input::IsMouseButtonPressed(INPUT_MOUSE_BUTTON_MIDDLE))
+		//{
+		//
+		//	// get mouse delta
+		//	glm::vec2 mousePos = Input::GetMousePosition();
+		//	glm::vec2 deltaPos = glm::normalize(mousePos - m_LastMousePos);
+		//
+		//	if (!glm::isnan(deltaPos).x && !glm::isnan(deltaPos.y))
+		//	{
+		//		
+		//		// MIDDLE MOUSE + LEFT MOUSE = Orbit
+		//		if (Input::IsMouseButtonPressed(INPUT_MOUSE_BUTTON_LEFT))
+		//		{
+		//			Orbit(ts, deltaPos);
+		//		}
+		//
+		//		// MIDDLE MOUSE + LEFT SHIFT = Look
+		//		else if (Input::IsKeyPressed(INPUT_KEY_LEFT_SHIFT))
+		//		{
+		//			Look(ts, deltaPos);
+		//		}
+		//
+		//		// MIDDLE MOUSE + LEFT CTRL = Zoom
+		//		else if (Input::IsKeyPressed(INPUT_KEY_LEFT_CONTROL))
+		//		{
+		//			Zoom(ts, deltaPos);
+		//		}
+		//
+		//		// MIDDLE MOUSE ONLY = Pan or Center View
+		//		else
+		//		{
+		//			Pan(ts, deltaPos);
+		//		}
+		//
+		//	}
+		//
+		//}
+		//
+		//// update values
+		//m_LastMousePos = Input::GetMousePosition();
+		//
+		//m_Camera.RecalculateViewMatrix();
+		//
+		//
 
 	}
 
-
-	/* MANIPULATION */
 	void PerspectiveCameraController::Pan(TimeStep ts, const glm::vec2& deltaPos)
 	{
 		//Transform& t = m_Camera.GetTransform();
@@ -119,7 +117,6 @@ namespace Engine
 	}
 
 
-	/* EVENTS */
 	void PerspectiveCameraController::OnEvent(Event& e)
 	{
 		EventDispatcher dispatcher(e);
@@ -152,3 +149,5 @@ namespace Engine
 
 
 }
+
+*/

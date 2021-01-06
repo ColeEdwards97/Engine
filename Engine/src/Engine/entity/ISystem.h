@@ -5,7 +5,7 @@
 namespace Engine
 {
 
-	using SystemTypeID = std::size_t;
+	using SystemTypeID = size_t;
 
 	class ISystem
 	{

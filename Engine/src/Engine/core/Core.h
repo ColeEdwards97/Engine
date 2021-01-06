@@ -26,6 +26,7 @@
 
 namespace Engine
 {
+	typedef uint64_t EntityID;
 
 	template<typename T>
 	using Scope = std::unique_ptr<T>;

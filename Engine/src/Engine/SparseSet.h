@@ -198,14 +198,14 @@ namespace Engine
 		using reverse_iterator = typename std::vector<V>::reverse_iterator;
 		using const_reverse_iterator = typename std::vector<V>::const_reverse_iterator;
 
-		iterator begin() { return m_Dense.begin(); }
-		iterator end() { return m_Dense.end(); }
-		const_iterator begin() const { return m_Dense.begin(); }
-		const_iterator end() const { return m_Dense.end(); }
-		reverse_iterator rbegin() { return m_Dense.rbegin(); }
-		reverse_iterator rend() { return m_Dense.rend(); }
-		const_reverse_iterator rbegin() const { return m_Dense.rbegin(); }
-		const_reverse_iterator rend() const { return m_Dense.rend(); }
+		iterator begin() { return m_DenseValue.begin(); }
+		iterator end() { return m_DenseValue.end(); }
+		const_iterator begin() const { return m_DenseValue.begin(); }
+		const_iterator end() const { return m_DenseValue.end(); }
+		reverse_iterator rbegin() { return m_DenseValue.rbegin(); }
+		reverse_iterator rend() { return m_DenseValue.rend(); }
+		const_reverse_iterator rbegin() const { return m_DenseValue.rbegin(); }
+		const_reverse_iterator rend() const { return m_DenseValue.rend(); }
 
 	private:
 

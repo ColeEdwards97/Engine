@@ -15,13 +15,37 @@ namespace Engine
 		bool handled = false;
 		bool cancelled = false;
 		
-		template<typename EB>
+		template<typename T>
 		bool IsEventType()
 		{
-			EB* e = dynamic_cast<EB*>(this);
+			T* e = dynamic_cast<T*>(this);
 			return (e != nullptr);
 		}
+	
+	};
 
+
+	class EventDispatcher
+	{
+
+	public:
+		EventDispatcher(Event& e)
+			: m_event(e)
+		{}
+
+		template<typename E, typename F>
+		bool Dispatch(const F& func)
+		{
+			if (typeid(E) == typeid(m_event))
+			{
+				m_event.handled |= func(static_cast<E&>(m_event));
+				return true;
+			}
+			return false;
+		}
+
+	private:
+		Event& m_event;
 
 	};
 

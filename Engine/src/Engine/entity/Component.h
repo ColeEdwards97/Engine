@@ -13,7 +13,6 @@ namespace Engine
 
 	public:
 
-		const EntityID GetEntityID() const { return m_Owner; }
 		const ComponentTypeID GetTypeID() const override { return s_ComponentTypeID; }
 
 		virtual void OnEnable() override {}
