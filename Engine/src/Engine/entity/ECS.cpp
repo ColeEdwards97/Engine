@@ -8,9 +8,9 @@ namespace Engine
 
 	void ECS::Init()
 	{
-
 		GetEntityManager().RegisterObserver(&GetComponentManager());
-
 	}
+
+
 
 }

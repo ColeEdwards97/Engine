@@ -20,20 +20,31 @@ namespace Engine
 
 		// STATIC ACCESSOR
 		static ComponentManager& Get() { return *s_Instance; }
+		
+		template<typename T>
+		Ref<ComponentContainer<T>> GetComponents()
+		{
+			return GetComponentContainer<T>();
+		}
 
+		// REGISTRY
+		// TODO: should we have to do this?
+		template<typename T>
+		void RegisterComponentType()
+		{
+			Register<T>();
+		}
 
 		// OPERATIONS
 
-		template<typename T>
-		Ref<T> AddComponent(const EntityID id)
+		template<typename T, typename ... Args>
+		void AddComponent(const EntityID id, Args&& ... args)
 		{
 			if (!IsRegistered<T>())
 			{
 				Register<T>();
 			}
-			Ref<T> component = CreateRef<T>();
-			GetComponentContainer<T>()->AddComponent(id, component);
-			return component;
+			GetComponentContainer<T>()->AddComponent(id, CreateRef<T>(std::forward<Args>(args)...));
 		}
 
 		template<typename T>

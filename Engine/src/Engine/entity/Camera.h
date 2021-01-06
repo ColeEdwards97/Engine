@@ -14,7 +14,6 @@ namespace Engine
 
 		Camera()
 		{
-			// TODO: forward args
 			AddComponent<CameraComponent>();
 			AddComponent<ControllerComponent>();
 		}

@@ -2,6 +2,7 @@
 
 #include "Engine/Entity/EntityManager.h"
 #include "Engine/Entity/ComponentManager.h"
+#include "Engine/Entity/SystemManager.h"
 
 namespace Engine
 {
@@ -14,6 +15,7 @@ namespace Engine
 
 		static EntityManager& GetEntityManager() { return EntityManager::Get(); }
 		static ComponentManager& GetComponentManager() { return ComponentManager::Get(); }
+		static SystemManager& GetSystemManager() { return SystemManager::Get(); }
 
 	private:
 		static ECS* s_Instance;

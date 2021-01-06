@@ -17,10 +17,11 @@ namespace Engine
 
 		const SystemTypeID GetTypeID() const override { return s_SystemTypeID; }
 
-		virtual void OnEnable() override {}
-		virtual void OnDisable() override {}
+		virtual void OnEnable() override { static_cast<S*>(this)->OnEnableImpl(); }
+		virtual void OnDisable() override { static_cast<S*>(this)->OnDisableImpl(); }
 
-		static void OnUpdate(SparseSet<EntityID, Ref<IEntity>> entities, TimeStep ts) { S::OnUpdate(entities, ts); }
+		virtual void OnUpdate(TimeStep ts) override { static_cast<S*>(this)->OnUpdateImpl(ts); }
+		virtual void OnEvent(Event& e) override { static_cast<S*>(this)->OnEventImpl(e); }
 
 	protected:
 

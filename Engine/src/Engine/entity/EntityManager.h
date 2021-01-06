@@ -15,14 +15,15 @@ namespace Engine
 
 	public:
 
+		// ACCESSOR
 		static EntityManager& Get() { return *s_Instance; }
 		SparseSet<EntityID, Ref<IEntity>>& GetEntities() { return m_Entities; }
 		
-
-		template<typename T>
-		Ref<T> CreateEntity()
+		// ENTITY CREATION / DESTRUCTION
+		template<typename T, typename ... Args>
+		Ref<T> CreateEntity(Args&& ... args)
 		{
-			Ref<T> entity = CreateRef<T>();
+			Ref<T> entity = CreateRef<T>(std::forward<Args>(args)...);
 			EntityID id = Handle<IEntity>::AcquireHandle();
 			entity->SetID(id);
 			m_Entities.Insert(id, entity);

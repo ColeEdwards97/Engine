@@ -9,10 +9,14 @@ namespace Engine
 
 	CameraComponent::CameraComponent()
 		: m_ProjectionMode(ProjectionMode::Perspective)
-	{}
+	{
+		RecalculateProjectionMatrix();
+	}
 	CameraComponent::CameraComponent(ProjectionMode projectionMode)
 		: m_ProjectionMode(projectionMode)
-	{}
+	{
+		RecalculateProjectionMatrix();
+	}
 	
 	// perspective
 	void CameraComponent::SetPerspective(float fov, float aspect, float zNear, float zFar)

@@ -1,6 +1,8 @@
 #pragma once
 
-#include "Engine/Entity/IController.h"
+#include "Engine/Core/TimeStep.h"
+#include "Engine/Event/Event.h"
+#include "Engine/Entity/IEntity.h"
 
 namespace Engine
 {
@@ -9,20 +11,17 @@ namespace Engine
 	{
 	public:
 
-		void OnUpdate(TimeStep ts);
-		void OnEvent(Event& e);
+		virtual void OnUpdate(TimeStep ts) = 0;
+		virtual void OnEvent(Event& e) = 0;
 
-		void Possess(EntityID id);
-		void Possess(Ref<IEntity> e);
-		void Unpossess();
+		virtual void Possess(EntityID id) = 0;
+		virtual void Possess(Ref<IEntity> e) = 0;
+		virtual void Unpossess() = 0;
 
 	protected:
 
-		Controller(IController* controller);
-		~Controller();
-
-	private:
-		IController* m_ControllerImpl;
+		Controller() {}
+		virtual ~Controller() {}
 		
 	};
 

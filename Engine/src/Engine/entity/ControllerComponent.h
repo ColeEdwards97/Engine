@@ -14,11 +14,11 @@ namespace Engine
 		{}
 		virtual ~ControllerComponent() {}
 
-		IController* GetController() { return m_Controller; }
-		void SetController(IController* controller) { m_Controller = controller; }
+		Controller* GetController() { return m_Controller; }
+		void SetController(Controller* controller) { m_Controller = controller; }
 
 	private:
-		IController* m_Controller;
+		Controller* m_Controller;
 
 	};
 

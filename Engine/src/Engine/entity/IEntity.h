@@ -10,6 +10,9 @@ namespace Engine
 
 	class IEntity
 	{
+
+		friend class EntityManager;
+
 	public:
 
 		const EntityID GetID() { return m_EntityID; }
@@ -24,10 +27,10 @@ namespace Engine
 
 
 		// COMPONENT MANAGER HELPERS
-		template<typename T>
-		Ref<T> AddComponent()
+		template<typename T, typename ... Args>
+		void AddComponent(Args&& ... args)
 		{
-			return m_ComponentManager.AddComponent<T>(m_EntityID);
+			m_ComponentManager.AddComponent<T>(m_EntityID, std::forward<Args>(args)...);
 		}
 		
 		template<typename T>
@@ -42,7 +45,6 @@ namespace Engine
 			m_ComponentManager.RemoveComponent<T>(m_EntityID);
 		}
 
-
 	protected:
 
 		// CONSTRUCTOR & DESTRUCTOR
@@ -51,9 +53,8 @@ namespace Engine
 		{}
 		virtual ~IEntity() = default;
 
+		// Entity ID is set by the EntityManager when creating the Entity
 		void SetID(EntityID id) { m_EntityID = id; }
-
-		friend class EntityManager;
 
 	protected:
 

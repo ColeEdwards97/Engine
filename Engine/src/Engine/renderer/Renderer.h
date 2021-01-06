@@ -13,7 +13,7 @@ namespace Engine
 
 	public:
 
-		static void BeginScene(Camera& camera);
+		static void BeginScene(Ref<Camera> camera);
 		static void EndScene();
 
 		static void Submit(const Ref<Shader>& shader, const Ref<VertexArray>& vertexArray, const glm::mat4& transform = glm::mat4(1.0f));
