@@ -6,27 +6,32 @@
 namespace Engine
 {
 
-	void ControllerSystem::OnEnableImpl()
+	ControllerSystem::ControllerSystem()
+		: m_Controllers(ComponentManager::Get().GetComponents<ControllerComponent>())
+	{}
+
+	void ControllerSystem::OnEnable()
 	{
-		// Register the Controller Component Type
-		ComponentManager::Get().RegisterComponentType<ControllerComponent>();
+		
 	}
 
-	void ControllerSystem::OnDisableImpl()
+	void ControllerSystem::OnDisable()
 	{
 
 	}
 
-	void ControllerSystem::OnUpdateImpl(TimeStep ts)
+	void ControllerSystem::OnUpdate(TimeStep ts)
 	{
-		Ref<ComponentContainer<ControllerComponent>> controllers = ComponentManager::Get().GetComponents<ControllerComponent>();
-		for (auto& controller : *controllers)
+		for (auto const& controller : *m_Controllers)
 		{
-			controller->GetController()->OnUpdate(ts);
+			// only update enabled controllers
+			// TODO: organize components by enabled/disabled
+			if (controller->IsEnabled())
+				controller->GetController().OnUpdate(ts);
 		}
 	}
 
-	void ControllerSystem::OnEventImpl(Event& e)
+	void ControllerSystem::OnEvent(Event& e)
 	{
 
 	}

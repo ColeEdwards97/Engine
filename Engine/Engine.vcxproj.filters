@@ -1443,6 +1443,7 @@
     <ClInclude Include="src\Engine\Entity\CameraController.h" />
     <ClInclude Include="src\Engine\Entity\ControllerSystem.h" />
     <ClInclude Include="src\Engine\Entity\SystemManager.h" />
+    <ClInclude Include="src\Engine\Entity\TagComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Engine\Assets\Model.cpp">

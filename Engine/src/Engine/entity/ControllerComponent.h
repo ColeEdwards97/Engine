@@ -9,12 +9,17 @@ namespace Engine
 	class ControllerComponent : public Component<ControllerComponent>
 	{
 	public:
+		
 		ControllerComponent()
 			: m_Controller(nullptr)
 		{}
-		virtual ~ControllerComponent() {}
 
-		Controller* GetController() { return m_Controller; }
+		virtual ~ControllerComponent() 
+		{
+			delete m_Controller;
+		}
+
+		Controller& GetController() { return *m_Controller; }
 		void SetController(Controller* controller) { m_Controller = controller; }
 
 	private:

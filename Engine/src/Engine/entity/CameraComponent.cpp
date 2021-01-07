@@ -12,6 +12,7 @@ namespace Engine
 	{
 		RecalculateProjectionMatrix();
 	}
+
 	CameraComponent::CameraComponent(ProjectionMode projectionMode)
 		: m_ProjectionMode(projectionMode)
 	{

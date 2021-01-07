@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Engine/Entity/System.h"
+#include "Engine/Entity/ControllerComponent.h"
 
 namespace Engine
 {
@@ -8,14 +9,17 @@ namespace Engine
 	class ControllerSystem : public System<ControllerSystem>
 	{
 	public:
-		ControllerSystem() {}
+		ControllerSystem();
 		virtual ~ControllerSystem() {}
 
-		void OnEnableImpl();
-		void OnDisableImpl();
+		void OnEnable();
+		void OnDisable();
 
-		void OnUpdateImpl(TimeStep ts);
-		void OnEventImpl(Event& e);
+		void OnUpdate(TimeStep ts);
+		void OnEvent(Event& e);
+
+	private:
+		Ref<ComponentContainer<ControllerComponent>> m_Controllers;
 
 	};
 

@@ -37,6 +37,9 @@ namespace Engine
 
 	private:
 		// TODO: what happens if camera is DESTROYED
+		// nevermind... when an entity is destroyed it should delete its components
+		// which will delete the controller component
+		// so make sure we delete the controller pointer in the controller component
 		Ref<Camera> m_Camera;
 
 		float m_PanSpeed = 5.0f;

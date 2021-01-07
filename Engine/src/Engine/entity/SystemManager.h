@@ -16,10 +16,11 @@ namespace Engine
 		SparseSet<SystemTypeID, Ref<ISystem>>& GetSystems() { return m_Systems; }
 
 		// SYSTEM REGISTRATION
-		template<typename T>
-		void CreateSystem()
+		template<typename T, typename ... Args>
+		void CreateSystem(Args&& ... args)
 		{
-			Ref<T> system = CreateRef<T>();
+			Ref<T> system = CreateRef<T>(std::forward<Args>(args)...);
+			system->OnEnable();
 			m_Systems.Insert(GetSystemTypeID<T>(), system);
 		}
 

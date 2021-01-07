@@ -7,13 +7,11 @@ namespace Engine
 
 	class IComponent
 	{
+
+		friend class ComponentManager;
+
 	public:
 
-		// CONSTRUCTOR & DESTRUCTOR
-		IComponent()
-			: m_Enabled(true)
-		{}
-		virtual ~IComponent() = default;
 		virtual const ComponentTypeID GetTypeID() const = 0;
 
 		virtual void OnEnable() = 0;
@@ -24,7 +22,14 @@ namespace Engine
 		void SetEnabled(bool enabled);
 
 		// ENTITY MANAGER HELPERS
+		// TODO: should entity ids be stored?
 
+	protected:
+		// CONSTRUCTOR & DESTRUCTOR
+		IComponent()
+			: m_Enabled(true)
+		{}
+		virtual ~IComponent() = default;
 
 	protected:
 		bool m_Enabled;

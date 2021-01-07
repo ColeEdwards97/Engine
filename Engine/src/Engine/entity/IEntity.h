@@ -53,6 +53,7 @@ namespace Engine
 		{}
 		virtual ~IEntity() = default;
 
+		// TODO: initially set EntityID to an Invalid Value
 		// Entity ID is set by the EntityManager when creating the Entity
 		void SetID(EntityID id) { m_EntityID = id; }
 

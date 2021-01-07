@@ -27,14 +27,6 @@ namespace Engine
 			return GetComponentContainer<T>();
 		}
 
-		// REGISTRY
-		// TODO: should we have to do this?
-		template<typename T>
-		void RegisterComponentType()
-		{
-			Register<T>();
-		}
-
 		// OPERATIONS
 
 		template<typename T, typename ... Args>
@@ -44,7 +36,10 @@ namespace Engine
 			{
 				Register<T>();
 			}
-			GetComponentContainer<T>()->AddComponent(id, CreateRef<T>(std::forward<Args>(args)...));
+			// Create and Enable the Component
+			Ref<T> component = CreateRef<T>(std::forward<Args>(args)...);
+			component->OnEnable();
+			GetComponentContainer<T>()->AddComponent(id, component);
 		}
 
 		template<typename T>
@@ -80,7 +75,6 @@ namespace Engine
 
 		bool OnEntityDestroyedEvent(EntityDestroyedEvent& e)
 		{
-			ENGINE_CORE_TRACE("Entity Destroyed Event!");
 			for (auto const& x : m_Components)
 			{
 				x.second->EntityDestroyed(e.GetEntityID());
@@ -101,7 +95,8 @@ namespace Engine
 		{
 			ComponentTypeID cID = GetComponentTypeID<T>();
 			if ((m_Components.find(cID) == m_Components.end()))
-				ENGINE_CORE_ASSERT(false, "Component not registered before use");
+				Register<T>();
+				//ENGINE_CORE_ASSERT(false, "Component not registered before use");
 			return std::static_pointer_cast<ComponentContainer<T>>(m_Components[cID]);
 		}
 

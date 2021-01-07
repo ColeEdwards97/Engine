@@ -15,13 +15,16 @@ namespace Engine
 	
 	public:
 
-		const SystemTypeID GetTypeID() const override { return s_SystemTypeID; }
+		const SystemTypeID GetTypeID() const override { return GetStaticTypeID(); }
+		static SystemTypeID GetStaticTypeID() { return s_SystemTypeID; }
 
-		virtual void OnEnable() override { static_cast<S*>(this)->OnEnableImpl(); }
-		virtual void OnDisable() override { static_cast<S*>(this)->OnDisableImpl(); }
-
-		virtual void OnUpdate(TimeStep ts) override { static_cast<S*>(this)->OnUpdateImpl(ts); }
-		virtual void OnEvent(Event& e) override { static_cast<S*>(this)->OnEventImpl(e); }
+		// Must be implemented in derived class
+		virtual void OnEnable() override { static_cast<S*>(this)->OnEnable(); }
+		virtual void OnDisable() override { static_cast<S*>(this)->OnDisable(); }
+		
+		// Must be implemented in derived class
+		virtual void OnUpdate(TimeStep ts) override { static_cast<S*>(this)->OnUpdate(ts); }
+		virtual void OnEvent(Event& e) override { static_cast<S*>(this)->OnEvent(e); }
 
 	protected:
 

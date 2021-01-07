@@ -6,11 +6,14 @@
 
 namespace Engine
 {
-
+	// TODO: make templated and keep a pawn reference
 	class Controller
 	{
 	public:
 
+		Controller() {}
+		virtual ~Controller() {}
+		
 		virtual void OnUpdate(TimeStep ts) = 0;
 		virtual void OnEvent(Event& e) = 0;
 
@@ -18,11 +21,6 @@ namespace Engine
 		virtual void Possess(Ref<IEntity> e) = 0;
 		virtual void Unpossess() = 0;
 
-	protected:
-
-		Controller() {}
-		virtual ~Controller() {}
-		
 	};
 
 }

@@ -16,7 +16,7 @@ namespace Engine
 		const EntityID GetID() const { return m_EntityID; }
 		const EntityTypeID GetTypeID() const override { return GetStaticTypeID(); }
 		static EntityTypeID GetStaticTypeID() { return s_EntityTypeID; }
-
+		
 		virtual void OnEnable() override {}
 		virtual void OnDisable() override {}
 		

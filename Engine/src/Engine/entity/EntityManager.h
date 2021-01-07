@@ -26,6 +26,7 @@ namespace Engine
 			Ref<T> entity = CreateRef<T>(std::forward<Args>(args)...);
 			EntityID id = Handle<IEntity>::AcquireHandle();
 			entity->SetID(id);
+			entity->OnEnable();
 			m_Entities.Insert(id, entity);
 
 			EntityCreatedEvent e(id);

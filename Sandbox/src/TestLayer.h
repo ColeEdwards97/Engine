@@ -10,7 +10,7 @@ class TestLayer : public Engine::Layer
 public:
 
 	TestLayer()
-		: Layer("Test Layer"), m_TriangleTransform()		// perspective cam
+		: Layer("Test Layer"), m_TriangleTransform()
 	{
 
 		/* HACKING IN A TRIANGLE */
@@ -91,6 +91,7 @@ public:
 		
 
 		/* ENTITY TEST */
+		
 		Engine::ECS::Init();
 
 		// Create Controller System

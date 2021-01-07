@@ -173,6 +173,7 @@
     <ClInclude Include="src\Engine\Entity\ISystem.h" />
     <ClInclude Include="src\Engine\Entity\System.h" />
     <ClInclude Include="src\Engine\Entity\SystemManager.h" />
+    <ClInclude Include="src\Engine\Entity\TagComponent.h" />
     <ClInclude Include="src\Engine\Entity\TransformComponent.h" />
     <ClInclude Include="src\Engine\Event\ApplicationEvent.h" />
     <ClInclude Include="src\Engine\Event\EntityEvent.h" />
