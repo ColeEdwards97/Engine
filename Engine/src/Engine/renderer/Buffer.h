@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Engine/Core/Core.h"
+#include "Engine/Renderer/Texture.h"
 
 namespace Engine
 {
@@ -126,7 +127,7 @@ namespace Engine
 		virtual void Bind() const = 0;
 		virtual void Unbind() const = 0;
 
-		static VertexBuffer* Create(float* vertices, uint32_t size);
+		static Ref<VertexBuffer> Create(float* vertices, uint32_t size);
 
 	};
 
@@ -142,10 +143,52 @@ namespace Engine
 		virtual void Bind() const = 0;
 		virtual void Unbind() const = 0;
 
-		static IndexBuffer* Create(uint32_t* indices, uint32_t count);
+		static Ref<IndexBuffer> Create(uint32_t* indices, uint32_t count);
 
 		virtual uint32_t GetCount() const = 0;
 
+	};
+
+
+
+	/* FRAME BUFFER */
+
+	class FrameBuffer
+	{
+	public:
+
+		virtual ~FrameBuffer() = default;
+
+		virtual void Bind() const = 0;
+		virtual void BindRead() const = 0;
+		virtual void BindWrite() const = 0;
+		virtual void Unbind() const = 0;
+		virtual void UnbindRead() const = 0;
+		virtual void UnbindWrite() const = 0;
+		
+		virtual void Attach(Texture2D& texture, uint32_t attachmentIdx) const = 0;
+
+		static Ref<FrameBuffer> Create();
+
+	};
+
+	/* GBUFFER */
+
+	class GBuffer
+	{
+	public:
+
+		enum GBufferTextureType
+		{
+			Position = 0, Diffuse, Normal, TexCoords
+		};
+		static const int NUM_TEXTURES = 4;
+
+		virtual ~GBuffer() = default;
+
+		virtual FrameBuffer& GetFrameBuffer() = 0;
+
+		static Ref<GBuffer> Create(int width, int height);
 	};
 
 

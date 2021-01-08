@@ -17,6 +17,7 @@ includeDir["glad"] = "Engine/vendor/glad/include"
 includeDir["glfw"] = "Engine/vendor/glfw/include"
 includeDir["glm"] = "Engine/vendor/glm"
 includeDir["imgui"] = "Engine/vendor/imgui"
+includeDir["stb_image"] = "Engine/vendor/stb_image"
 
 group "Dependencies"
 	include "Engine/vendor/glad"
@@ -44,7 +45,9 @@ project "Engine"
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
-		"%{prj.name}/vendor/glm/glm/**.inl"
+		"%{prj.name}/vendor/glm/glm/**.inl",
+		"%{prj.name}/vendor/stb_image/**.h",
+		"%{prj.name}/vendor/stb_image/**.cpp"
 	}
 	
 	includedirs
@@ -54,7 +57,8 @@ project "Engine"
 		"%{includeDir.glad}",
 		"%{includeDir.glfw}",
 		"%{includeDir.glm}",
-		"%{includeDir.imgui}"
+		"%{includeDir.imgui}",
+        "%{includeDir.stb_image}"
 	}
 	
     defines

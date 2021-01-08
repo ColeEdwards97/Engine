@@ -9,12 +9,12 @@ namespace Engine
 	
 	/* VERTEX BUFFER */
 
-	VertexBuffer* VertexBuffer::Create(float* vertices, uint32_t size)
+	Ref<VertexBuffer> VertexBuffer::Create(float* vertices, uint32_t size)
 	{
 		switch (Renderer::GetAPI())
 		{
-		case RendererAPI::API::None:	return nullptr;
-		case RendererAPI::API::OpenGL:	return new OpenGLVertexBuffer(vertices, size);
+		case RendererAPI::API::None:	ENGINE_CORE_ASSERT(false, "None RendererAPI is not supported"); return nullptr;
+		case RendererAPI::API::OpenGL:	return CreateRef<OpenGLVertexBuffer>(vertices, size);
 		}
 
 		ENGINE_CORE_ASSERT(false, "Unknown RendererAPI");
@@ -24,12 +24,12 @@ namespace Engine
 
 	/* INDEX BUFFER */
 	
-	IndexBuffer* IndexBuffer::Create(uint32_t* indices, uint32_t size)
+	Ref<IndexBuffer> IndexBuffer::Create(uint32_t* indices, uint32_t size)
 	{
 		switch (Renderer::GetAPI())
 		{
-		case RendererAPI::API::None:	return nullptr;
-		case RendererAPI::API::OpenGL:	return new OpenGLIndexBuffer(indices, size);
+		case RendererAPI::API::None:	ENGINE_CORE_ASSERT(false, "None RendererAPI is not supported"); return nullptr;
+		case RendererAPI::API::OpenGL:	return CreateRef<OpenGLIndexBuffer>(indices, size);
 		}
 	
 		ENGINE_CORE_ASSERT(false, "Unknown RendererAPI");
@@ -56,6 +56,36 @@ namespace Engine
 			offset += element.size;
 			m_Stride += element.size;
 		}
+	}
+
+
+	/* FRAME BUFFER */
+	
+	Ref<FrameBuffer> FrameBuffer::Create()
+	{
+		switch (Renderer::GetAPI())
+		{
+		case RendererAPI::API::None:	ENGINE_CORE_ASSERT(false, "None RendererAPI is not supported"); return nullptr;
+		case RendererAPI::API::OpenGL:	return CreateRef<OpenGLFrameBuffer>();
+		}
+
+		ENGINE_CORE_ASSERT(false, "Unknown RendererAPI");
+		return nullptr;
+	}
+
+
+	/* G BUFFER */
+
+	Ref<GBuffer> GBuffer::Create(int width, int height)
+	{
+		switch (Renderer::GetAPI())
+		{
+		case RendererAPI::API::None:	ENGINE_CORE_ASSERT(false, "None RendererAPI is not supported"); return nullptr;
+		case RendererAPI::API::OpenGL:	return CreateRef<OpenGLGBuffer>(width, height);
+		}
+
+		ENGINE_CORE_ASSERT(false, "Unknown RendererAPI");
+		return nullptr;
 	}
 
 }

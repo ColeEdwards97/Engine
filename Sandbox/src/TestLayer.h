@@ -10,7 +10,7 @@ class TestLayer : public Engine::Layer
 public:
 
 	TestLayer()
-		: Layer("Test Layer"), m_TriangleTransform()
+		: Layer("Test Layer"), m_CubeTransform()
 	{
 
 		/* HACKING IN A TRIANGLE */
@@ -20,17 +20,24 @@ public:
 
 
 		// vertices
-		float vertices[3 * 7] =
+
+		float vertices[8 * 7] =
 		{
-			-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
-			 0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
-			 0.0f,  0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f
+			// front
+			-1.0, -1.0,  1.0, 1.0f, 0.0f, 0.0f, 1.0f,
+			 1.0, -1.0,  1.0, 1.0f, 1.0f, 0.0f, 1.0f,
+			 1.0,  1.0,  1.0, 0.0f, 1.0f, 1.0f, 1.0f,
+			-1.0,  1.0,  1.0, 0.0f, 0.0f, 1.0f, 1.0f,
+			// back
+			-1.0, -1.0, -1.0, 1.0f, 0.0f, 0.0f, 1.0f,
+			 1.0, -1.0, -1.0, 1.0f, 1.0f, 0.0f, 1.0f,
+			 1.0,  1.0, -1.0, 0.0f, 1.0f, 1.0f, 1.0f,
+			-1.0,  1.0, -1.0, 0.0f, 0.0f, 1.0f, 1.0f,
 		};
 
 
 		// VBO
-		Engine::Ref<Engine::VertexBuffer> vertexBuffer;
-		vertexBuffer.reset(Engine::VertexBuffer::Create(vertices, sizeof(vertices)));
+		Engine::Ref<Engine::VertexBuffer> vertexBuffer = Engine::VertexBuffer::Create(vertices, sizeof(vertices));
 		vertexBuffer->SetLayout({
 			{ Engine::ShaderDataType::Float3, "a_Position" },
 			{ Engine::ShaderDataType::Float4, "a_Color" }
@@ -39,14 +46,31 @@ public:
 
 
 		// indices
-		uint32_t indices[3] =
+
+		uint32_t indices[36] =
 		{
-			0, 1, 2
+			// front
+			0, 1, 2,
+			2, 3, 0,
+			// right
+			1, 5, 6,
+			6, 2, 1,
+			// back
+			7, 6, 5,
+			5, 4, 7,
+			// left
+			4, 0, 3,
+			3, 7, 4,
+			// bottom
+			4, 5, 1,
+			1, 0, 4,
+			// top
+			3, 2, 6,
+			6, 7, 3
 		};
 
 		// VIO
-		Engine::Ref<Engine::IndexBuffer> indexBuffer;
-		indexBuffer.reset(Engine::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
+		Engine::Ref<Engine::IndexBuffer> indexBuffer = Engine::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t));
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
 		// shaders
@@ -81,10 +105,10 @@ public:
 			}
 		)";
 
-		m_Shader.reset(Engine::Shader::Create(fragShaderSrc, vertShaderSrc));
+		m_Shader = Engine::Shader::Create(fragShaderSrc, vertShaderSrc);
 
 		// transform setup
-		m_TriangleTransform.SetLocation(glm::vec3(0.0f, 0.0f, 0.0f));
+		m_CubeTransform.SetLocation(glm::vec3(0.0f, 0.0f, 0.0f));
 
 		/* HACKING IN A TRIANGLE */
 
@@ -119,16 +143,10 @@ public:
 		Engine::SystemManager::Get().GetSystem<Engine::ControllerSystem>()->OnUpdate(ts);
 		/* CAMERA SYSTEM TEST */
 
-		// TRIANGLE TRANSFORM
-		//m_TriangleTransform.Rotate(ts * 30.0f, glm::vec3(0.0f, 1.0f, 0.0f));
-		//m_TriangleTransform.SetScale((glm::sin(totalTime) * 0.4f + 0.5f) * glm::vec3(1.0f));
-		//m_TriangleTransform.Scale(1.0f, glm::vec3(1.0f));
-		totalTime += ts;
-
 		/* HACKING IN A TRIANGLE */
 		Engine::RenderCommand::Clear({ 0.0f, 0.0f, 0.0f, 1.0f });
 		Engine::Renderer::BeginScene(m_Camera);
-		Engine::Renderer::Submit(m_Shader, m_VertexArray, m_TriangleTransform.GetTransformMatrix());
+		Engine::Renderer::Submit(m_Shader, m_VertexArray, m_CubeTransform.GetTransformMatrix());
 		Engine::Renderer::EndScene();
 		/* HACKING IN A TRIANGLE */
 
@@ -136,8 +154,6 @@ public:
 
 	void OnEvent(Engine::Event& e) override
 	{
-		//ENGINE_TRACE("An Event Occurred!");
-
 		// CAMERA CONTROLLER EVENT
 		Engine::SystemManager::Get().GetSystem<Engine::ControllerSystem>()->OnEvent(e);
 
@@ -157,7 +173,7 @@ private:
 	Engine::Ref<Engine::Shader> m_Shader;
 	Engine::Ref<Engine::VertexArray> m_VertexArray;
 
-	Engine::Transform m_TriangleTransform;
+	Engine::Transform m_CubeTransform;
 	float totalTime = 0.0f;
 
 	Engine::Ref<Engine::Camera> m_Camera;

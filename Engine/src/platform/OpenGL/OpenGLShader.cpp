@@ -184,6 +184,19 @@ namespace Engine
 
 
 	// TODO: other mats and vecs
+	void OpenGLShader::SetVec3(const std::string& name, const glm::vec3& value)
+	{
+		glUniform3fv(glGetUniformLocation(m_programID, name.c_str()), 1, glm::value_ptr(value));
+	}
+	void OpenGLShader::SetVec4(const std::string& name, const glm::vec4& value)
+	{
+		glUniform4fv(glGetUniformLocation(m_programID, name.c_str()), 1, glm::value_ptr(value));
+	}
+
+	void OpenGLShader::SetMat3(const std::string& name, const glm::mat3& value)
+	{
+		glUniformMatrix3fv(glGetUniformLocation(m_programID, name.c_str()), 1, GL_FALSE, glm::value_ptr(value));
+	}
 	void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& value)
 	{
 		glUniformMatrix4fv(glGetUniformLocation(m_programID, name.c_str()), 1, GL_FALSE, glm::value_ptr(value));

@@ -43,6 +43,9 @@
 #include "Engine/Renderer/Shader.h"
 #include "Engine/Renderer/VertexArray.h"
 
+#include "Engine/Renderer/Texture.h"
+
+
 #include "Engine/Assets/Mesh.h"
 #include "Engine/Assets/Model.h"
 #include "Engine/Assets/ModelLoader.h"

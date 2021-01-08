@@ -2,6 +2,8 @@
 
 #include "Engine/Renderer/Buffer.h"
 
+#include <glad/glad.h>
+
 namespace Engine
 {
 
@@ -49,6 +51,45 @@ namespace Engine
 		uint32_t m_BufferID;
 		uint32_t m_Count;
 
+	};
+
+
+	/* OPENGL FRAME BUFFER */
+
+	class OpenGLFrameBuffer : public FrameBuffer
+	{
+	public:
+		OpenGLFrameBuffer();
+		virtual ~OpenGLFrameBuffer();
+
+		virtual void Bind() const override;
+		virtual void BindRead() const override;
+		virtual void BindWrite() const override;
+		virtual void Unbind() const override;
+		virtual void UnbindRead() const override;
+		virtual void UnbindWrite() const override;
+		
+		virtual void Attach(Texture2D& texture, uint32_t attachment) const override;
+
+	private:
+		uint32_t m_BufferID;
+	};
+
+
+	/* OPENGL G BUFFER */
+
+	class OpenGLGBuffer : public GBuffer
+	{
+	public:
+		OpenGLGBuffer(int width, int height);
+		virtual ~OpenGLGBuffer();
+
+		virtual FrameBuffer& GetFrameBuffer() { return m_FBO; }
+
+	private:
+		OpenGLFrameBuffer m_FBO;
+		GLuint m_Textures[NUM_TEXTURES];
+		GLuint m_DepthTexture;
 	};
 
 }
