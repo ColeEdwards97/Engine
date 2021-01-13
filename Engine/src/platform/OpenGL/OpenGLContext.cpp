@@ -24,6 +24,8 @@ namespace Engine
 		glEnable(GL_DEPTH_TEST);
 		glDepthFunc(GL_LESS);
 
+		glDisable(GL_BLEND);
+
 		// get what graphics vendor, card, and driver we're using
 		ENGINE_CORE_INFO("Renderer intitialized graphics context. Using:");
 		ENGINE_CORE_INFO("  VENDOR:\t{0}", glGetString(GL_VENDOR));
@@ -35,6 +37,19 @@ namespace Engine
 	void OpenGLContext::SwapBuffers()
 	{
 		glfwSwapBuffers(m_handle);
+	}
+
+	void OpenGLContext::StaticPrintErrors(const char* func, const char* file, int line)
+	{
+		while (GLenum error = glGetError())
+		{
+			ENGINE_CORE_ERROR("OpenGLError [{0}]: {1} in file {2} line {3}", error, func, file, line);
+		}
+	}
+
+	void OpenGLContext::StaticClearErrors()
+	{
+		while (glGetError() != GL_NO_ERROR);
 	}
 
 }

@@ -16,6 +16,11 @@ namespace Engine
 
 		virtual void Init() override;
 		virtual void SwapBuffers() override;
+		
+		virtual void PrintErrors(const char* func, const char* file, int line) { StaticPrintErrors(func, file, line); }
+		static void StaticPrintErrors(const char* func, const char* file, int line);
+		virtual void ClearErrors() { StaticClearErrors(); }
+		static void StaticClearErrors();
 
 	private:
 
@@ -24,3 +29,9 @@ namespace Engine
 	};
 
 }
+
+#ifdef ENG_DEBUG
+#define GL_CALL(x) ::Engine::OpenGLContext::StaticClearErrors(); x; ::Engine::OpenGLContext::StaticPrintErrors(#x, __FILE__, __LINE__);
+#else
+#define GL_CALL(x) x;
+#endif // ENG_DEBUG

@@ -31,8 +31,8 @@ namespace Engine
 		vertID = glCreateShader(GL_VERTEX_SHADER);
 		glShaderSource(vertID, 1, &vertShaderCode, nullptr);
 		glCompileShader(vertID);
-		glGetShaderiv(vertID, GL_VERTEX_SHADER, &success);
-		if (success == GL_FALSE)
+		glGetShaderiv(vertID, GL_COMPILE_STATUS, &success);
+		if (success != GL_TRUE)
 		{
 
 			GLint maxLength = 0;
@@ -54,8 +54,8 @@ namespace Engine
 		fragID = glCreateShader(GL_FRAGMENT_SHADER);
 		glShaderSource(fragID, 1, &fragShaderCode, nullptr);
 		glCompileShader(fragID);
-		glGetShaderiv(fragID, GL_FRAGMENT_SHADER, &success);
-		if (success == GL_FALSE)
+		glGetShaderiv(fragID, GL_COMPILE_STATUS, &success);
+		if (success != GL_TRUE)
 		{
 
 			GLint maxLength = 0;
@@ -71,7 +71,7 @@ namespace Engine
 
 			// log the error
 			ENGINE_CORE_ERROR("INFOLOG: {0}", infoLog.data());
-			ENGINE_CORE_ASSERT(false, "FAILED TO COMPILE FRAGMENT SHADER.")
+			ENGINE_CORE_ASSERT(false, "FAILED TO COMPILE FRAGMENT SHADER.");
 
 		}
 
@@ -80,8 +80,8 @@ namespace Engine
 		glAttachShader(m_programID, vertID);
 		glAttachShader(m_programID, fragID);
 		glLinkProgram(m_programID);
-		glGetProgramiv(m_programID, GL_PROGRAM, &success);
-		if (success == GL_FALSE)
+		glGetProgramiv(m_programID, GL_LINK_STATUS, &success);
+		if (success != GL_TRUE)
 		{
 
 			GLint maxLength = 0;

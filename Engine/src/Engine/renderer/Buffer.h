@@ -149,47 +149,4 @@ namespace Engine
 
 	};
 
-
-
-	/* FRAME BUFFER */
-
-	class FrameBuffer
-	{
-	public:
-
-		virtual ~FrameBuffer() = default;
-
-		virtual void Bind() const = 0;
-		virtual void BindRead() const = 0;
-		virtual void BindWrite() const = 0;
-		virtual void Unbind() const = 0;
-		virtual void UnbindRead() const = 0;
-		virtual void UnbindWrite() const = 0;
-		
-		virtual void Attach(Texture2D& texture, uint32_t attachmentIdx) const = 0;
-
-		static Ref<FrameBuffer> Create();
-
-	};
-
-	/* GBUFFER */
-
-	class GBuffer
-	{
-	public:
-
-		enum GBufferTextureType
-		{
-			Position = 0, Diffuse, Normal, TexCoords
-		};
-		static const int NUM_TEXTURES = 4;
-
-		virtual ~GBuffer() = default;
-
-		virtual FrameBuffer& GetFrameBuffer() = 0;
-
-		static Ref<GBuffer> Create(int width, int height);
-	};
-
-
 }

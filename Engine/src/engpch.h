@@ -22,6 +22,8 @@
 #include "Engine/Core/Core.h"
 #include "Engine/Core/Log.h"
 
+// OpenGL Includes
+#include "Platform/OpenGL/OpenGLContext.h"
 
 #ifdef ENG_PLATFORM_WINDOWS
 #include <Windows.h>

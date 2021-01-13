@@ -58,34 +58,4 @@ namespace Engine
 		}
 	}
 
-
-	/* FRAME BUFFER */
-	
-	Ref<FrameBuffer> FrameBuffer::Create()
-	{
-		switch (Renderer::GetAPI())
-		{
-		case RendererAPI::API::None:	ENGINE_CORE_ASSERT(false, "None RendererAPI is not supported"); return nullptr;
-		case RendererAPI::API::OpenGL:	return CreateRef<OpenGLFrameBuffer>();
-		}
-
-		ENGINE_CORE_ASSERT(false, "Unknown RendererAPI");
-		return nullptr;
-	}
-
-
-	/* G BUFFER */
-
-	Ref<GBuffer> GBuffer::Create(int width, int height)
-	{
-		switch (Renderer::GetAPI())
-		{
-		case RendererAPI::API::None:	ENGINE_CORE_ASSERT(false, "None RendererAPI is not supported"); return nullptr;
-		case RendererAPI::API::OpenGL:	return CreateRef<OpenGLGBuffer>(width, height);
-		}
-
-		ENGINE_CORE_ASSERT(false, "Unknown RendererAPI");
-		return nullptr;
-	}
-
 }

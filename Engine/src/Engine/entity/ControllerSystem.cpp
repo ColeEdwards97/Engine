@@ -33,7 +33,13 @@ namespace Engine
 
 	void ControllerSystem::OnEvent(Event& e)
 	{
-
+		for (auto const& controller : *m_Controllers)
+		{
+			// only update enabled controllers
+			// TODO: organize components by enabled/disabled
+			if (controller->IsEnabled())
+				controller->GetController().OnEvent(e);
+		}
 	}
 
 }

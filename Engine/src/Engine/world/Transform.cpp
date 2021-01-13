@@ -38,22 +38,27 @@ namespace Engine
 	void Transform::Translate(const float delta, const glm::vec3& axis)
 	{
 		m_Location += (delta * axis);
+		m_TransformMatrix = CalculateTransformMatrix();
 	}
 	void Transform::Translate(const glm::vec3& translation)
 	{
 		m_Location += translation;
+		m_TransformMatrix = CalculateTransformMatrix();
 	}
 	void Transform::Rotate(const float angle, const glm::vec3& axis)
 	{
 		m_Orientation = glm::angleAxis(glm::radians(angle), glm::normalize(axis)) * m_Orientation;
+		m_TransformMatrix = CalculateTransformMatrix();
 	}
 	void Transform::Rotate(const glm::quat& quat)
 	{
 		m_Orientation = quat * m_Orientation;
+		m_TransformMatrix = CalculateTransformMatrix();
 	}
 	void Transform::Scale(const float scale, const glm::vec3& axis)
 	{
 		m_Scale *= (scale * axis);
+		m_TransformMatrix = CalculateTransformMatrix();
 	}
 	
 	void Transform::LookAt(const glm::vec3& target)

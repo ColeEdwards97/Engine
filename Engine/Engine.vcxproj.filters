@@ -1504,6 +1504,10 @@
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h" />
+    <ClInclude Include="src\Engine\kd_tree.h" />
+    <ClInclude Include="src\Engine\Renderer\Light.h" />
+    <ClInclude Include="src\Engine\Renderer\Framebuffer.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLFramebuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Engine\Assets\Model.cpp">
@@ -1619,5 +1623,7 @@
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp" />
     <ClCompile Include="src\Engine\Renderer\Texture.cpp" />
+    <ClCompile Include="src\Engine\Renderer\Framebuffer.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLFramebuffer.cpp" />
   </ItemGroup>
 </Project>
