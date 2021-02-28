@@ -7,9 +7,9 @@ namespace Engine
 
 	Renderer::SceneData* Renderer::s_SceneData = new Renderer::SceneData();
 
-	void Renderer::BeginScene(Ref<Camera>& camera)
+	void Renderer::BeginScene(Camera* camera)
 	{
-		s_SceneData->viewProjectionMatrix = camera->GetComponent<CameraComponent>()->GetProjectionViewMatrix();
+		s_SceneData->viewProjectionMatrix = camera->GetProjectionViewMatrix();
 	}
 
 	void Renderer::EndScene()

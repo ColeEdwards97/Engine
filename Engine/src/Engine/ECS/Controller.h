@@ -3,8 +3,10 @@
 namespace Engine
 {
 
-	class Scene
+	class Controller
 	{
+	public:
+	private:
 
 	};
 

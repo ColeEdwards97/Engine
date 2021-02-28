@@ -7,10 +7,7 @@ namespace Engine
 
 	class WindowEvent : public Event
 	{
-	public:
-
 	protected:
-
 		WindowEvent()
 		{}
 
@@ -19,7 +16,6 @@ namespace Engine
 	class WindowResizedEvent : public WindowEvent
 	{
 	public:
-
 		WindowResizedEvent(unsigned int width, unsigned int height)
 			: m_width(width), m_height(height)
 		{}
@@ -28,7 +24,6 @@ namespace Engine
 		unsigned int GetHeight() const { return m_height; }
 
 	private:
-
 		unsigned int m_width;
 		unsigned int m_height;
 
@@ -37,7 +32,6 @@ namespace Engine
 	class WindowClosedEvent : public WindowEvent
 	{
 	public:
-
 		WindowClosedEvent() = default;
 
 	};

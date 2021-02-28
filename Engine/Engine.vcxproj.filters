@@ -114,70 +114,7 @@
     <ClInclude Include="src\Engine\Core\Window.h">
       <Filter>src\Engine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Engine\Entity\Camera.h">
-      <Filter>src\Engine\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Entity\CameraComponent.h">
-      <Filter>src\Engine\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Entity\CameraController.h">
-      <Filter>src\Engine\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Entity\Component.h">
-      <Filter>src\Engine\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Entity\ComponentContainer.h">
-      <Filter>src\Engine\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Entity\ComponentManager.h">
-      <Filter>src\Engine\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Entity\Controller.h">
-      <Filter>src\Engine\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Entity\ControllerComponent.h">
-      <Filter>src\Engine\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Entity\ControllerSystem.h">
-      <Filter>src\Engine\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Entity\ECS.h">
-      <Filter>src\Engine\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Entity\Entity.h">
-      <Filter>src\Engine\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Entity\EntityManager.h">
-      <Filter>src\Engine\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Entity\GameObject.h">
-      <Filter>src\Engine\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Entity\IComponent.h">
-      <Filter>src\Engine\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Entity\IEntity.h">
-      <Filter>src\Engine\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Entity\ISystem.h">
-      <Filter>src\Engine\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Entity\System.h">
-      <Filter>src\Engine\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Entity\SystemManager.h">
-      <Filter>src\Engine\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Entity\TagComponent.h">
-      <Filter>src\Engine\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Entity\TransformComponent.h">
-      <Filter>src\Engine\Entity</Filter>
-    </ClInclude>
     <ClInclude Include="src\Engine\Event\ApplicationEvent.h">
-      <Filter>src\Engine\Event</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Event\EntityEvent.h">
       <Filter>src\Engine\Event</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Event\Event.h">
@@ -187,12 +124,6 @@
       <Filter>src\Engine\Event</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Event\MouseEvent.h">
-      <Filter>src\Engine\Event</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Event\Observer.h">
-      <Filter>src\Engine\Event</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Event\Subject.h">
       <Filter>src\Engine\Event</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\ImGui\ImGuiLayer.h">
@@ -205,9 +136,6 @@
       <Filter>src\Engine\Math</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Renderer\Buffer.h">
-      <Filter>src\Engine\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Renderer\CameraController.h">
       <Filter>src\Engine\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Renderer\GraphicsContext.h">
@@ -234,20 +162,8 @@
     <ClInclude Include="src\Engine\Renderer\VertexArray.h">
       <Filter>src\Engine\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\Engine\SparseSet.h">
-      <Filter>src\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Utils\FamilyTypeID.h">
-      <Filter>src\Engine\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Utils\Handle.h">
-      <Filter>src\Engine\Utils</Filter>
-    </ClInclude>
     <ClInclude Include="src\Engine\Utils\QuaternionUtils.h">
       <Filter>src\Engine\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\World\Scene.h">
-      <Filter>src\Engine\World</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\World\Transform.h">
       <Filter>src\Engine\World</Filter>
@@ -1508,6 +1424,23 @@
     <ClInclude Include="src\Engine\Renderer\Light.h" />
     <ClInclude Include="src\Engine\Renderer\Framebuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLFramebuffer.h" />
+    <ClInclude Include="src\Engine\quadtree.h" />
+    <ClInclude Include="src\Engine\free_list.h" />
+    <ClInclude Include="src\Engine\Assets\Asset.h" />
+    <ClInclude Include="src\Engine\Utils\Identifier.h" />
+    <ClInclude Include="src\Engine\ECS\Entity.h" />
+    <ClInclude Include="src\Engine\ECS\Component.h" />
+    <ClInclude Include="src\Engine\Core\null.h" />
+    <ClInclude Include="src\Engine\Core\type_traits.h" />
+    <ClInclude Include="src\Engine\ECS\DefaultComponents.h" />
+    <ClInclude Include="src\Engine\ECS\Registry.h" />
+    <ClInclude Include="src\Engine\sparse_set.h" />
+    <ClInclude Include="src\Engine\Event\EntityEvent.h" />
+    <ClInclude Include="src\Engine\ECS\Controller.h" />
+    <ClInclude Include="src\Engine\ECS\IController.h" />
+    <ClInclude Include="src\Engine\ECS\Storage.h" />
+    <ClInclude Include="src\Engine\Renderer\Camera.h" />
+    <ClInclude Include="src\Engine\World\World.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Engine\Assets\Model.cpp">
@@ -1527,39 +1460,6 @@
     </ClCompile>
     <ClCompile Include="src\Engine\Core\Log.cpp">
       <Filter>src\Engine\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Engine\Entity\CameraComponent.cpp">
-      <Filter>src\Engine\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Engine\Entity\CameraController.cpp">
-      <Filter>src\Engine\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Engine\Entity\ComponentManager.cpp">
-      <Filter>src\Engine\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Engine\Entity\ControllerSystem.cpp">
-      <Filter>src\Engine\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Engine\Entity\ECS.cpp">
-      <Filter>src\Engine\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Engine\Entity\EntityManager.cpp">
-      <Filter>src\Engine\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Engine\Entity\IComponent.cpp">
-      <Filter>src\Engine\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Engine\Entity\IEntity.cpp">
-      <Filter>src\Engine\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Engine\Entity\ISystem.cpp">
-      <Filter>src\Engine\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Engine\Entity\SystemManager.cpp">
-      <Filter>src\Engine\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Engine\Event\Subject.cpp">
-      <Filter>src\Engine\Event</Filter>
     </ClCompile>
     <ClCompile Include="src\Engine\ImGui\ImGuiBuild.cpp">
       <Filter>src\Engine\ImGui</Filter>
@@ -1625,5 +1525,6 @@
     <ClCompile Include="src\Engine\Renderer\Texture.cpp" />
     <ClCompile Include="src\Engine\Renderer\Framebuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLFramebuffer.cpp" />
+    <ClCompile Include="src\Engine\Renderer\Camera.cpp" />
   </ItemGroup>
 </Project>

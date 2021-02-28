@@ -131,7 +131,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\TestEntity.h" />
     <ClInclude Include="src\TestLayer.h" />
   </ItemGroup>
   <ItemGroup>

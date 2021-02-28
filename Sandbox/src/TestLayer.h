@@ -3,7 +3,11 @@
 #include <Engine.h>
 #include <imgui/imgui.h>
 
-#include "TestEntity.h"
+
+struct S {
+
+};
+
 
 class TestLayer : public Engine::Layer
 {
@@ -12,8 +16,6 @@ public:
 	TestLayer()
 		: Layer("Test Layer"), m_CubeTransform()
 	{
-
-		/* HACKING IN A TRIANGLE */
 
 		// VAO
 		m_VertexArray.reset(Engine::VertexArray::Create());
@@ -273,56 +275,39 @@ public:
 		std::string texturePathSpec = "C:/Users/edwar/Desktop/container_spec.jpg";
 		m_CubeTextureDiff = Engine::Texture2D::Create(texturePathDiff);
 		m_CubeTextureSpec = Engine::Texture2D::Create(texturePathSpec);
-
-
-		/* HACKING IN A TRIANGLE */
-
 		
-
-		/* ENTITY TEST */
-		
-		Engine::ECS::Init();
-
-		// Create Controller System
-		Engine::SystemManager::Get().CreateSystem<Engine::ControllerSystem>();
-
-		// Create Camera Entity
-		m_Camera = Engine::EntityManager::Get().CreateEntity<Engine::Camera>();
-		// Create Camera Controller
-		Engine::CameraController* controller = new Engine::CameraController(m_Camera);
-		// Create Controller Component
-		m_Camera->AddComponent<Engine::ControllerComponent>();
-		Engine::Ref<Engine::ControllerComponent> controller_comp = m_Camera->GetComponent<Engine::ControllerComponent>();
-		// Attach Camera Controller to Controller Component
-		controller_comp->SetController(controller);
-
-
-		/* ENTITY TEST */
+		// camera setup
+		m_Camera = new Engine::Camera(Engine::ProjectionMode::Perspective);
+		m_CameraTransform = Engine::Transform{};
 
 	}
 
 	void OnUpdate(Engine::TimeStep ts) override
 	{
 
-		/* CAMERA SYSTEM TEST */
-		Engine::SystemManager::Get().GetSystem<Engine::ControllerSystem>()->OnUpdate(ts);
-		/* CAMERA SYSTEM TEST */
+
+		// TODO: move into Render System
+
+		// Update camera system
+		//Engine::SystemManager::Get().GetSystem<Engine::ControllerSystem>()->OnUpdate(ts);
 
 		
 		// update geometry
 		//m_CubeTransform.Rotate(60.0f * ts, glm::vec3(0.0f, 1.0f, 0.0f));
+
+		// update frametime
+		m_LastFrameTime = ts;
 
 
 		// --------------- GEOMETRY PASS --------------- //
 		
 		// bind gbuffer
 		m_GBuffer->Bind();
-		//m_GBuffer->DepthTest(true);
 		Engine::RenderCommand::Clear({ 0.0f, 0.0f, 0.0f, 1.0f });
 
 		m_GeometryShader->Bind();
-		m_GeometryShader->SetMat4("u_Projection", m_Camera->GetComponent<Engine::CameraComponent>()->GetProjectionMatrix());
-		m_GeometryShader->SetMat4("u_View", m_Camera->GetComponent<Engine::CameraComponent>()->GetViewMatrix());
+		m_GeometryShader->SetMat4("u_Projection", m_Camera->GetProjectionMatrix());
+		m_GeometryShader->SetMat4("u_View", m_Camera->GetViewMatrix());
 		m_GeometryShader->SetMat4("u_Model", m_CubeTransform.GetTransformMatrix());
 
 		// bind vertex array and draw
@@ -338,7 +323,6 @@ public:
 		// --------------- LIGHTING PASS --------------- //
 		
 		Engine::RenderCommand::Clear();
-		//m_GBuffer->DepthTest(false);
 
 		// bind gbuffer color attachment textures
 		m_GBuffer->SetActiveAttachment(0);
@@ -347,7 +331,7 @@ public:
 		
 		// set lighting shader uniforms
 		m_LightingShader->Bind();
-		m_LightingShader->SetVec3("u_ViewPos", m_Camera->GetComponent<Engine::TransformComponent>()->GetTransform().GetLocation());
+		m_LightingShader->SetVec3("u_ViewPos", m_CameraTransform.GetLocation());
 		m_LightingShader->SetVec3("u_Light.Position", m_Lights[0].Position);
 		m_LightingShader->SetVec3("u_Light.Diffuse", m_Lights[0].Diffuse);
 
@@ -371,29 +355,41 @@ public:
 	{
 		// CAMERA CONTROLLER EVENT
 		// TODO: this should probably be done automatically by making each system an Observer
-		Engine::SystemManager::Get().GetSystem<Engine::ControllerSystem>()->OnEvent(e);
+		//Engine::SystemManager::Get().GetSystem<Engine::ControllerSystem>()->OnEvent(e);
 
+		Engine::EventDispatcher dispatcher(e);
+		dispatcher.Dispatch<Engine::WindowResizedEvent>(ENG_BIND_FN(OnWindowResized));
+
+	}
+
+	bool OnWindowResized(Engine::WindowResizedEvent& e)
+	{
+		m_GBuffer->Resize(e.GetWidth(), e.GetHeight());
+		return false;
 	}
 	
 	void OnImGuiRender() override
 	{
-		ImGui::Begin("Test");
-		ImGui::Text("Hello world!");
-		
+		ImGui::Begin("Frametime");
+		ImGui::Text(std::to_string(m_LastFrameTime).append(" ms").c_str());
+		ImGui::Text(std::to_string(1.0f / m_LastFrameTime).append(" FPS").c_str());
+		ImGui::End();
+
+		ImGui::Begin("Light");
 		ImGui::SliderFloat3("LightPosition", m_LightPosition, -10.0f, 10.0f);
 		m_Lights[0].Position = glm::vec3(m_LightPosition[0], m_LightPosition[1], m_LightPosition[2]);
+		ImGui::End();
 
+		ImGui::Begin("Framebuffer");
 		ImGui::Image((ImTextureID)m_GBuffer->GetAttachment(0), ImVec2(128, 90), ImVec2(0, 1), ImVec2(1, 0));
 		ImGui::Image((ImTextureID)m_GBuffer->GetAttachment(1), ImVec2(128, 90), ImVec2(0, 1), ImVec2(1, 0));
 		ImGui::Image((ImTextureID)m_GBuffer->GetAttachment(2), ImVec2(128, 90), ImVec2(0, 1), ImVec2(1, 0));
-
 		ImGui::End();
 	}
 
 
 private:
 
-	/* hacking in triangle */
 	Engine::Ref<Engine::Shader> m_GeometryShader;
 	Engine::Ref<Engine::Shader> m_LightingShader;
 
@@ -408,8 +404,12 @@ private:
 	
 	float m_LightPosition[3] = { 0.0f, 0.0f, 0.0f };
 
-	Engine::Ref<Engine::Camera> m_Camera;
+	Engine::Camera* m_Camera;
+	Engine::Transform m_CameraTransform;
+
 	std::vector<Engine::Light> m_Lights;
+
+	float m_LastFrameTime = 0.0f;
 
 	/* hacking in triangle */
 

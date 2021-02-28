@@ -5,10 +5,23 @@
 namespace Engine
 {
 
-	enum class FramebufferAttachmentType
+	class RenderTarget
 	{
-		Color = 0, Depth
+	public:
+		virtual ~RenderTarget() = default;
+
 	};
+
+
+	class FramebufferLayout
+	{
+	public:
+
+		// TODO: specify what kind of information is needed so framebuffer implementations can use the best layouts
+		// similar to BufferLayout
+
+	};
+
 
 	struct FramebufferSpecification
 	{
@@ -32,15 +45,10 @@ namespace Engine
 		virtual void Unbind() = 0;
 		virtual void UnbindRead() = 0;
 		virtual void UnbindWrite() = 0;
-
-		virtual void Attach(FramebufferAttachmentType type) = 0;
+		
 		virtual uint32_t GetAttachment(uint32_t index) = 0;
 		virtual void SetActiveAttachment(uint32_t index) = 0;
 		virtual void Resize(uint32_t width, uint32_t height) = 0;
-
-		virtual void Blit() = 0;
-
-		virtual void DepthTest(bool test) = 0;
 
 		static Ref<Framebuffer> Create(const FramebufferSpecification& specification);
 

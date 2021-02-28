@@ -115,11 +115,6 @@ namespace Engine
 		GL_CALL(glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0));
 	}
 
-	void OpenGLFramebuffer::Attach(FramebufferAttachmentType type)
-	{
-		
-	}
-
 	void OpenGLFramebuffer::SetActiveAttachment(uint32_t index)
 	{
 		GL_CALL(glActiveTexture(GL_TEXTURE0 + index));
@@ -158,24 +153,7 @@ namespace Engine
 		}
 		m_Specification.Width = width;
 		m_Specification.Height = height;
-	}
-
-	void OpenGLFramebuffer::Blit()
-	{
-		GL_CALL(glBlitFramebuffer(0, 0, m_Specification.Width, m_Specification.Height, 0, 0, m_Specification.Width, m_Specification.Height, GL_COLOR_BUFFER_BIT, GL_NEAREST));
-	}
-
-
-	void OpenGLFramebuffer::DepthTest(bool test)
-	{
-		if (test)
-		{
-			GL_CALL(glEnable(GL_DEPTH_TEST));
-		}
-		else
-		{
-			GL_CALL(glDisable(GL_DEPTH_TEST));
-		}
+		Invalidate();
 	}
 
 }

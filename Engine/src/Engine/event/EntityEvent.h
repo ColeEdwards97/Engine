@@ -1,37 +1,38 @@
 #pragma once
 
 #include "Engine/Event/Event.h"
+#include "Engine/ECS/Entity.h"
 
 namespace Engine
 {
 
 	class EntityEvent : public Event
 	{
-
 	public:
-		EntityEvent(EntityID id)
-			: m_EntityID(id)
+		EntityID GetEntityID() const { return m_Id; }
+
+	protected:
+		EntityEvent(const EntityID id)
+			: m_Id(id)
 		{}
-
-		EntityID GetEntityID() const { return m_EntityID; }
-
 	private:
-		EntityID m_EntityID;
-
+		EntityID m_Id;
 	};
+
 
 	class EntityCreatedEvent : public EntityEvent
 	{
 	public:
-		EntityCreatedEvent(EntityID id)
+		EntityCreatedEvent(const EntityID id)
 			: EntityEvent(id)
 		{}
 	};
 
+
 	class EntityDestroyedEvent : public EntityEvent
 	{
 	public:
-		EntityDestroyedEvent(EntityID id)
+		EntityDestroyedEvent(const EntityID id)
 			: EntityEvent(id)
 		{}
 	};

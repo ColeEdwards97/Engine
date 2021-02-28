@@ -11,17 +11,14 @@ namespace Engine
 	{
 	
 	public:
-
 		int GetKeyCode() const { return m_keyCode; }
 
 	protected:
-
 		KeyEvent(const int keyCode)
 			: m_keyCode(keyCode)
 		{}
 
 	private:
-
 		int m_keyCode;
 
 	};
@@ -38,7 +35,6 @@ namespace Engine
 		uint16_t GetRepeatCount() const { return m_repeats; }
 
 	private:
-
 		uint16_t m_repeats;
 
 	};
@@ -47,7 +43,6 @@ namespace Engine
 	class KeyReleasedEvent : public KeyEvent
 	{
 	public:
-
 		KeyReleasedEvent(const int keyCode)
 			: KeyEvent(keyCode)
 		{}
@@ -58,7 +53,6 @@ namespace Engine
 	class KeyTypedEvent : public KeyEvent
 	{
 	public:
-
 		KeyTypedEvent(const int keyCode)
 			: KeyEvent(keyCode)
 		{}

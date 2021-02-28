@@ -9,7 +9,21 @@ namespace Engine
 	glm::vec3 ScreenToWorld(const glm::mat4& viewProjectionMatrix, const glm::vec2& mousePosition, const glm::vec2& screenDimensions);
 	glm::vec3 ScreenToWorld(const glm::mat4& modelMatrix, const glm::mat4& viewMatrix, const glm::mat4& projectionMatrix, const glm::vec2& mousePosition, const glm::vec4& viewPort);
 
+	/* GLM TYPE CHECKING */
 
+	// vectors
+	template<typename T>
+	struct is_glm_vector { static const bool value = false; };
+
+	template<typename T, glm::length_t L, glm::qualifier Q>
+	struct is_glm_vector<glm::vec<L, T, Q>> { static const bool value = true; };
+
+	// matrices
+	template<typename T>
+	struct is_glm_matrix { static const bool value = false; };
+
+	template<typename T, glm::length_t C, glm::length_t R, glm::qualifier Q>
+	struct is_glm_matrix <glm::mat<C, R, T, Q>> { static const bool value = true; };
 
 
 	/* GENERIC FUNCTIONS FOR GLM+ */

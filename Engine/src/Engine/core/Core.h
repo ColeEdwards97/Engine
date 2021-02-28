@@ -5,7 +5,7 @@
 #ifdef ENG_PLATFORM_WINDOWS
 #else
 	#error Engine currently only supports Windows!
-#endif
+#endif // ENG_PLATFORM_WINDOWS
 
 #ifdef ENG_DEBUG
 	#define ENG_ENABLE_ASSERTS
@@ -19,17 +19,19 @@
 	#define ENGINE_CORE_ASSERT(x, ...)
 #endif // ENG_ENABLE_ASSERTS
 
+
+
 #define BIT(x) (1 << x)
 
-#define ENG_BIND_EVENT_FN(fn) [this](auto&&... args) -> decltype(auto) { return this->fn(std::forward<decltype(args)>(args)...); }
+#define ENG_BIND_FN(fn) [this](auto&&... args) -> decltype(auto) { return this->fn(std::forward<decltype(args)>(args)...); }
 
 
 namespace Engine
 {
-	typedef uint64_t EntityID;
 
 	template<typename T>
 	using Scope = std::unique_ptr<T>;
+
 	template<typename T, typename ... Args>
 	constexpr Scope<T> CreateScope(Args&& ... args)
 	{
@@ -38,6 +40,7 @@ namespace Engine
 
 	template<typename T>
 	using Ref = std::shared_ptr<T>;
+
 	template<typename T, typename ... Args>
 	constexpr Ref<T> CreateRef(Args&& ... args)
 	{

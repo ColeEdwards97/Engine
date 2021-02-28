@@ -1,26 +1,26 @@
 #include "engpch.h"
 
-#include "CameraComponent.h"
+#include "Camera.h"
 
 #include <glm/gtc/matrix_transform.hpp>
 
 namespace Engine
 {
 
-	CameraComponent::CameraComponent()
+	Camera::Camera()
 		: m_ProjectionMode(ProjectionMode::Perspective)
 	{
 		RecalculateProjectionMatrix();
 	}
 
-	CameraComponent::CameraComponent(ProjectionMode projectionMode)
+	Camera::Camera(ProjectionMode projectionMode)
 		: m_ProjectionMode(projectionMode)
 	{
 		RecalculateProjectionMatrix();
 	}
-	
+
 	// perspective
-	void CameraComponent::SetPerspective(float fov, float aspect, float zNear, float zFar)
+	void Camera::SetPerspective(float fov, float aspect, float zNear, float zFar)
 	{
 		m_PerspFov = fov;
 		m_Aspect = aspect;
@@ -29,14 +29,14 @@ namespace Engine
 		RecalculateProjectionMatrix();
 	}
 
-	void CameraComponent::SetPerspFOV(float fov)
+	void Camera::SetPerspFOV(float fov)
 	{
 		m_PerspFov = fov;
 		RecalculateProjectionMatrix();
 	}
 
 	// orthographic
-	void CameraComponent::SetOrthographic(float size, float zNear, float zFar)
+	void Camera::SetOrthographic(float size, float zNear, float zFar)
 	{
 		m_OrthoSize = size;
 		m_ZNear = zNear;
@@ -44,38 +44,38 @@ namespace Engine
 		RecalculateProjectionMatrix();
 	}
 
-	void CameraComponent::SetOrthoSize(float size)
+	void Camera::SetOrthoSize(float size)
 	{
 		m_OrthoSize = size;
 		RecalculateProjectionMatrix();
 	}
 
 	// common
-	void CameraComponent::SetAspectRatio(float aspect)
+	void Camera::SetAspectRatio(float aspect)
 	{
 		m_Aspect = aspect;
 		RecalculateProjectionMatrix();
 	}
 
-	void CameraComponent::SetZNear(float zNear)
+	void Camera::SetZNear(float zNear)
 	{
 		m_ZNear = zNear;
 		RecalculateProjectionMatrix();
 	}
 
-	void CameraComponent::SetZFar(float zFar)
+	void Camera::SetZFar(float zFar)
 	{
 		m_ZFar = zFar;
 		RecalculateProjectionMatrix();
 	}
 
 	// matrices
-	void CameraComponent::RecalculateProjectionViewMatrix()
+	void Camera::RecalculateProjectionViewMatrix()
 	{
 		m_ProjectionViewMatrix = m_ProjectionMatrix * m_ViewMatrix;
 	}
 
-	void CameraComponent::RecalculateProjectionMatrix()
+	void Camera::RecalculateProjectionMatrix()
 	{
 		switch (m_ProjectionMode)
 		{
@@ -98,7 +98,7 @@ namespace Engine
 		RecalculateProjectionViewMatrix();
 	}
 
-	void CameraComponent::RecalculateViewMatrix(const Transform& transform)
+	void Camera::RecalculateViewMatrix(const Transform& transform)
 	{
 		m_ViewMatrix = glm::lookAt(transform.GetLocation(), transform.GetLocation() + transform.GetFront(), glm::vec3(0.0f, 1.0f, 0.0f));
 		RecalculateProjectionViewMatrix();

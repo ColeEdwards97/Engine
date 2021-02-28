@@ -9,7 +9,6 @@
 #include "Engine/Event/ApplicationEvent.h"
 #include "Engine/Event/KeyEvent.h"
 #include "Engine/Event/MouseEvent.h"
-#include "Engine/Event/Observer.h"
 
 #include "Engine/ImGui/ImGuiLayer.h"
 #include "Engine/Core/LayerStack.h"

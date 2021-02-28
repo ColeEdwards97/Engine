@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Engine/Entity/Component.h"
 #include "Engine/World/Transform.h"
 
 #include <glm/glm.hpp>
@@ -14,14 +13,14 @@ namespace Engine
 		Orthographic = 1
 	};
 
-	class CameraComponent : public Component<CameraComponent>
+	class Camera
 	{
 
 	public:
 
-		CameraComponent();
-		CameraComponent(ProjectionMode projectionMode);
-		virtual ~CameraComponent() {}
+		Camera();
+		Camera(ProjectionMode projectionMode);
+		virtual ~Camera() {}
 
 		const glm::mat4& GetProjectionViewMatrix() const { return m_ProjectionViewMatrix; }
 		const glm::mat4& GetProjectionMatrix() const { return m_ProjectionMatrix; }
@@ -42,10 +41,6 @@ namespace Engine
 		void SetAspectRatio(float aspect);
 		void SetZNear(float zNear);
 		void SetZFar(float zFar);
-
-		// virtual
-		virtual void OnEnable() override {}
-		virtual void OnDisable() override {}
 
 	private:
 

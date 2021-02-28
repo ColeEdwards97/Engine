@@ -7,10 +7,7 @@ namespace Engine
 
 	class MouseEvent : public Event
 	{
-	public:
-		
 	protected:
-		
 		MouseEvent()
 		{}
 
@@ -20,7 +17,6 @@ namespace Engine
 	class MouseMovedEvent : public MouseEvent
 	{
 	public:
-
 		MouseMovedEvent(const float posX, const float posY)
 			: m_posX(posX), m_posY(posY)
 		{}
@@ -29,7 +25,6 @@ namespace Engine
 		float GetMouseY() const { return m_posY; }
 		
 	private:
-
 		float m_posX;
 		float m_posY;
 
@@ -39,7 +34,6 @@ namespace Engine
 	class MouseScrolledEvent : public MouseEvent
 	{
 	public:
-
 		MouseScrolledEvent(const float offsetX, const float offsetY)
 			: m_offsetX(offsetX), m_offsetY(offsetY)
 		{}
@@ -48,7 +42,6 @@ namespace Engine
 		float GetOffsetY() const { return m_offsetY; }
 
 	private:
-
 		float m_offsetX;
 		float m_offsetY;
 
@@ -58,17 +51,14 @@ namespace Engine
 	class MouseButtonEvent : public MouseEvent
 	{
 	public:
-
 		int GetMouseButton() const { return m_button; }
 
 	protected:
-
 		MouseButtonEvent(const int button)
 			: m_button(button)
 		{}
 
 	private:
-
 		int m_button;
 
 	};
@@ -76,7 +66,6 @@ namespace Engine
 	class MouseButtonPressedEvent : public MouseButtonEvent
 	{
 	public:
-
 		MouseButtonPressedEvent(const int button, const uint16_t repeats)
 			: MouseButtonEvent(button), m_repeats(repeats)
 		{}
@@ -84,7 +73,6 @@ namespace Engine
 		uint16_t GetRepeatCount() const { return m_repeats; }
 
 	private:
-		
 		uint16_t m_repeats;
 	
 	};
@@ -93,7 +81,6 @@ namespace Engine
 	class MouseButtonReleasedEvent : public MouseButtonEvent
 	{
 	public:
-
 		MouseButtonReleasedEvent(const int button)
 			: MouseButtonEvent(button)
 		{}

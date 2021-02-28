@@ -21,19 +21,11 @@ namespace Engine
 		virtual void Unbind() override;
 		virtual void UnbindRead() override;
 		virtual void UnbindWrite() override;
-
-		virtual void Attach(FramebufferAttachmentType type) override;
+		
 		virtual uint32_t GetAttachment(uint32_t index) override;
 		virtual void SetActiveAttachment(uint32_t index) override;
 
 		virtual void Resize(uint32_t width, uint32_t height) override;
-
-		virtual void Blit() override;
-
-
-		// disable depth
-		virtual void DepthTest(bool test) override;
-
 
 	private:
 

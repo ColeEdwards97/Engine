@@ -24,9 +24,10 @@ namespace Engine {
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
 
-		// register observer
+		// register events
+		// general interest in events from m_Window
 		m_Window->RegisterObserver(this);
-		
+				
 	}
 
 	Application::~Application() 
@@ -83,8 +84,8 @@ namespace Engine {
 		//ENGINE_CORE_TRACE("An Event Occurred!");
 		
 		EventDispatcher dispatcher(e);
-		dispatcher.Dispatch<WindowClosedEvent>(ENG_BIND_EVENT_FN(Application::OnWindowClosedEvent));
-		dispatcher.Dispatch<WindowResizedEvent>(ENG_BIND_EVENT_FN(Application::OnWindowResizedEvent));
+		dispatcher.Dispatch<WindowClosedEvent>(ENG_BIND_FN(Application::OnWindowClosedEvent));
+		dispatcher.Dispatch<WindowResizedEvent>(ENG_BIND_FN(Application::OnWindowResizedEvent));
 
 		for (auto it = m_LayerStack.rbegin(); it != m_LayerStack.rend(); ++it)
 		{
