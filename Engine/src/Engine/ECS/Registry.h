@@ -140,7 +140,7 @@ namespace Engine
 	private:
 		std::vector<EntityID> m_Entities;
 		std::vector<storage_type> m_Components;
-		EntityID m_Available = EntityID{ null };
+		EntityID m_Available = null;
 
 	};
 

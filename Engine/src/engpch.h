@@ -3,6 +3,8 @@
 #include <iostream>
 #include <memory>
 #include <utility>
+#include <variant>
+#include <optional>
 #include <algorithm>
 #include <functional>
 

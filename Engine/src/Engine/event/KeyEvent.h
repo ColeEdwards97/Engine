@@ -2,7 +2,7 @@
 
 #include "Engine/Event/Event.h"
 
-#include "Engine/Core/KeyCodes.h"
+#include "Engine/Core/Input/KeyCodes.h"
 
 namespace Engine
 {
@@ -11,15 +11,15 @@ namespace Engine
 	{
 	
 	public:
-		int GetKeyCode() const { return m_keyCode; }
+		KeyCode GetKeyCode() const { return m_keyCode; }
 
 	protected:
-		KeyEvent(const int keyCode)
+		KeyEvent(const KeyCode keyCode)
 			: m_keyCode(keyCode)
 		{}
 
 	private:
-		int m_keyCode;
+		KeyCode m_keyCode;
 
 	};
 
@@ -28,7 +28,7 @@ namespace Engine
 	{
 	public:
 
-		KeyPressedEvent(const int keyCode, const uint16_t repeats)
+		KeyPressedEvent(const KeyCode keyCode, const uint16_t repeats)
 			: KeyEvent(keyCode), m_repeats(repeats)
 		{}
 
@@ -43,7 +43,7 @@ namespace Engine
 	class KeyReleasedEvent : public KeyEvent
 	{
 	public:
-		KeyReleasedEvent(const int keyCode)
+		KeyReleasedEvent(const KeyCode keyCode)
 			: KeyEvent(keyCode)
 		{}
 
@@ -53,7 +53,7 @@ namespace Engine
 	class KeyTypedEvent : public KeyEvent
 	{
 	public:
-		KeyTypedEvent(const int keyCode)
+		KeyTypedEvent(const KeyCode keyCode)
 			: KeyEvent(keyCode)
 		{}
 

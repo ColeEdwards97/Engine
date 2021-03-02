@@ -98,9 +98,9 @@ namespace Engine
 		RecalculateProjectionViewMatrix();
 	}
 
-	void Camera::RecalculateViewMatrix(const Transform& transform)
+	void Camera::RecalculateViewMatrix()
 	{
-		m_ViewMatrix = glm::lookAt(transform.GetLocation(), transform.GetLocation() + transform.GetFront(), glm::vec3(0.0f, 1.0f, 0.0f));
+		m_ViewMatrix = glm::lookAt(m_Transform.GetLocation(), m_Transform.GetLocation() + m_Transform.GetFront(), glm::vec3(0.0f, 1.0f, 0.0f));
 		RecalculateProjectionViewMatrix();
 		// TODO: glm::vec3(0.0f, 1.0f, 0.0f); to become transform.GetWorld().GetWorldUp();
 	}

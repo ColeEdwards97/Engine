@@ -2,13 +2,9 @@
 
 namespace Engine
 {
-
-	class Controller
+	class Platform
 	{
 	public:
-		
-
-	private:
+		static const float GetTime();
 	};
-
 }

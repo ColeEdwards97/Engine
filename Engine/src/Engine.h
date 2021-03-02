@@ -1,9 +1,8 @@
 #pragma once
 
-// General includes
-
-
 // For use by Engine applications only
+#include "Engine/Core/Core.h"
+
 #include "Engine/Core/Application.h"
 #include "Engine/Core/TimeStep.h"
 #include "Engine/Core/Layer.h"
@@ -11,9 +10,13 @@
 
 #include "Engine/Core/null.h"
 
-#include "Engine/Core/Input.h"
-#include "Engine/Core/KeyCodes.h"
-#include "Engine/Core/MouseButtonCodes.h"
+// TEMP
+#include "Engine/Core/Input/Input.h"
+#include "Engine/Core/Input/InputContext.h"
+#include "Engine/Core/Input/KeyCodes.h"
+#include "Engine/Core/Input/MouseCodes.h"
+// TEMP
+
 
 #include "Engine/Event/Event.h"
 #include "Engine/Event/KeyEvent.h"

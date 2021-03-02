@@ -20,8 +20,6 @@ namespace Engine
 
 		const std::string& GetName() const { return m_debugName; }
 
-		bool enabled = true;
-
 	private:
 		std::string m_debugName;
 	};

@@ -278,7 +278,7 @@ public:
 		
 		// camera setup
 		m_Camera = new Engine::Camera(Engine::ProjectionMode::Perspective);
-		m_CameraTransform = Engine::Transform{};
+
 
 	}
 
@@ -331,7 +331,7 @@ public:
 		
 		// set lighting shader uniforms
 		m_LightingShader->Bind();
-		m_LightingShader->SetVec3("u_ViewPos", m_CameraTransform.GetLocation());
+		m_LightingShader->SetVec3("u_ViewPos", m_Camera->GetTransform().GetLocation());
 		m_LightingShader->SetVec3("u_Light.Position", m_Lights[0].Position);
 		m_LightingShader->SetVec3("u_Light.Diffuse", m_Lights[0].Diffuse);
 
@@ -405,7 +405,6 @@ private:
 	float m_LightPosition[3] = { 0.0f, 0.0f, 0.0f };
 
 	Engine::Camera* m_Camera;
-	Engine::Transform m_CameraTransform;
 
 	std::vector<Engine::Light> m_Lights;
 

@@ -22,12 +22,14 @@ namespace Engine
 		Camera(ProjectionMode projectionMode);
 		virtual ~Camera() {}
 
+		const Transform& GetTransform() const { return m_Transform; }
+
 		const glm::mat4& GetProjectionViewMatrix() const { return m_ProjectionViewMatrix; }
 		const glm::mat4& GetProjectionMatrix() const { return m_ProjectionMatrix; }
 		const glm::mat4& GetViewMatrix() const { return m_ViewMatrix; }
 
 		void RecalculateProjectionMatrix();
-		void RecalculateViewMatrix(const Transform& transform);
+		void RecalculateViewMatrix();
 
 		// perspective
 		void SetPerspective(float fov, float aspect, float zNear, float zFar);
@@ -47,6 +49,8 @@ namespace Engine
 		void RecalculateProjectionViewMatrix();
 
 	private:
+
+		Transform m_Transform = Transform{};
 
 		glm::mat4 m_ProjectionViewMatrix = glm::mat4(0.0f);
 		glm::mat4 m_ProjectionMatrix = glm::mat4(0.0f);

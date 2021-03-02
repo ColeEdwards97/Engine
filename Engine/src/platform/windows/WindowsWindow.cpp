@@ -3,6 +3,8 @@
 #include "WindowsWindow.h"
 #include "Engine/Renderer/GraphicsContext.h"
 
+#include "Engine/Core/Input/Input.h"
+
 #include "Engine/Event/ApplicationEvent.h"
 #include "Engine/Event/KeyEvent.h"
 #include "Engine/Event/MouseEvent.h"
@@ -12,15 +14,6 @@
 namespace Engine {
 	
 	static bool s_isGLFWInitialized = false;
-
-	// IMPLEMENTATION OF THE Window CLASS
-	// (this is how the code knows to create a Windows Window and not a BlaBlaWindow)
-	Window* Window::Create(const WindowProperties& props) 
-	{
-		// TODO: platform detection
-		return new WindowsWindow(props);
-	}
-
 
 	WindowsWindow::WindowsWindow(const WindowProperties& props)
 	{
@@ -56,18 +49,15 @@ namespace Engine {
 			ENGINE_CORE_ASSERT(success, "Could not initialize GLFW!");
 			s_isGLFWInitialized = true;
 		}
-		
-		//glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-		// FOR macOS:
-		//		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
 		// GLFWwindow creation
 		m_window = glfwCreateWindow((int)props.width, (int)props.height, props.title.c_str(), NULL, NULL);
 		
 		// OpenGL Context initialization
-		m_context = new OpenGLContext(m_window);
+		m_context = GraphicsContext::Create(m_window);
 		m_context->Init();
 
+		// Handle Errors
 		if (m_window == NULL) {
 			ENGINE_CORE_ERROR("Failed to create GLFW window");
 			glfwTerminate();
@@ -77,9 +67,9 @@ namespace Engine {
 		{
 			ENGINE_CORE_INFO("Created Windows Window: {0}; {1} x {2}", props.title, props.width, props.height);
 		}
-
+		
+		SetVSync(false);
 		glfwSetWindowUserPointer(m_window, &m_data);
-		SetVSync(true);
 
 
 		// GLFW Callbacks -----------------------
@@ -101,7 +91,7 @@ namespace Engine {
 				data.eventCallback(event);
 			}
 		);
-
+		
 		glfwSetKeyCallback(m_window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
 			{
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
@@ -110,19 +100,19 @@ namespace Engine {
 				{
 				case GLFW_PRESS:
 				{
-					KeyPressedEvent event(key, 0);
+					KeyPressedEvent event(Input::RawToKeyCode(key), 0);
 					data.eventCallback(event);
 					break;
 				}
 				case GLFW_RELEASE:
 				{
-					KeyReleasedEvent event(key);
+					KeyReleasedEvent event(Input::RawToKeyCode(key));
 					data.eventCallback(event);
 					break;
 				}
 				case GLFW_REPEAT:
 				{
-					KeyPressedEvent event(key, 1);
+					KeyPressedEvent event(Input::RawToKeyCode(key), 1);
 					data.eventCallback(event);
 					break;
 				}
@@ -135,7 +125,7 @@ namespace Engine {
 		glfwSetCharCallback(m_window, [](GLFWwindow* window, unsigned int keycode)
 			{
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
-				KeyTypedEvent event(keycode);
+				KeyTypedEvent event(Input::RawToKeyCode(keycode));
 				data.eventCallback(event);
 			}
 		);
@@ -148,19 +138,19 @@ namespace Engine {
 				{
 				case GLFW_PRESS:
 				{
-					MouseButtonPressedEvent event(button, 0);
+					MouseButtonPressedEvent event(Input::RawToMouseCode(button), 0);
 					data.eventCallback(event);
 					break;
 				}
 				case GLFW_RELEASE:
 				{
-					MouseButtonReleasedEvent event(button);
+					MouseButtonReleasedEvent event(Input::RawToMouseCode(button));
 					data.eventCallback(event);
 					break;
 				}
 				case GLFW_REPEAT:
 				{
-					MouseButtonPressedEvent event(button, 1);
+					MouseButtonPressedEvent event(Input::RawToMouseCode(button), 1);
 					data.eventCallback(event);
 					break;
 				}

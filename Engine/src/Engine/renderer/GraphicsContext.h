@@ -13,6 +13,8 @@ namespace Engine
 		virtual void PrintErrors(const char* func, const char* file, int line) = 0;
 		virtual void ClearErrors() = 0;
 
+		static Scope<GraphicsContext> Create(void* window);
+
 	};
 
 }

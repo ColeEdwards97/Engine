@@ -141,6 +141,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Engine.h" />
+    <ClInclude Include="src\Engine\Action.h" />
+    <ClInclude Include="src\Engine\Actions.h" />
     <ClInclude Include="src\Engine\Assets\Asset.h" />
     <ClInclude Include="src\Engine\Assets\Mesh.h" />
     <ClInclude Include="src\Engine\Assets\Model.h" />
@@ -148,13 +150,17 @@
     <ClInclude Include="src\Engine\Core\Application.h" />
     <ClInclude Include="src\Engine\Core\Core.h" />
     <ClInclude Include="src\Engine\Core\EntryPoint.h" />
-    <ClInclude Include="src\Engine\Core\Input.h" />
+    <ClInclude Include="src\Engine\Core\Input\Input.h" />
+    <ClInclude Include="src\Engine\Core\Input\InputContext.h" />
+    <ClInclude Include="src\Engine\Core\Input\KeyCodes.h" />
+    <ClInclude Include="src\Engine\Core\Input\MouseCodes.h" />
     <ClInclude Include="src\Engine\Core\KeyCodes.h" />
     <ClInclude Include="src\Engine\Core\Layer.h" />
     <ClInclude Include="src\Engine\Core\LayerStack.h" />
     <ClInclude Include="src\Engine\Core\Log.h" />
     <ClInclude Include="src\Engine\Core\MouseButtonCodes.h" />
     <ClInclude Include="src\Engine\Core\null.h" />
+    <ClInclude Include="src\Engine\Core\Platform.h" />
     <ClInclude Include="src\Engine\Core\TimeStep.h" />
     <ClInclude Include="src\Engine\Core\type_traits.h" />
     <ClInclude Include="src\Engine\Core\Window.h" />
@@ -200,7 +206,6 @@
     <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
-    <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\engpch.h" />
     <ClInclude Include="vendor\glm\glm\common.hpp" />
@@ -617,15 +622,18 @@
     <ClCompile Include="src\Engine\Assets\Model.cpp" />
     <ClCompile Include="src\Engine\Assets\ModelLoader.cpp" />
     <ClCompile Include="src\Engine\Core\Application.cpp" />
+    <ClCompile Include="src\Engine\Core\Input\InputContext.cpp" />
     <ClCompile Include="src\Engine\Core\Layer.cpp" />
     <ClCompile Include="src\Engine\Core\LayerStack.cpp" />
     <ClCompile Include="src\Engine\Core\Log.cpp" />
+    <ClCompile Include="src\Engine\Core\Window.cpp" />
     <ClCompile Include="src\Engine\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Engine\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Engine\Math\Math.cpp" />
     <ClCompile Include="src\Engine\Renderer\Buffer.cpp" />
     <ClCompile Include="src\Engine\Renderer\Camera.cpp" />
     <ClCompile Include="src\Engine\Renderer\Framebuffer.cpp" />
+    <ClCompile Include="src\Engine\Renderer\GraphicsContext.cpp" />
     <ClCompile Include="src\Engine\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\Engine\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Engine\Renderer\RendererAPI.cpp" />
@@ -641,6 +649,7 @@
     <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
+    <ClCompile Include="src\Platform\Windows\PlatformWindows.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\engpch.cpp">

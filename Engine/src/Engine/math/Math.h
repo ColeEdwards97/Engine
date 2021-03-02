@@ -5,9 +5,38 @@
 
 namespace Engine
 {
+	
+
+	// TODO: refactor
+	namespace glm_helper {
+
+		template<typename T>
+		struct glm_mat;
+
+		template<glm::length_t C, glm::length_t R, typename T, glm::qualifier Q>
+		struct glm_mat<glm::mat<C, R, T, Q>> {
+
+			GLM_FUNC_QUALIFIER static glm::mat<C, R, T, Q> all(T val) {
+				glm::mat<C, R, T, Q> mat{};
+				for (glm::length_t i = 0; i < mat.length(); ++i) {
+					mat[i] = glm::vec<C, T, Q>(val);
+				}
+				return mat;
+			}
+		
+		};
+
+
+
+	}
+
 
 	glm::vec3 ScreenToWorld(const glm::mat4& viewProjectionMatrix, const glm::vec2& mousePosition, const glm::vec2& screenDimensions);
-	glm::vec3 ScreenToWorld(const glm::mat4& modelMatrix, const glm::mat4& viewMatrix, const glm::mat4& projectionMatrix, const glm::vec2& mousePosition, const glm::vec4& viewPort);
+	//glm::vec3 ScreenToWorld(const glm::mat4& modelMatrix, const glm::mat4& viewMatrix, const glm::mat4& projectionMatrix, const glm::vec2& mousePosition, const glm::vec4& viewPort);
+
+
+
+
 
 	/* GLM TYPE CHECKING */
 
@@ -48,8 +77,51 @@ namespace Engine
 		}
 	};
 
+	// TODO: compute_map_matrix
+
 
 	/* ADDITIONAL GLM FUNCTORS */
+
+	/* FUNCTOR 0 */
+	template<template<glm::length_t L, typename T, glm::qualifier Q> class vec, glm::length_t L, typename R, typename T, glm::qualifier Q>
+	struct functor0 {};
+
+	template<template<glm::length_t L, typename T, glm::qualifier Q> class vec, typename R, typename T, glm::qualifier Q>
+	struct functor0<vec, 1, R, T, Q>
+	{
+		GLM_FUNC_QUALIFIER GLM_CONSTEXPR static vec<1, R, Q> call(R(*Func) ())
+		{
+			return vec<1, R, Q>(Func());
+		}
+	};
+
+	template<template<glm::length_t L, typename T, glm::qualifier Q> class vec, typename R, typename T, glm::qualifier Q>
+	struct functor0<vec, 2, R, T, Q>
+	{
+		GLM_FUNC_QUALIFIER GLM_CONSTEXPR static vec<2, R, Q> call(R(*Func) ())
+		{
+			return vec<2, R, Q>(Func(), Func());
+		}
+	};
+
+	template<template<glm::length_t L, typename T, glm::qualifier Q> class vec, typename R, typename T, glm::qualifier Q>
+	struct functor0<vec, 3, R, T, Q>
+	{
+		GLM_FUNC_QUALIFIER GLM_CONSTEXPR static vec<3, R, Q> call(R(*Func) ())
+		{
+			return vec<3, R, Q>(Func(), Func(), Func());
+		}
+	};
+
+	template<template<glm::length_t L, typename T, glm::qualifier Q> class vec, typename R, typename T, glm::qualifier Q>
+	struct functor0<vec, 4, R, T, Q>
+	{
+		GLM_FUNC_QUALIFIER GLM_CONSTEXPR static vec<4, R, Q> call(R(*Func) ())
+		{
+			return vec<4, R, Q>(Func(), Func(), Func(), Func());
+		}
+	};
+
 
 	/* FUNCTOR 5 */
 	template<template<glm::length_t L, typename T, glm::qualifier Q> class vec, glm::length_t L, typename R, typename T, glm::qualifier Q>

@@ -1,30 +1,31 @@
 #include "engpch.h"
 
-#include "WindowsInput.h"
+#include "Engine/Core/Input/Input.h"
 
 #include "Engine/Core/Application.h"
+
+#include "Platform/Windows/WindowsWindow.h"
 
 #include <GLFW/glfw3.h>
 
 namespace Engine
 {
-	Input* Input::s_instance = new WindowsInput();
 
-	bool WindowsInput::IsKeyPressedImp(int keyCode)
+	bool Input::IsKeyPressed(KeyCode keyCode)
 	{
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
-		auto state = glfwGetKey(window, keyCode);
+		auto state = glfwGetKey(window, KeyCodeToRaw(keyCode));
 		return (state == GLFW_PRESS || state == GLFW_REPEAT);
 	}
 
-	bool WindowsInput::IsMouseButtonPressedImp(int button)
+	bool Input::IsMouseButtonPressed(MouseCode button)
 	{
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
-		auto state = glfwGetMouseButton(window, button);
+		auto state = glfwGetMouseButton(window, MouseCodeToRaw(button));
 		return (state == GLFW_PRESS || state == GLFW_REPEAT);
 	}
 
-	glm::vec2 WindowsInput::GetMousePositionImp()
+	glm::vec2 Input::GetMousePosition()
 	{
 		double xpos;
 		double ypos;
@@ -33,14 +34,32 @@ namespace Engine
 		return glm::vec2((float)xpos, (float)ypos);
 	}
 
-	float WindowsInput::GetMouseXImp()
+	float Input::GetMouseX()
 	{
-		return GetMousePositionImp().x;
+		return GetMousePosition().x;
 	}
 
-	float WindowsInput::GetMouseYImp()
+	float Input::GetMouseY()
 	{
-		return GetMousePositionImp().y;
+		return GetMousePosition().y;
+	}
+
+
+
+	const KeyCode Input::RawToKeyCode(const int rawCode) {
+		return static_cast<KeyCode>(rawCode);
+	}
+
+	const int Input::KeyCodeToRaw(const KeyCode keyCode) {
+		return static_cast<int>(keyCode);
+	}
+
+	const MouseCode Input::RawToMouseCode(const int rawCode) {
+		return static_cast<MouseCode>(rawCode);
+	}
+
+	const int Input::MouseCodeToRaw(const MouseCode mouseCode) {
+		return static_cast<int>(mouseCode);
 	}
 
 

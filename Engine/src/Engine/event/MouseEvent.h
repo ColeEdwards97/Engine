@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Engine/Event/Event.h"
+#include "Engine/Core/Input/MouseCodes.h"
 
 namespace Engine
 {
@@ -51,22 +52,22 @@ namespace Engine
 	class MouseButtonEvent : public MouseEvent
 	{
 	public:
-		int GetMouseButton() const { return m_button; }
+		MouseCode GetMouseButton() const { return m_button; }
 
 	protected:
-		MouseButtonEvent(const int button)
+		MouseButtonEvent(const MouseCode button)
 			: m_button(button)
 		{}
 
 	private:
-		int m_button;
+		MouseCode m_button;
 
 	};
 
 	class MouseButtonPressedEvent : public MouseButtonEvent
 	{
 	public:
-		MouseButtonPressedEvent(const int button, const uint16_t repeats)
+		MouseButtonPressedEvent(const MouseCode button, const uint16_t repeats)
 			: MouseButtonEvent(button), m_repeats(repeats)
 		{}
 
@@ -81,7 +82,7 @@ namespace Engine
 	class MouseButtonReleasedEvent : public MouseButtonEvent
 	{
 	public:
-		MouseButtonReleasedEvent(const int button)
+		MouseButtonReleasedEvent(const MouseCode button)
 			: MouseButtonEvent(button)
 		{}
 

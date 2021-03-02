@@ -1,12 +1,8 @@
 #include "engpch.h"
 
 #include "Application.h"
-
-#include "Engine/Core/Input.h"
-
+#include "Engine/Core/Platform.h"
 #include "Engine/Renderer/Renderer.h"
-
-#include <GLFW/glfw3.h>
 
 namespace Engine {
 
@@ -42,7 +38,7 @@ namespace Engine {
 		{
 
 			// Time Calculation
-			float time = (float)glfwGetTime(); // Platform::GetTime()
+			float time = Platform::GetTime();
 			TimeStep timeStep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
 
@@ -54,10 +50,7 @@ namespace Engine {
 				// LAYER :: OnUpdate()
 				for (Layer* layer : m_LayerStack)
 				{
-					if (layer->enabled)
-					{
-						layer->OnUpdate(timeStep);
-					}
+					layer->OnUpdate(timeStep);
 				}
 
 			}
@@ -81,8 +74,6 @@ namespace Engine {
 
 	void Application::OnEvent(Event& e)
 	{
-		//ENGINE_CORE_TRACE("An Event Occurred!");
-		
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowClosedEvent>(ENG_BIND_FN(Application::OnWindowClosedEvent));
 		dispatcher.Dispatch<WindowResizedEvent>(ENG_BIND_FN(Application::OnWindowResizedEvent));
@@ -132,13 +123,11 @@ namespace Engine {
 	void Application::PushLayer(Layer* layer)
 	{
 		m_LayerStack.PushLayer(layer);
-		layer->OnAttach();
 	}
 
 	void Application::PushOverlay(Layer* overlay)
 	{
 		m_LayerStack.PushOverlay(overlay);
-		overlay->OnAttach();
 	}
 
 }

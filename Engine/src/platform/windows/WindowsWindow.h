@@ -12,7 +12,6 @@ namespace Engine {
 
 	class WindowsWindow : public Window
 	{
-
 	public:
 
 		WindowsWindow(const WindowProperties& props);
@@ -30,7 +29,6 @@ namespace Engine {
 		
 		virtual void* GetNativeWindow() const override { return m_window; }
 
-
 	private:
 
 		virtual void Init(const WindowProperties& props);
@@ -39,14 +37,13 @@ namespace Engine {
 	private:
 
 		GLFWwindow* m_window;
-		GraphicsContext* m_context;
+		Scope<GraphicsContext> m_context;
 
 		struct WindowData {
 			std::string title;
 			unsigned int width;
 			unsigned int height;
 			bool vSync;
-
 			EventCallbackFn eventCallback;
 		};
 
