@@ -19,7 +19,7 @@ namespace Engine
 			GLM_FUNC_QUALIFIER static glm::mat<C, R, T, Q> all(T val) {
 				glm::mat<C, R, T, Q> mat{};
 				for (glm::length_t i = 0; i < mat.length(); ++i) {
-					mat[i] = glm::vec<C, T, Q>(val);
+					mat[i] = glm::vec<R, T, Q>(val);
 				}
 				return mat;
 			}

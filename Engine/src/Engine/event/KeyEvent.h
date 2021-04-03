@@ -1,8 +1,7 @@
 #pragma once
 
 #include "Engine/Event/Event.h"
-
-#include "Engine/Core/Input/KeyCodes.h"
+#include "Engine/Core/Input/InputConstants.h"
 
 namespace Engine
 {
@@ -11,15 +10,15 @@ namespace Engine
 	{
 	
 	public:
-		KeyCode GetKeyCode() const { return m_keyCode; }
+		KeyCode GetKeyCode() const { return m_KeyCode; }
 
 	protected:
 		KeyEvent(const KeyCode keyCode)
-			: m_keyCode(keyCode)
+			: m_KeyCode(keyCode)
 		{}
 
 	private:
-		KeyCode m_keyCode;
+		KeyCode m_KeyCode;
 
 	};
 
@@ -28,14 +27,14 @@ namespace Engine
 	{
 	public:
 
-		KeyPressedEvent(const KeyCode keyCode, const uint16_t repeats)
-			: KeyEvent(keyCode), m_repeats(repeats)
+		KeyPressedEvent(const KeyCode keyCode, const bool repeated)
+			: KeyEvent(keyCode), m_Repeated(repeated)
 		{}
 
-		uint16_t GetRepeatCount() const { return m_repeats; }
+		bool IsRepeated() const { return m_Repeated; }
 
 	private:
-		uint16_t m_repeats;
+		bool m_Repeated;
 
 	};
 

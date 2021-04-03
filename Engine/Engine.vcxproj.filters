@@ -90,9 +90,6 @@
     <ClInclude Include="src\Engine\Core\EntryPoint.h">
       <Filter>src\Engine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Engine\Core\KeyCodes.h">
-      <Filter>src\Engine\Core</Filter>
-    </ClInclude>
     <ClInclude Include="src\Engine\Core\Layer.h">
       <Filter>src\Engine\Core</Filter>
     </ClInclude>
@@ -100,9 +97,6 @@
       <Filter>src\Engine\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Core\Log.h">
-      <Filter>src\Engine\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Core\MouseButtonCodes.h">
       <Filter>src\Engine\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Core\TimeStep.h">
@@ -1430,18 +1424,20 @@
     <ClInclude Include="src\Engine\ECS\Registry.h" />
     <ClInclude Include="src\Engine\sparse_set.h" />
     <ClInclude Include="src\Engine\Event\EntityEvent.h" />
-    <ClInclude Include="src\Engine\ECS\Controller.h" />
-    <ClInclude Include="src\Engine\ECS\IController.h" />
     <ClInclude Include="src\Engine\ECS\Storage.h" />
     <ClInclude Include="src\Engine\Renderer\Camera.h" />
     <ClInclude Include="src\Engine\World\World.h" />
-    <ClInclude Include="src\Engine\Action.h" />
-    <ClInclude Include="src\Engine\Actions.h" />
     <ClInclude Include="src\Engine\Core\Input\InputContext.h" />
-    <ClInclude Include="src\Engine\Core\Input\KeyCodes.h" />
     <ClInclude Include="src\Engine\Core\Input\Input.h" />
-    <ClInclude Include="src\Engine\Core\Input\MouseCodes.h" />
     <ClInclude Include="src\Engine\Core\Platform.h" />
+    <ClInclude Include="src\Engine\Core\Input\InputContextStack.h" />
+    <ClInclude Include="src\Engine\Core\Input\InputConstants.h" />
+    <ClInclude Include="src\Engine\Core\Input\Action.h" />
+    <ClInclude Include="src\Engine\Core\Input\Range.h" />
+    <ClInclude Include="src\Engine\Event\ActionEvent.h" />
+    <ClInclude Include="src\Engine\Core\ServiceLocator.h" />
+    <ClInclude Include="src\Engine\Event\RangeEvent.h" />
+    <ClInclude Include="src\Engine\Core\Input\InputConversion.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Engine\Assets\Model.cpp">
@@ -1528,8 +1524,11 @@
     <ClCompile Include="src\Platform\OpenGL\OpenGLFramebuffer.cpp" />
     <ClCompile Include="src\Engine\Renderer\Camera.cpp" />
     <ClCompile Include="src\Engine\Core\Input\InputContext.cpp" />
-    <ClCompile Include="src\Engine\Core\Window.cpp" />
     <ClCompile Include="src\Platform\Windows\PlatformWindows.cpp" />
     <ClCompile Include="src\Engine\Renderer\GraphicsContext.cpp" />
+    <ClCompile Include="src\Engine\World\World.cpp" />
+    <ClCompile Include="src\Engine\Core\Input\InputContextStack.cpp" />
+    <ClCompile Include="src\Engine\Core\Input\Input.cpp" />
+    <ClCompile Include="src\Engine\Core\Input\InputConversion.cpp" />
   </ItemGroup>
 </Project>

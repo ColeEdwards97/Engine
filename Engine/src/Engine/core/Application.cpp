@@ -14,15 +14,23 @@ namespace Engine {
 		ENGINE_CORE_ASSERT(!s_Instance, "Application already exists");
 		s_Instance = this;
 		m_Running = true;
+
+		m_Input = Scope<Input>(Input::Create());
 		m_Window = Scope<Window>(Window::Create());
 		
+		// register events
+		// general interest in events from Window
+		m_Window->RegisterObserver(this);
+
+		// input is only interested int window events
+		m_Window->RegisterObserver(m_Input.get());
+
+		// general interest in events from Input
+		m_Input->RegisterObserver(this);
+
 		// create default imgui layer
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
-
-		// register events
-		// general interest in events from m_Window
-		m_Window->RegisterObserver(this);
 				
 	}
 
@@ -43,16 +51,13 @@ namespace Engine {
 			m_LastFrameTime = time;
 
 			// only call on update if we're not minimized
-			
 			if (!m_Minimized)
 			{
-
 				// LAYER :: OnUpdate()
 				for (Layer* layer : m_LayerStack)
 				{
 					layer->OnUpdate(timeStep);
 				}
-
 			}
 
 			// still update imgui though

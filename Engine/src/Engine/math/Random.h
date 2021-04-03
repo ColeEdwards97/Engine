@@ -4,11 +4,10 @@
 
 namespace Engine
 {
-
 	namespace detail
 	{
 		
-		/* GENERATORS */
+		// generators
 		template<typename T>
 		struct generator {
 			using type = std::conditional_t<(sizeof(T) > 4), std::mt19937_64, std::mt19937>;
@@ -16,21 +15,19 @@ namespace Engine
 
 		template<typename T>
 		using generator_t = typename generator<T>::type;
-		/* GENERATORS */
 
-
-		/* DISTRIBUTIONS */
+		// distributions
 		template<typename T, typename = void>
 		struct distribution;
 
 		template<typename T>
 		struct distribution<T, std::enable_if_t<std::is_integral_v<T>>> {
-			using type = std::uniform_int_distribution;
+			using type = std::uniform_int_distribution<T>;
 		};
 
 		template<typename T>
 		struct distribution<T, std::enable_if_t<std::is_floating_point_v<T>>> {
-			using type = std::uniform_real_distribution;
+			using type = std::uniform_real_distribution<T>;
 		};
 
 		template<>
@@ -40,138 +37,133 @@ namespace Engine
 
 		template<typename T>
 		using distribution_t = typename distribution<T>::type;
-		/* DISTRIBUTIONS */
 
-
-
-		/* RANDOM IMPLEMENTATIONS */
+		// random functions
 		template<typename T, typename = void>
-		struct random_t;
+		struct random_func;
 
-		// general types types
 		template<typename T>
-		struct random_t<T, std::enable_if_t<(std::is_integral_v<T> || std::is_floating_point_v<T>)>>
+		struct random_func<T, std::enable_if_t<std::is_arithmetic_v<T>>>
 		{
-			[[nodiscard]] T operator()() {
-				return this->operator()(std::numeric_limits<T>::min(), std::numeric_limits<T>::max());
+			[[nodiscard]] T next() {
+				return next_in_range(std::numeric_limits<T>::min(), std::numeric_limits<T>::max());
 			}
-
-			[[nodiscard]] T operator()(T from, T to) {
-				if (from > to) {
-					T temp = from;
-					from = to;
-					to = from;
-				}
+			[[nodiscard]] T next_in_range(T min, T max = std::numeric_limits<T>::max()) {
 				static std::random_device rd;
-				static generator_t<T> generator(rd());
-				distribution_t<T> distribution(from, to);
-				return distribution(generator);
+				static generator_t<T> gen(rd());
+				distribution_t<T> distr(std::min(min, max), std::max(min, max));
+				return distr(gen);
 			}
 
 		};
 
-		// bools
 		template<>
-		struct random_t<bool>
+		struct random_func<bool> 
 		{
-			[[nodiscard]] bool operator()(double p) {
+			[[nodiscard]] bool probability(double p = 0.5) 
+			{
 				p = std::clamp(p, 0.0, 1.0);
 				static std::random_device rd;
-				static generator_t<bool> generator(rd());
-				distribution_t<bool> distribution(p);
-				return distribution(generator);
+				static generator_t<bool> gen(rd());
+				distribution_t<bool> distr(p);
+				return distr(gen);
 			}
 		};
+
+		// free funcs for glm::functor
+		template<typename T>
+		T random(T min, T max) {
+			return random_func<T>{}.next_in_range(min, max);
+		}
+
+		bool random(double p) {
+			return random_func<bool>{}.probability(p);
+		}
 
 		// vectors
-		template<glm::length_t L, typename T, glm::qualifier Q>
-		struct random_t<glm::vec<L, T, Q>>
+		template<template<glm::length_t, typename, glm::qualifier> class vec, glm::length_t L, typename T, glm::qualifier Q>
+		struct random_func<vec<L, T, Q>> 
 		{
-			[[nodiscard]] constexpr glm::vec<L, T, Q> operator()() {
-				return compute_rand_vector<L, T, Q, glm::detail::is_aligned<Q>::value>::call();
+			[[nodiscard]] vec<L, T, Q> next() {
+				return next_in_range(std::numeric_limits<T>::min(), std::numeric_limits<T>::max());
 			}
-			
-			[[nodiscard]] constexpr glm::vec<L, T, Q> operator()(glm::vec<L, T, Q> const& from, glm::vec<L, T, Q> const& to) {
-				return compute_rand_vector<L, T, Q, glm::detail::is_aligned<Q>::value>::call(from, to);
+			[[nodiscard]] vec<L, T, Q> next_in_range(T min, T max = std::numeric_limits<T>::max()) {
+				return compute_rand_vector<L, T, Q, glm::detail::is_aligned<Q>::value>::call(vec<L, T, Q>{ min }, vec<L, T, Q>{ max });
 			}
-
+			[[nodiscard]] vec<L, T, Q> next_in_range(vec<L, T, Q> const& min, vec<L, T, Q> const& max) {
+				return compute_rand_vector<L, T, Q, glm::detail::is_aligned<Q>::value>::call(min, max);
+			}
 		};
 
+		template<template<glm::length_t, typename, glm::qualifier> class vec, glm::length_t L, glm::qualifier Q>
+		struct random_func<vec<L, bool, Q>> 
+		{
+			[[nodiscard]] vec<L, bool, Q> probability(double p = 0.5) {
+				return compute_rand_vector<L, bool, Q, glm::detail::is_aligned<Q>::value>::call(p);
+			}
+		};
 
-		// vector impls
 		template<glm::length_t L, typename T, glm::qualifier Q, bool Aligned>
 		struct compute_rand_vector
 		{
-			GLM_FUNC_QUALIFIER static glm::vec<L, T, Q> call()
+			GLM_FUNC_QUALIFIER static glm::vec<L, T, Q> call(glm::vec<L, T, Q> const& min, glm::vec<L, T, Q> const& max)
 			{
-				return functor0<glm::vec, L, T, T, Q>::call(Random<T>);
+				return glm::detail::functor2<glm::vec, L, T, Q>::call(random<T>, min, max);
 			}
-			GLM_FUNC_QUALIFIER static glm::vec<L, T, Q> call(glm::vec<L, T, Q> const& from, glm::vec<L, T, Q> const& to)
+			GLM_FUNC_QUALIFIER static glm::vec<L, T, Q> call(double p)
 			{
-				return glm::detail::functor2<glm::vec, L, T, Q>::call(Random<T>, from, to);
+				return glm::detail::functor1<glm::vec, L, T, double, Q>::call(random, glm::vec<L, double, Q>{ p });
 			}
 		};
 
 		// matrices
-		template<glm::length_t C, glm::length_t R, typename T, glm::qualifier Q>
-		struct random_t<glm::mat<C, R, T, Q>>
+		template<template<glm::length_t, glm::length_t, typename, glm::qualifier> class mat, glm::length_t C, glm::length_t R, typename T, glm::qualifier Q>
+		struct random_func<mat<C, R, T, Q>> 
 		{
-			[[nodiscard]] constexpr glm::mat<C, R, T, Q> operator()() {
-				return compute_rand_matrix<C, R, T, Q, glm::detail::is_aligned<Q>::value>::call();
+			[[nodiscard]] mat<C, R, T, Q> next() {
+				return next_in_range(std::numeric_limits<T>::min(), std::numeric_limits<T>::max());
 			}
-
-			[[nodiscard]] constexpr glm::mat<C, R, T, Q> operator()(glm::mat<C, R, T, Q> const& from, glm::mat<C, R, T, Q> const& to) {
-				return compute_rand_matrix<C, R, T, Q, glm::detail::is_aligned<Q>::value>::call(from, to);
+			[[nodiscard]] mat<C, R, T, Q> next_in_range(T min, T max) {
+				return compute_rand_matrix<C, R, T, Q>::call(
+					glm_helper::glm_mat<mat<C, R, T, Q>>::all(min),
+					glm_helper::glm_mat<mat<C, R, T, Q>>::all(max)
+				);
+			}
+			[[nodiscard]] mat<C, R, T, Q> next_in_range(mat<C, R, T, Q> const& min, mat<C, R, T, Q> const& max) {
+				return compute_rand_matrix<C, R, T, Q>::call(min, max);
 			}
 		};
-		
-		// matrices impl
-		template<glm::length_t C, glm::length_t R, typename T, glm::qualifier Q, bool Aligned>
+
+		template<glm::length_t C, glm::length_t R, typename T, glm::qualifier Q>
 		struct compute_rand_matrix
 		{
-			GLM_FUNC_QUALIFIER static glm::mat<C, R, T, Q> call()
+			GLM_FUNC_QUALIFIER static glm::mat<C, R, T, Q> call(glm::mat<C, R, T, Q> const& min, glm::mat<C, R, T, Q> const& max)
 			{
-				glm::mat<C, R, T, Q> result{};
-				for (glm::length_t i = 0; i < result.length(); ++i)
+				glm::mat<C, R, T, Q> ret{};
+				for (glm::length_t i = 0; i < C; ++i)
 				{
-					result[i] = functor0<glm::vec, C, T, T, Q>::call(Random<T>);
+					ret[i] = glm::detail::functor2<glm::vec, R, T, Q>::call(random<T>, min[i], max[i]);
 				}
-				return result;
-			}
-			GLM_FUNC_QUALIFIER static glm::mat<C, R, T, Q> call(glm::mat<C, R, T, Q> const& from, glm::mat<C, R, T, Q> const& to)
-			{
-				glm::mat<C, R, T, Q> result{};
-				for (glm::length_t i = 0; i < result.length(); ++i)
-				{
-					result[i] = glm::detail::functor2<glm::vec, C, T, Q>::call(Random<T>, from[i], to[i]);
-				}
-				return result;
+				return ret;
 			}
 		};
 
-		/* RANDOM IMPLEMENTATIONS */
+		// seeded random functions
+		template<typename T, typename = void>
+		struct seeded_random_func;
+
+		template<typename T>
+		struct seeded_random_func<T> 
+		{};
 
 	}
 
-	
-	// numeric limits
+	// interface
 	template<typename T>
-	auto Random() {
-		static detail::random_t<T> rand{};
-		return rand();
-	}
+	using random_t = detail::random_func<T>;
 
-	// in range
 	template<typename T>
-	auto Random(T from, T to) {
-		static detail::random_t<T> rand{};
-		return rand(from, to);
-	}
+	using srandom_t = detail::seeded_random_func<T>;
 
-	// probability
-	bool Random(double p) {
-		static detail::random_t<bool> rand{};
-		return rand(p);
-	}
 
 }

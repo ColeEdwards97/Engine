@@ -1,9 +1,8 @@
 #include "engpch.h"
 
 #include "Engine/Core/Input/Input.h"
-
+#include "Engine/Core/Input/InputConversion.h"
 #include "Engine/Core/Application.h"
-
 #include "Platform/Windows/WindowsWindow.h"
 
 #include <GLFW/glfw3.h>
@@ -11,18 +10,39 @@
 namespace Engine
 {
 
-	bool Input::IsKeyPressed(KeyCode keyCode)
+	// INPUT IMPLEMENTATION
+	Scope<Input> Input::Create()
+	{
+		return Scope<Input>(new Input());
+	}
+
+	// WINDOWS INPUT IMPLEMENTATION
+	bool Input::IsKeyPressed(const KeyCode key)
 	{
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
-		auto state = glfwGetKey(window, KeyCodeToRaw(keyCode));
+		auto state = glfwGetKey(window, InputConversion::KeyCodeToRaw(key));
 		return (state == GLFW_PRESS || state == GLFW_REPEAT);
 	}
 
-	bool Input::IsMouseButtonPressed(MouseCode button)
+	bool Input::IsKeyReleased(const KeyCode key)
 	{
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
-		auto state = glfwGetMouseButton(window, MouseCodeToRaw(button));
+		auto state = glfwGetKey(window, InputConversion::KeyCodeToRaw(key));
+		return (state == GLFW_RELEASE);
+	}
+
+	bool Input::IsMouseButtonPressed(const MouseButton button)
+	{
+		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
+		auto state = glfwGetMouseButton(window, InputConversion::MouseButtonToRaw(button));
 		return (state == GLFW_PRESS || state == GLFW_REPEAT);
+	}
+
+	bool Input::IsMouseButtonReleased(const MouseButton button)
+	{
+		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
+		auto state = glfwGetMouseButton(window, InputConversion::MouseButtonToRaw(button));
+		return (state == GLFW_RELEASE);
 	}
 
 	glm::vec2 Input::GetMousePosition()
@@ -33,34 +53,11 @@ namespace Engine
 		glfwGetCursorPos(window, &xpos, &ypos);
 		return glm::vec2((float)xpos, (float)ypos);
 	}
-
-	float Input::GetMouseX()
-	{
+	float Input::GetMouseX() {
 		return GetMousePosition().x;
 	}
-
-	float Input::GetMouseY()
-	{
+	float Input::GetMouseY() {
 		return GetMousePosition().y;
 	}
-
-
-
-	const KeyCode Input::RawToKeyCode(const int rawCode) {
-		return static_cast<KeyCode>(rawCode);
-	}
-
-	const int Input::KeyCodeToRaw(const KeyCode keyCode) {
-		return static_cast<int>(keyCode);
-	}
-
-	const MouseCode Input::RawToMouseCode(const int rawCode) {
-		return static_cast<MouseCode>(rawCode);
-	}
-
-	const int Input::MouseCodeToRaw(const MouseCode mouseCode) {
-		return static_cast<int>(mouseCode);
-	}
-
 
 }

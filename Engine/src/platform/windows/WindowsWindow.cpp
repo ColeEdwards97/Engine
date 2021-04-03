@@ -3,11 +3,12 @@
 #include "WindowsWindow.h"
 #include "Engine/Renderer/GraphicsContext.h"
 
-#include "Engine/Core/Input/Input.h"
-
 #include "Engine/Event/ApplicationEvent.h"
 #include "Engine/Event/KeyEvent.h"
 #include "Engine/Event/MouseEvent.h"
+
+#include "Engine/Core/Input/InputConstants.h"
+#include "Engine/Core/Input/InputConversion.h"
 
 #include "Platform/OpenGL/OpenGLContext.h"
 
@@ -15,6 +16,13 @@ namespace Engine {
 	
 	static bool s_isGLFWInitialized = false;
 
+	// WINDOW IMPLEMENTATION
+	Scope<Window> Window::Create(const WindowProperties& props)
+	{
+		return Scope<Window>(new WindowsWindow(props));
+	}
+
+	// WINDOWS WINDOW IMPLEMENTATION
 	WindowsWindow::WindowsWindow(const WindowProperties& props)
 	{
 		Init(props);
@@ -29,11 +37,10 @@ namespace Engine {
 
 	void WindowsWindow::Init(const WindowProperties& props) 
 	{
-
-		m_data.width = props.width;
-		m_data.height = props.height;
-		m_data.title = props.title;
-		SetEventCallback(ENG_BIND_FN(Notify));
+		m_Data.width = props.width;
+		m_Data.height = props.height;
+		m_Data.title = props.title;
+		SetEventCallback(ENG_BIND_FN(WindowsWindow::Notify));
 
 		// Error Callback
 		glfwSetErrorCallback([](int error, const char* description)
@@ -51,14 +58,14 @@ namespace Engine {
 		}
 
 		// GLFWwindow creation
-		m_window = glfwCreateWindow((int)props.width, (int)props.height, props.title.c_str(), NULL, NULL);
+		m_Window = glfwCreateWindow((int)props.width, (int)props.height, props.title.c_str(), NULL, NULL);
 		
 		// OpenGL Context initialization
-		m_context = GraphicsContext::Create(m_window);
-		m_context->Init();
+		m_Context = GraphicsContext::Create(m_Window);
+		m_Context->Init();
 
 		// Handle Errors
-		if (m_window == NULL) {
+		if (m_Window == NULL) {
 			ENGINE_CORE_ERROR("Failed to create GLFW window");
 			glfwTerminate();
 			return;
@@ -68,13 +75,12 @@ namespace Engine {
 			ENGINE_CORE_INFO("Created Windows Window: {0}; {1} x {2}", props.title, props.width, props.height);
 		}
 		
-		SetVSync(false);
-		glfwSetWindowUserPointer(m_window, &m_data);
-
+		SetVSync(true);
+		glfwSetWindowUserPointer(m_Window, &m_Data);
 
 		// GLFW Callbacks -----------------------
 
-		glfwSetWindowSizeCallback(m_window, [](GLFWwindow* window, int width, int height)
+		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height)
 			{
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 				data.width = width;
@@ -84,7 +90,7 @@ namespace Engine {
 			}
 		);
 
-		glfwSetWindowCloseCallback(m_window, [](GLFWwindow* window)
+		glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window)
 			{
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 				WindowClosedEvent event;
@@ -92,7 +98,7 @@ namespace Engine {
 			}
 		);
 		
-		glfwSetKeyCallback(m_window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
+		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
 			{
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
@@ -100,19 +106,19 @@ namespace Engine {
 				{
 				case GLFW_PRESS:
 				{
-					KeyPressedEvent event(Input::RawToKeyCode(key), 0);
+					KeyPressedEvent event(InputConversion::RawToKeyCode(key), false);
 					data.eventCallback(event);
 					break;
 				}
 				case GLFW_RELEASE:
 				{
-					KeyReleasedEvent event(Input::RawToKeyCode(key));
+					KeyReleasedEvent event(InputConversion::RawToKeyCode(key));
 					data.eventCallback(event);
 					break;
 				}
 				case GLFW_REPEAT:
 				{
-					KeyPressedEvent event(Input::RawToKeyCode(key), 1);
+					KeyPressedEvent event(InputConversion::RawToKeyCode(key), true);
 					data.eventCallback(event);
 					break;
 				}
@@ -122,15 +128,15 @@ namespace Engine {
 			}
 		);
 
-		glfwSetCharCallback(m_window, [](GLFWwindow* window, unsigned int keycode)
+		glfwSetCharCallback(m_Window, [](GLFWwindow* window, unsigned int keycode)
 			{
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
-				KeyTypedEvent event(Input::RawToKeyCode(keycode));
+				KeyTypedEvent event(InputConversion::RawToKeyCode(keycode));
 				data.eventCallback(event);
 			}
 		);
 
-		glfwSetMouseButtonCallback(m_window, [](GLFWwindow* window, int button, int action, int mods)
+		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods)
 			{
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
@@ -138,19 +144,19 @@ namespace Engine {
 				{
 				case GLFW_PRESS:
 				{
-					MouseButtonPressedEvent event(Input::RawToMouseCode(button), 0);
+					MouseButtonPressedEvent event(InputConversion::RawToMouseButton(button), 0);
 					data.eventCallback(event);
 					break;
 				}
 				case GLFW_RELEASE:
 				{
-					MouseButtonReleasedEvent event(Input::RawToMouseCode(button));
+					MouseButtonReleasedEvent event(InputConversion::RawToMouseButton(button));
 					data.eventCallback(event);
 					break;
 				}
 				case GLFW_REPEAT:
 				{
-					MouseButtonPressedEvent event(Input::RawToMouseCode(button), 1);
+					MouseButtonPressedEvent event(InputConversion::RawToMouseButton(button), 1);
 					data.eventCallback(event);
 					break;
 				}
@@ -160,7 +166,7 @@ namespace Engine {
 			}
 		);
 
-		glfwSetScrollCallback(m_window, [](GLFWwindow* window, double offsetX, double offsetY)
+		glfwSetScrollCallback(m_Window, [](GLFWwindow* window, double offsetX, double offsetY)
 			{
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 				MouseScrolledEvent event((float)offsetX, (float)offsetY);
@@ -168,7 +174,7 @@ namespace Engine {
 			}
 		);
 
-		glfwSetCursorPosCallback(m_window, [](GLFWwindow* window, double posX, double posY)
+		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, double posX, double posY)
 			{
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 				MouseMovedEvent event((float)posX, (float)posY);
@@ -184,26 +190,26 @@ namespace Engine {
 	void WindowsWindow::OnUpdate() 
 	{
 		glfwPollEvents();
-		m_context->SwapBuffers();
+		m_Context->SwapBuffers();
 	}
 
 
 	void WindowsWindow::Shutdown() 
 	{
-		glfwDestroyWindow(m_window);
+		glfwDestroyWindow(m_Window);
 	}
 
 
 	void WindowsWindow::SetVSync(bool enabled) 
 	{
 		glfwSwapInterval(enabled);
-		m_data.vSync = enabled;
+		m_Data.vSync = enabled;
 	}
 
 
 	bool WindowsWindow::IsVSync() const
 	{
-		return m_data.vSync;
+		return m_Data.vSync;
 	}
 
 

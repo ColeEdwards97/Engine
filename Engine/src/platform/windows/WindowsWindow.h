@@ -1,13 +1,12 @@
 #pragma once
 
 #include "Engine/Core/Window.h"
-#include "Engine/Core/Log.h"
-
 #include "Engine/Renderer/GraphicsContext.h"
 
 #include <GLFW/glfw3.h>
 
-namespace Engine {
+namespace Engine 
+{
 
 
 	class WindowsWindow : public Window
@@ -20,14 +19,14 @@ namespace Engine {
 		void OnUpdate() override;
 		void OnEvent(Event& e) override;
 
-		unsigned int GetWidth() const override { return m_data.width; }
-		unsigned int GetHeight() const override { return m_data.height; }
+		unsigned int GetWidth() const override { return m_Data.width; }
+		unsigned int GetHeight() const override { return m_Data.height; }
 
-		void SetEventCallback(const EventCallbackFn& callback) override { m_data.eventCallback = callback; }
+		void SetEventCallback(const EventCallbackFn& callback) override { m_Data.eventCallback = callback; }
 		void SetVSync(bool enabled) override;
 		bool IsVSync() const override;
 		
-		virtual void* GetNativeWindow() const override { return m_window; }
+		virtual void* GetNativeWindow() const override { return m_Window; }
 
 	private:
 
@@ -36,8 +35,8 @@ namespace Engine {
 
 	private:
 
-		GLFWwindow* m_window;
-		Scope<GraphicsContext> m_context;
+		GLFWwindow* m_Window;
+		Scope<GraphicsContext> m_Context;
 
 		struct WindowData {
 			std::string title;
@@ -47,7 +46,7 @@ namespace Engine {
 			EventCallbackFn eventCallback;
 		};
 
-		WindowData m_data;
+		WindowData m_Data;
 
 	};
 

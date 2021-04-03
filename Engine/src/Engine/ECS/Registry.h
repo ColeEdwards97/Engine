@@ -77,8 +77,13 @@ namespace Engine
 			return (HasComponent<Components>(id) && ...);
 		}
 
+		template<typename ... Components>
+		[[nodiscard]] bool HasComponents(const EntityID id, type_list<Components...>) {
+			return (HasComponent<Components>(id) && ...);
+		}
+
 		template<typename Component, typename ... Args>
-		[[nodiscard]] Component& AddComponent(const EntityID id, Args&& ... args) {
+		Component& AddComponent(const EntityID id, Args&& ... args) {
 			ENGINE_CORE_ASSERT((is_component_v<Component>), "Type passed to Component parameter is not a valid Component");
 			ENGINE_CORE_ASSERT((Valid(id)), "Entity is invalid");
 			ENGINE_CORE_ASSERT((!HasComponent<Component>(id)), "Entity already has a component of this type");
@@ -86,12 +91,22 @@ namespace Engine
 		}
 
 		template<typename ... Components, typename ... Args>
-		[[nodiscard]] auto AddComponents(const EntityID id, Args&& ... args) {
+		auto AddComponents(const EntityID id, Args&& ... args) {
 			return std::forward_as_tuple(AddComponent<Components>(id, std::forward<Args>(args))...);
 		}
 
 		template<typename ... Components>
-		[[nodiscard]] auto AddComponents(const EntityID id) {
+		auto AddComponents(const EntityID id, type_list<Components...>) {
+			return std::forward_as_tuple(AddComponent<Components>(id)...);
+		}
+
+		template<typename ... Components, typename ... Args>
+		auto AddComponents(const EntityID id, type_list<Components...>, Args&& ... args) {
+			return std::forward_as_tuple(AddComponent<Components>(id, std::forward<Args>(args))...);
+		}
+
+		template<typename ... Components>
+		auto AddComponents(const EntityID id) {
 			return std::forward_as_tuple(AddComponent<Components>(id)...);
 		}
 

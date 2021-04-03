@@ -4,11 +4,6 @@
 #include <imgui/imgui.h>
 
 
-struct S {
-
-};
-
-
 class TestLayer : public Engine::Layer
 {
 public:
@@ -280,6 +275,11 @@ public:
 		m_Camera = new Engine::Camera(Engine::ProjectionMode::Perspective);
 
 
+		auto rand_vec3 = Engine::random_t<glm::vec3>{}.next();
+		auto rand_bvec3 = Engine::random_t<glm::bvec3>{}.probability();
+		auto rand_mat2x3 = Engine::random_t<glm::mat2x3>{}.next_in_range(0.0f, 69.0f);
+
+
 	}
 
 	void OnUpdate(Engine::TimeStep ts) override
@@ -287,10 +287,6 @@ public:
 
 
 		// TODO: move into Render System
-
-		// Update camera system
-		//Engine::SystemManager::Get().GetSystem<Engine::ControllerSystem>()->OnUpdate(ts);
-
 		
 		// update geometry
 		//m_CubeTransform.Rotate(60.0f * ts, glm::vec3(0.0f, 1.0f, 0.0f));

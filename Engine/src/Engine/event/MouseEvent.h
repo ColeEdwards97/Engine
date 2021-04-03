@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Engine/Event/Event.h"
-#include "Engine/Core/Input/MouseCodes.h"
+#include "Engine/Core/Input/InputConstants.h"
 
 namespace Engine
 {
@@ -19,15 +19,15 @@ namespace Engine
 	{
 	public:
 		MouseMovedEvent(const float posX, const float posY)
-			: m_posX(posX), m_posY(posY)
+			: m_PosX(posX), m_PosY(posY)
 		{}
 
-		float GetMouseX() const { return m_posX; }
-		float GetMouseY() const { return m_posY; }
+		float GetMouseX() const { return m_PosX; }
+		float GetMouseY() const { return m_PosY; }
 		
 	private:
-		float m_posX;
-		float m_posY;
+		float m_PosX;
+		float m_PosY;
 
 	};
 
@@ -36,15 +36,15 @@ namespace Engine
 	{
 	public:
 		MouseScrolledEvent(const float offsetX, const float offsetY)
-			: m_offsetX(offsetX), m_offsetY(offsetY)
+			: m_OffsetX(offsetX), m_OffsetY(offsetY)
 		{}
 
-		float GetOffsetX() const { return m_offsetX; }
-		float GetOffsetY() const { return m_offsetY; }
+		float GetOffsetX() const { return m_OffsetX; }
+		float GetOffsetY() const { return m_OffsetY; }
 
 	private:
-		float m_offsetX;
-		float m_offsetY;
+		float m_OffsetX;
+		float m_OffsetY;
 
 	};
 
@@ -52,29 +52,29 @@ namespace Engine
 	class MouseButtonEvent : public MouseEvent
 	{
 	public:
-		MouseCode GetMouseButton() const { return m_button; }
+		MouseButton GetMouseButton() const { return m_Button; }
 
 	protected:
-		MouseButtonEvent(const MouseCode button)
-			: m_button(button)
+		MouseButtonEvent(const MouseButton button)
+			: m_Button(button)
 		{}
 
 	private:
-		MouseCode m_button;
+		MouseButton m_Button;
 
 	};
 
 	class MouseButtonPressedEvent : public MouseButtonEvent
 	{
 	public:
-		MouseButtonPressedEvent(const MouseCode button, const uint16_t repeats)
-			: MouseButtonEvent(button), m_repeats(repeats)
+		MouseButtonPressedEvent(const MouseButton button, const bool repeated)
+			: MouseButtonEvent(button), m_Repeated(repeated)
 		{}
 
-		uint16_t GetRepeatCount() const { return m_repeats; }
+		bool IsRepeated() const { return m_Repeated; }
 
 	private:
-		uint16_t m_repeats;
+		bool m_Repeated;
 	
 	};
 
@@ -82,7 +82,7 @@ namespace Engine
 	class MouseButtonReleasedEvent : public MouseButtonEvent
 	{
 	public:
-		MouseButtonReleasedEvent(const MouseCode button)
+		MouseButtonReleasedEvent(const MouseButton button)
 			: MouseButtonEvent(button)
 		{}
 

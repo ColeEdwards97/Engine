@@ -30,7 +30,6 @@ namespace Engine
 
 
 	// TYPE ID
-
 	template<typename T, typename value_type>
 	struct TypeIdentifier
 	{
@@ -45,7 +44,6 @@ namespace Engine
 	
 
 	// FAMILY TYPE ID
-
 	template<typename Family, typename value_type>
 	struct FamilyTypeIdentifier
 	{
